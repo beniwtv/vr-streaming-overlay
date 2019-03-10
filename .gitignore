@@ -1,0 +1,11 @@
+*.o
+*.os
+*.dylib
+.import/
+*.dblite
+*.exp
+*.lib
+*.obj
+*.TMP
+logs
+Thumbs.db

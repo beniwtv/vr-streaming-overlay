@@ -1,0 +1,45 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
+[application]
+
+config/name="VR Streaming Overlay"
+run/main_scene="res://overlay.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+SettingsManager="*res://addons/settings_manager/settings_manager.tscn"
+SignalManager="*res://signalmanager.tscn"
+
+[debug]
+
+settings/stdout/print_fps=true
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+window/vsync/use_vsync=false
+
+[gdnative]
+
+singletons=[ "res://addons/godot-openvr/godot_openvr.gdnlib" ]
+
+[rendering]
+
+quality/voxel_cone_tracing/high_quality=false
+quality/filters/msaa=1
+environment/default_environment="res://default_env.tres"
