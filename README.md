@@ -1,9 +1,9 @@
 # VR Streaming Overlay
 
-This is a VR overlay for SteamVR for streamers on Linux.
+This is a SteamVR overlay for streamers on Linux.
 (It is made with Godot, so theoretically this could run on Windows and MacOSX too, feedback and patches welcome ;)
 
-**Note:** The master on this repository is now kept in sync with the Godot / Godot OpenVR master.
+**Note:** The master on this repository is kept in sync with the Godot / Godot OpenVR master.
 For official releases of Godot please check the releases page and/or the respective branches.
 
 Right now this needs a specially compiled Godot OpenVR plugin for which I have not had the time to make a pull request to get it into Godot OpenVR. See "How to get help" and bug me for the patch or compiled version for the time being :)
