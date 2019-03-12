@@ -11,17 +11,17 @@ Right now this needs a specially compiled Godot OpenVR plugin for which I have n
 Also note this is in *VERY* early state, you probably do not want to try this yet (but early testers/feedback are welcome of course).
 
 Current features:
+- Should support all SteamVR-supported headsets (only Vive tested though - feedback welcome)
 - Adjustable background opacity and color
+- Adjustable overlay size in the VR world
 - Shows Twitch chat
 
 Planned features:
 - Trigger gesture to show overlay (attached left/right hand)
-- Support for other headsets (Vive only for now, other SteamVR headsets probably work, but the widget may show weird)
 - Track overlay with that hand
-- Adjust overlay size in the VR world
 - Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
 - Twitch emotes integration
-- Integration of other streaming service integration (patches will be welcome ;)
+- Integration of other streaming services (patches will be welcome ;)
 
 Linux notes
 -----------

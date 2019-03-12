@@ -1,20 +1,21 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/font/Ubuntu-M.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://widgets/twitch/twitchchat.gd" type="Script" id=3]
-[ext_resource path="res://addons/godot-openvr/scenes/ovr_first_person.tscn" type="PackedScene" id=4]
+[ext_resource path="res://vr2dscene.gd" type="Script" id=2]
+[ext_resource path="res://ui/font/Ubuntu-M.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://widgets/twitch/twitchchat.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
 use_mipmaps = true
 use_filter = true
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="VR2DScene" type="Control"]
 margin_right = 2160.0
 margin_bottom = 2100.0
 theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -30,7 +31,5 @@ bbcode_enabled = true
 bbcode_text = "NO AUTH TOKEN"
 text = "NO AUTH TOKEN"
 scroll_following = true
-script = ExtResource( 3 )
-
-[node name="OVRFirstPerson" parent="." instance=ExtResource( 4 )]
+script = ExtResource( 4 )
 
