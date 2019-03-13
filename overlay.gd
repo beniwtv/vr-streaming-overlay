@@ -7,7 +7,7 @@ var target_size = Vector2()
 func _ready():
 	# Get configuration object
 	OpenVRConfig = preload("res://addons/godot-openvr/OpenVRConfig.gdns").new()
-	OpenVRConfig.set_application_type(1) # Set to OVERLAY MODE = 2, NORMAL MODE = 1
+	OpenVRConfig.set_application_type(2) # Set to OVERLAY MODE = 2, NORMAL MODE = 1
 	
 	# Find the OpenVR interface and initialise it
 	var arvr_interface = ARVRServer.find_interface("OpenVR")
@@ -30,7 +30,18 @@ func _ready():
 		OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", 1.5))
 
 		OpenVROverlay.show_overlay()
-	
+		
+		# Listen for trackers becoming available / going away
+		ARVRServer.connect("tracker_added", self, "_on_trackers_changed")
+		ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
+
+		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('Left hand', 0)
+		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('Right hand', 1)
+		
+		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".select(SettingsManager.get_value("user", "overlay/hand", 1))
+		
+		attempt_tracking()
+			
 	SignalManager.connect("settings_changed", self, "_on_settings_changed")
 	
 	$VRViewport/VRBackground.color = SettingsManager.get_value("user", "overlay/color", Color(0, 0, 0))
@@ -48,3 +59,27 @@ func _on_settings_changed():
 	$VRViewport/VRBackground.color = SettingsManager.get_value("user", "overlay/color", Color(0, 0, 0))
 	$VRViewport/VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", 0.8)
 	OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", 1.5))
+
+	attempt_tracking()
+
+func _on_trackers_changed(tracker_name, tracker_type, tracker_id):
+	attempt_tracking()
+	
+func attempt_tracking():
+	var trackingIdFound = null
+		
+	for i in range(0, ARVRServer.get_tracker_count()):
+		var tracker = ARVRServer.get_tracker(i)
+			
+		match tracker.get_hand():
+			ARVRPositionalTracker.TRACKER_LEFT_HAND:
+				if $"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() == 0:
+					var name_parts = tracker.get_name().split("_")
+					trackingIdFound = name_parts[name_parts.size() - 1]
+			ARVRPositionalTracker.TRACKER_RIGHT_HAND:
+				if $"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() == 1:
+					var name_parts = tracker.get_name().split("_")
+					trackingIdFound = name_parts[name_parts.size() - 1]
+	
+	if trackingIdFound:
+		OpenVROverlay.track_relative_to_device(trackingIdFound)

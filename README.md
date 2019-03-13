@@ -15,10 +15,11 @@ Current features:
 - Adjustable background opacity and color
 - Adjustable overlay size in the VR world
 - Shows Twitch chat
+- Track overlay with left/right hand
 
 Planned features:
-- Trigger gesture to show overlay (attached left/right hand)
-- Track overlay with that hand
+- Fix overlay transform to be below hand (or even make it configurable?)
+- Trigger gesture to show/hide overlay (attached left/right hand)
 - Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
 - Twitch emotes integration
 - Integration of other streaming services (patches will be welcome ;)

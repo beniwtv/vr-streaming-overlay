@@ -25,6 +25,11 @@ func _on_OverlaySizeHSlider_value_changed(value):
 func _on_LineEdit_text_changed(new_text):
 	SignalManager.emit_signal("oauth_changed", new_text)
 
+func _on_OptionButton_item_selected(ID):
+	SettingsManager.set_value("user", "overlay/hand", ID)
+	SignalManager.emit_signal("settings_changed")
+
 func _on_LineEdit2_text_changed(new_text):
 	SettingsManager.set_value("user", "twitchchat/nick", new_text)
 	SignalManager.emit_signal("settings_changed")
+

@@ -24,10 +24,6 @@ config/icon="res://icon.png"
 SettingsManager="*res://addons/settings_manager/settings_manager.tscn"
 SignalManager="*res://signalmanager.tscn"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/width=1280
