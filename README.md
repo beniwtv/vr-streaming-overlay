@@ -45,7 +45,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/path/to/libgodot_openvr.so/dir/":"/hom
 
 License
 -------
-The overlay is licensed under the MIT license model. See credits for additional third-party licenses.
+The overlay is licensed under the MIT license model. See [3rd-party-licenses.md](3rd-party-licenses.md) for additional third-party licenses.
 
 How to get help
 ---------------
