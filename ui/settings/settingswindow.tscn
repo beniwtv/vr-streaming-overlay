@@ -66,78 +66,9 @@ margin_bottom = 599.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="BackgroundColor" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
-editor/display_folded = true
-margin_right = 629.0
-margin_bottom = 25.0
-
-[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/BackgroundColor"]
-margin_right = 312.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Background color:"
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/BackgroundColor"]
-margin_left = 316.0
-margin_right = 629.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Select color"
-
-[node name="BackgroundOpacity" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
-editor/display_folded = true
-margin_top = 29.0
-margin_right = 629.0
-margin_bottom = 48.0
-
-[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/BackgroundOpacity"]
-margin_right = 312.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Background opacity:"
-
-[node name="HSlider" type="HSlider" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/BackgroundOpacity"]
-margin_left = 316.0
-margin_right = 629.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_value = 1.0
-step = 0.01
-ticks_on_borders = true
-
-[node name="OverlaySize" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
-editor/display_folded = true
-margin_top = 52.0
-margin_right = 629.0
-margin_bottom = 71.0
-
-[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/OverlaySize"]
-margin_right = 312.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Overlay size in meters:"
-
-[node name="HSlider" type="HSlider" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/OverlaySize"]
-margin_left = 316.0
-margin_right = 629.0
-margin_bottom = 19.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-min_value = 0.1
-max_value = 5.0
-step = 0.1
-value = 1.0
-ticks_on_borders = true
-
 [node name="TrackingHand" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
-margin_top = 75.0
 margin_right = 629.0
-margin_bottom = 100.0
+margin_bottom = 25.0
 
 [node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand"]
 margin_right = 312.0
@@ -156,9 +87,9 @@ text = "Select hand"
 
 [node name="TwitchNick" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
 editor/display_folded = true
-margin_top = 104.0
+margin_top = 29.0
 margin_right = 629.0
-margin_bottom = 133.0
+margin_bottom = 58.0
 
 [node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchNick"]
 margin_right = 312.0
@@ -176,9 +107,9 @@ size_flags_vertical = 3
 
 [node name="TwitchCode" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
 editor/display_folded = true
-margin_top = 137.0
+margin_top = 62.0
 margin_right = 629.0
-margin_bottom = 166.0
+margin_bottom = 91.0
 
 [node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchCode"]
 margin_right = 312.0
@@ -193,6 +124,7 @@ margin_right = 629.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+secret = true
 
 [node name="RightSettings" type="VBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer"]
 margin_left = 633.0
@@ -292,9 +224,6 @@ https://github.com/Calinou/godot-settings-manager
 "
 selection_enabled = true
 
-[connection signal="color_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/BackgroundColor/ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
-[connection signal="value_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/BackgroundOpacity/HSlider" to="." method="_on_HSlider_value_changed"]
-[connection signal="value_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/OverlaySize/HSlider" to="." method="_on_OverlaySizeHSlider_value_changed"]
-[connection signal="item_selected" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="item_selected" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton" to="." method="_on_handoption_item_selected"]
 [connection signal="text_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchNick/LineEdit" to="." method="_on_LineEdit2_text_changed"]
 [connection signal="text_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchCode/LineEdit" to="." method="_on_LineEdit_text_changed"]

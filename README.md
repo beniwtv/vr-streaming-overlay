@@ -16,13 +16,17 @@ Current features:
 - Adjustable overlay size in the VR world
 - Shows Twitch chat
 - Track overlay with left/right hand
+- Configurable position and rotation relative to tracking device or absolute in VR world
 
 Planned features:
-- Fix overlay transform to be below hand (or even make it configurable?)
 - Trigger gesture to show/hide overlay (attached left/right hand)
 - Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
 - Twitch emotes integration
 - Integration of other streaming services (patches will be welcome ;)
+
+TODO:
+- Figure out what standing / seated means in OpenVR related to overlay transform
+- Properly figure out angles for rotation (maybe OpenVR thing?)
 
 Linux notes
 -----------
