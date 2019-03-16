@@ -9,15 +9,17 @@ func set_label(text):
 	$BaseOption.set_label(text)
 	
 func set_option_name(name, default):	
-	$BaseOption/HBoxContainer/HSlider.value = SettingsManager.get_value("user", name, default)
+	$BaseOption/HBoxContainer/HBoxContainer/HSlider.value = SettingsManager.get_value("user", name, default)
 	option_name = name
 
 func set_slider_range(min_value, max_value, step):
-	$BaseOption/HBoxContainer/HSlider.min_value = min_value
-	$BaseOption/HBoxContainer/HSlider.max_value = max_value
-	$BaseOption/HBoxContainer/HSlider.step = step
+	$BaseOption/HBoxContainer/HBoxContainer/HSlider.min_value = min_value
+	$BaseOption/HBoxContainer/HBoxContainer/HSlider.max_value = max_value
+	$BaseOption/HBoxContainer/HBoxContainer/HSlider.step = step
 
 func _on_HSlider_value_changed(value):
+	$BaseOption/HBoxContainer/HBoxContainer/ValueDisplay.text = str(value)
+	
 	if option_name:
 		SettingsManager.set_value("user", option_name, value)
-		SignalManager.emit_signal("settings_changed")
+		SignalManager.emit_signal("settings_changed")		

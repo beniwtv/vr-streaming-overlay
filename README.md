@@ -6,9 +6,11 @@ This is a SteamVR overlay for streamers on Linux.
 **Note:** The master on this repository is kept in sync with the Godot / Godot OpenVR master.
 For official releases of Godot please check the releases page and/or the respective branches.
 
-Right now this needs a specially compiled Godot OpenVR plugin for which I have not had the time to make a pull request to get it into Godot OpenVR. See "How to get help" and bug me for the patch or compiled version for the time being :)
+Right now this needs a specially compiled Godot OpenVR plugin for which I have not had the time to make a pull request to get it into Godot OpenVR. I have a forked repository you can get it from: https://github.com/beniwtv/godot_openvr/tree/vroverlay -> place the *demo/addons/godot_openvr* folder into *addons/godot_openvr*.
 
-Also note this is in *VERY* early state, you probably do not want to try this yet (but early testers/feedback are welcome of course).
+**Note:** The changed version of the plugin is only compiled for Linux at the moment.
+
+Also note this is in *VERY* early state, but early testers/feedback are welcome of course!
 
 Current features:
 - Should support all SteamVR-supported headsets (only Vive tested though - feedback welcome)
@@ -25,8 +27,7 @@ Planned features:
 - Integration of other streaming services (patches will be welcome ;)
 
 TODO:
-- Figure out what standing / seated means in OpenVR related to overlay transform
-- Properly figure out angles for rotation (maybe OpenVR thing?)
+- Check Twitch return status on IRC commands
 
 Linux notes
 -----------

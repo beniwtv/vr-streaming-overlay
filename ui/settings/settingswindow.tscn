@@ -51,84 +51,122 @@ margin_bottom = -4.0
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/General settings"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/General settings/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 1272.0
+margin_right = 1262.0
 margin_bottom = 609.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="LeftSettings" type="VBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer"]
-margin_right = 629.0
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer"]
+margin_right = 1252.0
 margin_bottom = 599.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TrackingHand" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
-margin_right = 629.0
+[node name="LeftSettings" type="VBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer"]
+editor/display_folded = true
+margin_right = 607.0
+margin_bottom = 599.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TrackingHand" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings"]
+editor/display_folded = true
+margin_right = 607.0
 margin_bottom = 25.0
 
-[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand"]
+[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand"]
+margin_right = 301.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Track on hand:"
+
+[node name="OptionButton" type="OptionButton" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand"]
+margin_left = 305.0
+margin_right = 607.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Select hand"
+
+[node name="TrackingOrigin" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings"]
+editor/display_folded = true
+visible = false
+margin_top = 29.0
+margin_right = 629.0
+margin_bottom = 54.0
+
+[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin"]
 margin_right = 312.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "Track on hand:"
 
-[node name="OptionButton" type="OptionButton" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand"]
+[node name="OptionButton" type="OptionButton" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin"]
 margin_left = 316.0
 margin_right = 629.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Select hand"
 
-[node name="TwitchNick" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
+[node name="TwitchNick" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings"]
 editor/display_folded = true
 margin_top = 29.0
-margin_right = 629.0
+margin_right = 607.0
 margin_bottom = 58.0
 
-[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchNick"]
-margin_right = 312.0
+[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchNick"]
+margin_right = 301.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "TEMP (TWITCH NICK):"
 
-[node name="LineEdit" type="LineEdit" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchNick"]
-margin_left = 316.0
-margin_right = 629.0
+[node name="LineEdit" type="LineEdit" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchNick"]
+margin_left = 305.0
+margin_right = 607.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TwitchCode" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings"]
+[node name="TwitchCode" type="HBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings"]
 editor/display_folded = true
 margin_top = 62.0
-margin_right = 629.0
+margin_right = 607.0
 margin_bottom = 91.0
 
-[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchCode"]
-margin_right = 312.0
+[node name="Label" type="Label" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchCode"]
+margin_right = 301.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "TEMP (TWITCH OAUTH):"
 
-[node name="LineEdit" type="LineEdit" parent="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchCode"]
-margin_left = 316.0
-margin_right = 629.0
+[node name="LineEdit" type="LineEdit" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchCode"]
+margin_left = 305.0
+margin_right = 607.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 secret = true
 
-[node name="RightSettings" type="VBoxContainer" parent="TabContainer/General settings/MarginContainer/HBoxContainer"]
-margin_left = 633.0
-margin_right = 1262.0
+[node name="VSeparator" type="VSeparator" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 611.0
+margin_right = 641.0
+margin_bottom = 599.0
+custom_constants/separation = 30
+
+[node name="RightSettings" type="VBoxContainer" parent="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 645.0
+margin_right = 1252.0
 margin_bottom = 599.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -224,6 +262,7 @@ https://github.com/Calinou/godot-settings-manager
 "
 selection_enabled = true
 
-[connection signal="item_selected" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton" to="." method="_on_handoption_item_selected"]
-[connection signal="text_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchNick/LineEdit" to="." method="_on_LineEdit2_text_changed"]
-[connection signal="text_changed" from="TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TwitchCode/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="item_selected" from="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton" to="." method="_on_handoption_item_selected"]
+[connection signal="item_selected" from="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin/OptionButton" to="." method="_on_originoption_item_selected"]
+[connection signal="text_changed" from="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchNick/LineEdit" to="." method="_on_LineEdit2_text_changed"]
+[connection signal="text_changed" from="TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchCode/LineEdit" to="." method="_on_LineEdit_text_changed"]

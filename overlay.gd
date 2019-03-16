@@ -35,11 +35,18 @@ func _ready():
 		ARVRServer.connect("tracker_added", self, "_on_trackers_changed")
 		ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
 
-		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('None (absolute position)', 2)
-		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('Left hand', 0)
-		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('Right hand', 1)
+		$"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('None (absolute position)', 2)
+		$"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('Left hand', 0)
+		$"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".add_item('Right hand', 1)
 		
-		$"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".select(SettingsManager.get_value("user", "overlay/hand", 1))
+		for i in range(0, $"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_item_count()):
+			if SettingsManager.get_value("user", "overlay/hand", 2) == $"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_item_id(i): 
+				$"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".select(i)
+			
+		if SettingsManager.get_value("user", "overlay/hand", 2) == 2:
+			$"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin".visible = true
+		else:
+			$"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin".visible = false
 		
 		attempt_tracking()
 			
@@ -49,12 +56,9 @@ func _ready():
 	$VRViewport/VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", 0.8)
 	
 func _process(delta):
-	# Test for escape to close application, space to reset our reference frame
-	if (Input.is_key_pressed(KEY_ESCAPE)):
-		get_tree().quit()
-	elif (Input.is_key_pressed(KEY_SPACE)):
+	if Input.is_action_just_pressed("center_on_hmd"):
 		# Calling center_on_hmd will cause the ARVRServer to adjust all tracking data so the player is centered on the origin point looking forward
-		ARVRServer.center_on_hmd(true, true)
+		ARVRServer.center_on_hmd(true, false)
 
 func _on_settings_changed():
 	$VRViewport/VRBackground.color = SettingsManager.get_value("user", "overlay/color", Color(0, 0, 0))
@@ -75,9 +79,14 @@ func attempt_tracking():
 	var rotation_y = SettingsManager.get_value("user", "overlay/rotation_y", 0)
 	var rotation_z = SettingsManager.get_value("user", "overlay/rotation_z", 0)
 	
-	var transform = Transform(Basis(Vector3(rotation_x, rotation_y, rotation_z)), Vector3(position_x, position_y, position_z))
+	var transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
+	transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)	
+	transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)	
+	transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)	
 
-	if $"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() != 2:
+	transform = transform.orthonormalized()
+
+	if $"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() != 2:
 		var trackingIdFound = null
 			
 		for i in range(0, ARVRServer.get_tracker_count()):
@@ -85,15 +94,15 @@ func attempt_tracking():
 				
 			match tracker.get_hand():
 				ARVRPositionalTracker.TRACKER_LEFT_HAND:
-					if $"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() == 0:
+					if $"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() == 0:
 						var name_parts = tracker.get_name().split("_")
 						trackingIdFound = name_parts[name_parts.size() - 1]
 				ARVRPositionalTracker.TRACKER_RIGHT_HAND:
-					if $"SettingsWindow/TabContainer/General settings/MarginContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() == 1:
+					if $"SettingsWindow/TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id() == 1:
 						var name_parts = tracker.get_name().split("_")
 						trackingIdFound = name_parts[name_parts.size() - 1]
 		
 		if trackingIdFound:
 			OpenVROverlay.track_relative_to_device(trackingIdFound, transform)
 	else:
-		OpenVROverlay.overlay_position_absolute(null, transform)
+		OpenVROverlay.overlay_position_absolute(SettingsManager.get_value("user", "overlay/origin", 1), transform) # 0 = Seated, 1 = Standing
