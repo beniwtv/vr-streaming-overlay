@@ -62,9 +62,11 @@ func _ready():
 	for i in range(0, $"TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin/OptionButton".get_item_count()):
 		if SettingsManager.get_value("user", "overlay/origin", 1) == $"TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin/OptionButton".get_item_id(i): 
 			$"TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin/OptionButton".select(i)	
-	
+		
 	# TEMP STUFF - remove later
 	$"TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TwitchNick/LineEdit".text = SettingsManager.get_value("user", "twitchchat/nick", "")
+
+	SignalManager.emit_signal("settings_changed")
 
 func _on_handoption_item_selected(id):
 	SettingsManager.set_value("user", "overlay/hand", $"TabContainer/General settings/MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand/OptionButton".get_selected_id())

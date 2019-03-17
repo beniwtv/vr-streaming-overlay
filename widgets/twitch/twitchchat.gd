@@ -13,8 +13,10 @@ func _ready():
 	SignalManager.connect("oauth_changed", self, "connect_to_twitch")
 	SignalManager.connect("settings_changed", self, "_on_settings_changed")	
 
+	nick = SettingsManager.get_value("user", "twitchchat/nick", "")
+
 func _on_settings_changed():
-	nick = SettingsManager.get_value("user", "twitchat/nick", "")
+	nick = SettingsManager.get_value("user", "twitchchat/nick", "")
 
 func connect_to_twitch(chat_token):
 	clear()
@@ -27,12 +29,14 @@ func connect_to_twitch(chat_token):
 		# Make sure we could connect to Twitch
 		clear()
 		append_bbcode("ERROR! VERIFY CONNECTION TO INTERNET")
-
+	
 	while irc_stream.get_status() != StreamPeerTCP.STATUS_CONNECTED:
 		OS.delay_msec(500)
 	
 	irc_stream.put_data(("PASS oauth:" + chat_token + "\n").to_utf8())
 	irc_stream.put_data(("NICK " + nick + "\n").to_utf8())
+	
+	print(nick)
 	
 	# Request advanced tags from Twitch
 	irc_stream.put_data(("CAP REQ :twitch.tv/tags\n").to_utf8())
@@ -53,6 +57,7 @@ func parse_irc_line(lines):
 	lines = lines.split('\n')
 	
 	for line in lines:
+		print(line)
 		var parts = line.split(' ')
 
 		if parts.size() > 1:
