@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/screens/settings/generalsettingstab.gd" type="Script" id=1]
+
+[node name="General settings" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1262.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 1252.0
+margin_bottom = 515.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeftSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 607.0
+margin_bottom = 515.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TrackingHand" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSettings"]
+editor/display_folded = true
+margin_right = 607.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand"]
+margin_right = 301.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Track on hand:"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingHand"]
+margin_left = 305.0
+margin_right = 607.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TrackingOrigin" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSettings"]
+margin_top = 24.0
+margin_right = 607.0
+margin_bottom = 44.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin"]
+margin_right = 301.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "World mode:"
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer/LeftSettings/TrackingOrigin"]
+margin_left = 305.0
+margin_right = 607.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 611.0
+margin_right = 641.0
+margin_bottom = 515.0
+custom_constants/separation = 30
+
+[node name="RightSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 645.0
+margin_right = 1252.0
+margin_bottom = 515.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatusBox" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 519.0
+margin_right = 1252.0
+margin_bottom = 674.0
+size_flags_horizontal = 3
+size_flags_vertical = 15
+size_flags_stretch_ratio = 0.3
+text = "VR init..."
+align = 1
+valign = 1
+

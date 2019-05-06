@@ -19,15 +19,13 @@ Current features:
 - Shows Twitch chat
 - Track overlay with left/right hand
 - Configurable position and rotation relative to tracking device or absolute in VR world
+- Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
 
 Planned features:
 - Trigger gesture to show/hide overlay (attached left/right hand)
-- Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
 - Twitch emotes integration
 - Integration of other streaming services (patches will be welcome ;)
 
-TODO:
-- Check Twitch return status on IRC commands
 
 Linux notes
 -----------

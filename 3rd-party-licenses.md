@@ -17,6 +17,10 @@ This Font Software is licensed under the Ubuntu Font Licence, Version
 Creative Commons Zero 1.0 Public Domain License  
 https://openclipart.org/detail/284554/virtual-reality-penguin
 
+** Some of the Godot icons **
+CC BY 4.0 International License
+https://github.com/godotengine/godot-design
+
 ## Third party addons:
 
 **GDNative based OpenVR plugin for Godot**  
@@ -26,3 +30,7 @@ https://github.com/GodotVR/godot_openvr
 **Godot Settings Manager**  
 Copyright © 2018-2019 Hugo Locurcio and contributors (MIT license)  
 https://github.com/Calinou/godot-settings-manager
+
+**uuid - static uuid generator for Godot Engine**
+Copyright © 2018 Xavier Sellier (MIT license)
+https://github.com/binogure-studio/godot-uuid

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/vr2dscene/vr2dscene.gd" type="Script" id=2]
+
+[node name="VR2DScene" type="Control"]
+margin_right = 2160.0
+margin_bottom = 2100.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+

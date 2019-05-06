@@ -22,7 +22,9 @@ config/icon="res://icon.png"
 [autoload]
 
 SettingsManager="*res://addons/settings_manager/settings_manager.tscn"
-SignalManager="*res://signalmanager.tscn"
+SignalManager="*res://utils/signalmanager.tscn"
+DefaultSettings="*res://utils/defaultsettings.tscn"
+PasswordStorage="*res://utils/passwordstorage.tscn"
 
 [display]
 
@@ -41,6 +43,10 @@ center_on_hmd={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777255,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[network]
+
+ssl/certificates="res://ca-certificates.crt"
 
 [rendering]
 

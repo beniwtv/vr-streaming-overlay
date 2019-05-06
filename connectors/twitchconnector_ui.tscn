@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://connectors/twitchconnector_ui.gd" type="Script" id=1]
+
+[node name="TwitchConnectorUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+margin_right = 1480.0
+margin_bottom = 692.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "To connect to Twitch, we need a so called \"authentication token\". There are many ways to create this, but this instruction guide should give you an easy way to create a token.
+
+    1) Navigate to [url]https://dev.twitch.tv/console/apps[/url] in your favourite browser, to register a new application for the overlay. If you already have an application and client ID, skip to the 3rd step.
+	
+	2) As name, enter a descriptive name like \"VR overlay\". As redirect URL, enter \"http://localhost\". Then select \"Application Integration\" as category and fill out the captcha. Click on \"Create\" to create your new application.
+	
+	3) Now navigate to [url]https://twitchapps.com/tokengen/[/url] and enter the client ID as received in the previous step. As scopes, enter [b]\"read::chat\"[/b].
+	
+	4) Authorize your new application when asked and your authentication token will be displayed. Enter this token below:"
+text = "To connect to Twitch, we need a so called \"authentication token\". There are many ways to create this, but this instruction guide should give you an easy way to create a token.
+
+    1) Navigate to https://dev.twitch.tv/console/apps in your favourite browser, to register a new application for the overlay. If you already have an application and client ID, skip to the 3rd step.
+	
+	2) As name, enter a descriptive name like \"VR overlay\". As redirect URL, enter \"http://localhost\". Then select \"Application Integration\" as category and fill out the captcha. Click on \"Create\" to create your new application.
+	
+	3) Now navigate to https://twitchapps.com/tokengen/ and enter the client ID as received in the previous step. As scopes, enter \"read::chat\".
+	
+	4) Authorize your new application when asked and your authentication token will be displayed. Enter this token below:"
+
+[node name="Token" type="LineEdit" parent="VBoxContainer"]
+margin_top = 696.0
+margin_right = 1480.0
+margin_bottom = 720.0
+placeholder_text = "Authentication token"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+

@@ -1,0 +1,97 @@
+[gd_scene format=2]
+
+[node name="Credits" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+
+[node name="Copyright" type="RichTextLabel" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1272.0
+margin_bottom = 684.0
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+bbcode_text = "© Copyright Benedikt <beniwtv@relamp.tk>
+Licensed under the MIT license.
+
+GitHub: [url]https://github.com/beniwtv/[/url]
+
+-> Third party assets:
+
+[b]Ubuntu Font[/b]
+© Copyright 2010,2011 Canonical Ltd.
+[url]https://design.ubuntu.com/font/[/url]
+
+This Font Software is licensed under the Ubuntu Font Licence, Version
+1.0. [url]https://launchpad.net/ubuntu-font-licence[/url]
+
+[b]Virtual Reality Penguin[/b]
+Creative Commons Zero 1.0 Public Domain License
+[url]https://openclipart.org/detail/284554/virtual-reality-penguin[/url]
+
+[b]Some of the icons from Godot[/b]
+CC BY 4.0 International License
+[url]https://github.com/godotengine/godot-design[/url]
+
+-> Third party addons:
+
+[b]GDNative based OpenVR plugin for Godot[/b]
+Copyright © 2018 Bastiaan Olij (MIT license)
+[url]https://github.com/GodotVR/godot_openvr[/url]
+
+[b]Godot Settings Manager[/b]
+Copyright © 2018-2019 Hugo Locurcio and contributors (MIT license)
+[url]https://github.com/Calinou/godot-settings-manager[/url]
+
+[b]uuid - static uuid generator for Godot Engine[/b]
+Copyright © 2018 Xavier Sellier (MIT license)
+[url]https://github.com/binogure-studio/godot-uuid[/url]"
+text = "© Copyright Benedikt <beniwtv@relamp.tk>
+Licensed under the MIT license.
+
+GitHub: https://github.com/beniwtv/
+
+-> Third party assets:
+
+Ubuntu Font
+© Copyright 2010,2011 Canonical Ltd.
+https://design.ubuntu.com/font/
+
+This Font Software is licensed under the Ubuntu Font Licence, Version
+1.0. https://launchpad.net/ubuntu-font-licence
+
+Virtual Reality Penguin
+Creative Commons Zero 1.0 Public Domain License
+https://openclipart.org/detail/284554/virtual-reality-penguin
+
+Some of the icons from Godot
+CC BY 4.0 International License
+https://github.com/godotengine/godot-design
+
+-> Third party addons:
+
+GDNative based OpenVR plugin for Godot
+Copyright © 2018 Bastiaan Olij (MIT license)
+https://github.com/GodotVR/godot_openvr
+
+Godot Settings Manager
+Copyright © 2018-2019 Hugo Locurcio and contributors (MIT license)
+https://github.com/Calinou/godot-settings-manager
+
+uuid - static uuid generator for Godot Engine
+Copyright © 2018 Xavier Sellier (MIT license)
+https://github.com/binogure-studio/godot-uuid"
+selection_enabled = true
+
