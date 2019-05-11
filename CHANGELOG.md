@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Connect to Twitch via SSL
 - Handle connection drops / closes by reconnecting
 - Twitch chat widget can now connect to multiple chat rooms
+- Fixed overlay moving itself when certain controllers/axis are used
 - This changelog
 
 ## [0.0.1-alpha] - 2019-03-16
