@@ -29,4 +29,3 @@ margin_bottom = 2100.0
 color = Color( 0.0588235, 0.054902, 0.0666667, 1 )
 
 [node name="VR2DScene" parent="VRViewport" instance=ExtResource( 3 )]
-

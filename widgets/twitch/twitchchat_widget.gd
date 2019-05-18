@@ -30,6 +30,7 @@ var show_timestamps = false
 # Apply config given by widget manager
 func apply_config(widget_id, config):
 	var connections = PasswordStorage.get_secret("connections")
+	if !connections: connections = []
 	
 	if config.has("ratio"): size_flags_stretch_ratio = config["ratio"]
 	if config.has("channels"): channels = PoolStringArray(config["channels"])

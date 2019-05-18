@@ -18,6 +18,7 @@ func add_config_options(widget_id, config):
 	if config.has("show_timestamps"): show_timestamps_value = config["show_timestamps"]
 	
 	var connections = PasswordStorage.get_secret("connections")
+	if !connections: connections = []
 	var items = []
 	
 	for i in connections:
