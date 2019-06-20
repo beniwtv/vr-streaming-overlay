@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.co##m/en/1.0.0/
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [UNRELEASED] - 2019-XX-XX
+### Added
+- Events, when something on the overlay happens (e.g. new chat message)
+- Option(s) to dim/undim overlay based on events
+- Option to play a chime when an event happens
+
+### Changed
+- Fixed some stuff in the credits
+- Refactored 80%+ for static typing
 
 ## [0.0.2-alpha] - 2019-05-18
 ### Added

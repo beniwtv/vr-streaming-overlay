@@ -24,9 +24,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
 bbcode_text = "© Copyright Benedikt <beniwtv@relamp.tk>
-Licensed under the MIT license.
+Licensed under the MIT license
+Made with Godot Engine <3 [url]www.godotengine.org[/url]
 
-GitHub: [url]https://github.com/beniwtv/[/url]
+GitHub: [url]https://github.com/relamptk/vr-streaming-overlay[/url]
 
 -> Third party assets:
 
@@ -45,6 +46,10 @@ Creative Commons Zero 1.0 Public Domain License
 CC BY 4.0 International License
 [url]https://github.com/godotengine/godot-design[/url]
 
+[b]Chime notification sound from Brandon75689[/b]
+OGA-BY 3.0 / CC0
+[url]https://opengameart.org/content/point-bell[/url]
+
 -> Third party addons:
 
 [b]GDNative based OpenVR plugin for Godot[/b]
@@ -59,9 +64,10 @@ Copyright © 2018-2019 Hugo Locurcio and contributors (MIT license)
 Copyright © 2018 Xavier Sellier (MIT license)
 [url]https://github.com/binogure-studio/godot-uuid[/url]"
 text = "© Copyright Benedikt <beniwtv@relamp.tk>
-Licensed under the MIT license.
+Licensed under the MIT license
+Made with Godot Engine <3 www.godotengine.org
 
-GitHub: https://github.com/beniwtv/
+GitHub: https://github.com/relamptk/vr-streaming-overlay
 
 -> Third party assets:
 
@@ -80,6 +86,10 @@ Some of the icons from Godot
 CC BY 4.0 International License
 https://github.com/godotengine/godot-design
 
+Chime notification sound from Brandon75689
+OGA-BY 3.0 / CC0
+https://opengameart.org/content/point-bell
+
 -> Third party addons:
 
 GDNative based OpenVR plugin for Godot
@@ -94,4 +104,3 @@ uuid - static uuid generator for Godot Engine
 Copyright © 2018 Xavier Sellier (MIT license)
 https://github.com/binogure-studio/godot-uuid"
 selection_enabled = true
-

@@ -2,7 +2,5 @@
 
 [ext_resource path="res://utils/signalmanager.gd" type="Script" id=1]
 
-
 [node name="SignalManager" type="Node"]
 script = ExtResource( 1 )
-

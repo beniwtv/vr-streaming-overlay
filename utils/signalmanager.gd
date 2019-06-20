@@ -18,5 +18,5 @@ signal options_changed
 # Fired if the overlay needs to be redrawn
 signal redraw_overlay
 
-# TEMP for Twitch oauth
-signal oauth_changed
+# Fired from widgets when an interesting event happened
+signal event_happened

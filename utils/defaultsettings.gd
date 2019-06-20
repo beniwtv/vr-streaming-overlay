@@ -6,10 +6,15 @@ var UUID = preload("res://addons/godot-uuid/uuid.gd")
 var overlay_hand = 2
 var overlay_color = Color(0, 0, 0)
 var overlay_opacity = 0.8
-var overlay_size = 1.5
 var overlay_origin = 1
+var overlay_dimundim = true
+var overlay_dimdownopacity = 0.4
+var overlay_dimdownafter = 30
+var overlay_undimchime = true
 
 # Overlay position / rotation
+var overlay_size = 1.5
+
 var overlay_position_x = 0
 var overlay_position_y = 0
 var overlay_position_z = -1.4
@@ -24,13 +29,11 @@ var margin_container_margin_left = 10
 var margin_container_margin_right = 10
 var margin_container_margin_bottom = 10
 
-
-
 # Default margin + Twitch chat widget
-var parent_id = UUID.v4()
-var twitch_id = UUID.v4()
+var parent_id : String = UUID.v4()
+var twitch_id : String = UUID.v4()
 
-var widgets_configuration = [{
+var widgets_configuration : Array = [{
 	"data": {
 		"config": {
 			"ratio": 1,

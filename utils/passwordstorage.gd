@@ -1,25 +1,25 @@
 extends Node
 
 # Variable to store secrets while running
-var saved_secrets = {}
+var saved_secrets : Dictionary = {}
 
 # Path to the file that stores the passwords
-var encypted_file = "user://encrypted.ini"
+var encypted_file : String = "user://encrypted.ini"
 
 # Holds the password while running
-var user_password
+var user_password : String
 
 # Used to save when no properties are being changed (debouncing).
 # This way, secrets can be preserved in case of a crash
 onready var save_timer := $SaveTimer as Timer
 
 # Checks if the secret file already exists for the user
-func has_password_file():
-	var file = File.new()	
+func has_password_file() -> bool:
+	var file : File = File.new()	
 	return file.file_exists(encypted_file)
 
 # Unlocks and loads the secret file
-func unlock_secret_file(password):
+func unlock_secret_file(password : String) -> bool:
 	var file = File.new()
 	var err = file.open_encrypted_with_pass(encypted_file, File.READ, password)
 
@@ -34,7 +34,7 @@ func unlock_secret_file(password):
 	return true
 
 # Creates a new secret file with the password provided
-func create_new_secret_file(password):
+func create_new_secret_file(password : String) -> bool:
 	user_password = password
 	return save()
 
@@ -44,15 +44,15 @@ func set_secret(key, value):
 	save_timer.start()
 
 # Returns a secred from the password file
-func get_secret(key):
+func get_secret(key : String):
 	if saved_secrets.has(key):
 		return saved_secrets[key]
 	else:
 		return null
 
 # Saves secret file
-func save():
-	var file = File.new()
+func save() -> bool:
+	var file : File = File.new()
 	var err = file.open_encrypted_with_pass(encypted_file, File.WRITE, user_password)
 
 	if err != OK:
@@ -63,6 +63,6 @@ func save():
 	
 	return true
 
-func _exit_tree():
+func _exit_tree() -> void:
 	# Always save secret file when quitting the project
 	save()

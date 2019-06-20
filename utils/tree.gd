@@ -4,31 +4,31 @@ extends Node
 var storage : Array = []
 
 # Alphabet for assiging position id's
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+var alphabet : Array = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 # Default alphabet letter for new generations / sub-generations
-var defaultindex = 12
+var defaultindex : int = 12
 
 # Removes an item from the tree, with all it's children
-func remove_item(item):
+func remove_item(item : String) -> void:
 	for i in range(storage.size() - 1, -1, -1):
 		if storage[i]["id"] == item or storage[i]["data"]["parent"] == item:
 			storage.remove(i)
 
 # Gets an item by id from the tree
-func get_item(item):
+func get_item(item : String):
 	for entry in storage:
 		if entry["id"] == item:
 			return entry
 
 # Gets data for an item by id from the tree
-func get_item_data(item):
+func get_item_data(item : String):
 	for entry in storage:
 		if entry["id"] == item:
 			return entry["data"]
 
 # Sets data for an item by id from the tree
-func set_item_data(item, data):
+func set_item_data(item : String, data) -> void:
 	for entry in storage:
 		if entry["id"] == item:
 			entry["data"] = data
@@ -105,7 +105,7 @@ func get_child_position(parent_position : String, start_position : String, secti
 
 	return next_free_letter
 
-func sort_by_position(a, b):
+func sort_by_position(a : Dictionary, b : Dictionary) -> bool:
 	return a["position"] < b["position"]
 
 # Returns the tree in array form

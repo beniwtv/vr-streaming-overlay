@@ -274,9 +274,11 @@ func parse_irc_line(lines):
 			var timestamp = "[color=#" + text_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
 			
 			chat_lines.append(timestamp + "[color=" + color + "]" + author + "[/color] " + badges_string + "\n")
-			chat_lines.append("[color=#" + text_color.to_html(true) + "]" + message + "[/color]\n\n")	
+			chat_lines.append("[color=#" + text_color.to_html(true) + "]" + message + "[/color]\n\n")			
 
 			redraw_chat()
+			
+			SignalManager.emit_signal("event_happened")
 
 # Redraws chat text in the richtextlabel
 func redraw_chat():

@@ -19,15 +19,45 @@ func _ready():
 	backgroundopacity.set_value(SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity")))
 	backgroundopacity.set_widget_node(self)
 	
+	var dimundim = preload("res://ui/elements/options/toggleoption.tscn").instance()
+	get_node(SettingsNode + "LeftSettings").add_child(dimundim)
+	dimundim.set_label("Dim/undim on activity:")
+	dimundim.set_option_name("overlay/dimundim")
+	dimundim.set_value(SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")))
+	dimundim.set_widget_node(self)
+
+	var undimchime = preload("res://ui/elements/options/toggleoption.tscn").instance()
+	get_node(SettingsNode + "LeftSettings").add_child(undimchime)
+	undimchime.set_label("Play chime on event/undim:")
+	undimchime.set_option_name("overlay/undimchime")
+	undimchime.set_value(SettingsManager.get_value("user", "overlay/undimchime", DefaultSettings.get_default_setting("overlay/undimchime")))
+	undimchime.set_widget_node(self)
+
+	var dimdownopacity = preload("res://ui/elements/options/slideroption.tscn").instance()
+	get_node(SettingsNode + "LeftSettings").add_child(dimdownopacity)
+	dimdownopacity.set_label("Dim to opacity:")
+	dimdownopacity.set_slider_range(0, 1, 0.01)
+	dimdownopacity.set_option_name("overlay/dimdownopacity")
+	dimdownopacity.set_value(SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity")))
+	dimdownopacity.set_widget_node(self)
+
+	var dimdownafter = preload("res://ui/elements/options/numberoption.tscn").instance()
+	get_node(SettingsNode + "LeftSettings").add_child(dimdownafter)
+	dimdownafter.set_label("Dim after (seconds):")
+	dimdownafter.set_spinbox_range(0, 180, 1)
+	dimdownafter.set_option_name("overlay/dimdownafter")
+	dimdownafter.set_value(SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter")))
+	dimdownafter.set_widget_node(self)
+	
+	# Right side
 	var overlaysize = preload("res://ui/elements/options/slideroption.tscn").instance()
-	get_node(SettingsNode + "LeftSettings").add_child(overlaysize)
+	get_node(SettingsNode + "RightSettings").add_child(overlaysize)
 	overlaysize.set_label("Overlay size in meters:")
 	overlaysize.set_slider_range(0.1, 5, 0.1)
 	overlaysize.set_option_name("overlay/size")
 	overlaysize.set_value(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")))
 	overlaysize.set_widget_node(self)
-	
-	# Right side
+		
 	var position_x = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(position_x)
 	position_x.set_label("Adjust position (left/right):")

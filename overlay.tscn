@@ -22,10 +22,4 @@ usage = 0
 render_target_update_mode = 3
 gui_disable_input = true
 
-[node name="VRBackground" type="ColorRect" parent="VRViewport"]
-modulate = Color( 1, 1, 1, 0.415686 )
-margin_right = 2160.0
-margin_bottom = 2100.0
-color = Color( 0.0588235, 0.054902, 0.0666667, 1 )
-
 [node name="VR2DScene" parent="VRViewport" instance=ExtResource( 3 )]

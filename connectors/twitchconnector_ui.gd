@@ -1,16 +1,16 @@
 extends Control
 
-var receiver = null
-var info = null
+var receiver : Node = null
+var info : Dictionary = {}
 
-func set_connection_info(info):
+func set_connection_info(info : Dictionary) -> void:
 	self.info = info
 	$VBoxContainer/Token.text = info["token"]
 
-func verify_connection(receiver):
+func verify_connection(receiver : Node) -> void:
 	self.receiver = receiver
 	
-	var headers = [
+	var headers : Array = [
 		"User-Agent: VR Streaming Overlay/1.0 (Godot)",
 		"Accept: application/json",
 		"Authorization: Bearer " + $VBoxContainer/Token.text
@@ -20,10 +20,10 @@ func verify_connection(receiver):
 	var err = $HTTPRequest.request("https://api.twitch.tv/helix/users", headers, true, HTTPClient.METHOD_GET)
 	assert(err==OK)
 
-func _on_twitch_verify(result, response_code, headers, body):
+func _on_twitch_verify(result, response_code, headers, body) -> void:
 	$HTTPRequest.disconnect("request_completed", self, "_on_twitch_verify")
 	
-	var userResponse = JSON.parse(body.get_string_from_utf8())
+	var userResponse : JSONParseResult = JSON.parse(body.get_string_from_utf8())
 	assert(userResponse.error==OK)
 
 	if response_code == 200:
