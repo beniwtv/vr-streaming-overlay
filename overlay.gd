@@ -7,6 +7,9 @@ var target_size = Vector2()
 var SettingsNode : String = "MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/HBoxContainer/"
 
 func _ready() -> void:
+	# Set default audio device
+	AudioServer.set_device(SettingsManager.get_value("user", "overlay/chimedevice", DefaultSettings.get_default_setting("overlay/chimedevice")))
+	
 	# Get configuration object
 	OpenVRConfig = preload("res://addons/godot-openvr/OpenVRConfig.gdns").new()
 	OpenVRConfig.set_application_type(2) # Set to OVERLAY MODE = 2, NORMAL MODE = 1

@@ -33,6 +33,25 @@ func _ready():
 	undimchime.set_value(SettingsManager.get_value("user", "overlay/undimchime", DefaultSettings.get_default_setting("overlay/undimchime")))
 	undimchime.set_widget_node(self)
 
+	var chimedevice = preload("res://ui/elements/options/dropdownoption.tscn").instance()
+	get_node(SettingsNode + "LeftSettings").add_child(chimedevice)
+	chimedevice.set_label("Play chime on output/device:")
+	chimedevice.set_option_name("overlay/chimedevice")
+	
+	var displaydevices : Array
+	
+	for audiodevice in AudioServer.get_device_list():
+		var displayDevice = {
+			"name": audiodevice,
+			"value": audiodevice
+		}
+		
+		displaydevices.push_back(displayDevice)
+	
+	chimedevice.set_values(displaydevices)
+	chimedevice.set_value(SettingsManager.get_value("user", "overlay/chimedevice", DefaultSettings.get_default_setting("overlay/chimedevice")))
+	chimedevice.set_widget_node(self)
+
 	var dimdownopacity = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "LeftSettings").add_child(dimdownopacity)
 	dimdownopacity.set_label("Dim to opacity:")
