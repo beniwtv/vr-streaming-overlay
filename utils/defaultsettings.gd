@@ -12,6 +12,8 @@ var overlay_dimdownopacity = 0.4
 var overlay_dimdownafter = 30
 var overlay_undimchime = true
 var overlay_chimedevice = "Default"
+var overlay_undimstare = true
+var overlay_undimstareseconds = 5
 
 # Overlay position / rotation
 var overlay_size = 1.5

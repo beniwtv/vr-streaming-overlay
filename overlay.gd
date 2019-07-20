@@ -13,6 +13,7 @@ func _ready() -> void:
 	# Get configuration object
 	OpenVRConfig = preload("res://addons/godot-openvr/OpenVRConfig.gdns").new()
 	OpenVRConfig.set_application_type(2) # Set to OVERLAY MODE = 2, NORMAL MODE = 1
+	OpenVRConfig.set_tracking_universe(SettingsManager.get_value("user", "overlay/origin", DefaultSettings.get_default_setting("overlay/origin"))) # Set to SEATED MODE = 0, STANDING MODE = 1, RAW MODE = 2
 	
 	# Find the OpenVR interface and initialise it
 	var arvr_interface : ARVRInterface = ARVRServer.find_interface("OpenVR")
@@ -69,9 +70,10 @@ func _process(delta : float) -> void:
 func _on_settings_changed() -> void:
 	if OpenVROverlay:
 		OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")))
+		OpenVRConfig.set_tracking_universe(SettingsManager.get_value("user", "overlay/origin", DefaultSettings.get_default_setting("overlay/origin")))
 		attempt_tracking()
 
-func _on_trackers_changed(tracker_name : String, tracker_type : String, tracker_id) -> void:
+func _on_trackers_changed(tracker_name : String, tracker_type : int, tracker_id) -> void:
 	attempt_tracking()
 	
 func attempt_tracking():
@@ -109,4 +111,4 @@ func attempt_tracking():
 		if trackingIdFound:
 			OpenVROverlay.track_relative_to_device(trackingIdFound, transform)
 	else:
-		OpenVROverlay.overlay_position_absolute(SettingsManager.get_value("user", "overlay/origin", DefaultSettings.get_default_setting("overlay/origin")), transform) # 0 = Seated, 1 = Standing
+		OpenVROverlay.overlay_position_absolute(transform)

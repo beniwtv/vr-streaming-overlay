@@ -33,9 +33,17 @@ func unlock_secret_file(password : String) -> bool:
 	
 	return true
 
+# Deletes the current password file. if it exists
+func delete_secret_file() -> void:
+	var file = File.new()
+	
+	if file.file_exists(encypted_file):
+		var dir = Directory.new()
+		dir.remove(encypted_file)
+
 # Creates a new secret file with the password provided
 func create_new_secret_file(password : String) -> bool:
-	user_password = password
+	delete_secret_file()
 	return save()
 
 # Seta a secret to the password file

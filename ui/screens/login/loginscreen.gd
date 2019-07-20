@@ -53,6 +53,8 @@ func _on_ForgotPasswordButton_pressed() -> void:
 	confirm_dialog.popup_centered()
 
 func _on_encrypted_file_remove_confirm() -> void:
+	PasswordStorage.delete_secret_file()
+	
 	$HBoxContainer/LeftMarginContainer/LeftVBoxContainer/Welcome.visible = true
 	$HBoxContainer/LeftMarginContainer/LeftVBoxContainer/Back.visible = false
 

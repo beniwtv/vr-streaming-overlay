@@ -84,7 +84,6 @@ margin_left = 349.0
 margin_right = 380.0
 margin_bottom = 26.0
 text = "OK"
-
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/ConnectorBoxNode" to="." method="_on_ConnectorBoxNode_item_selected"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/OKButton" to="." method="_on_OKButton_pressed"]

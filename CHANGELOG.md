@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed some stuff in the credits
 - Refactored 80%+ for static typing
 
+### Fixed
+- Remove old secret file before creating a new one, else we can't create it
+
 ## [0.0.2-alpha] - 2019-05-18
 ### Added
 - New widget system that allows to add and arrange widgets at will

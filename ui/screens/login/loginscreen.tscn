@@ -4,7 +4,6 @@
 [ext_resource path="res://ui/font/Ubuntu-M.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://ui/elements/options/passwordoption.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 32
 use_mipmaps = true

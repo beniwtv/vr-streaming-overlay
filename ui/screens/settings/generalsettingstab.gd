@@ -19,16 +19,9 @@ func _ready():
 	backgroundopacity.set_value(SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity")))
 	backgroundopacity.set_widget_node(self)
 	
-	var dimundim = preload("res://ui/elements/options/toggleoption.tscn").instance()
-	get_node(SettingsNode + "LeftSettings").add_child(dimundim)
-	dimundim.set_label("Dim/undim on activity:")
-	dimundim.set_option_name("overlay/dimundim")
-	dimundim.set_value(SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")))
-	dimundim.set_widget_node(self)
-
 	var undimchime = preload("res://ui/elements/options/toggleoption.tscn").instance()
 	get_node(SettingsNode + "LeftSettings").add_child(undimchime)
-	undimchime.set_label("Play chime on event/undim:")
+	undimchime.set_label("Play chime on event:")
 	undimchime.set_option_name("overlay/undimchime")
 	undimchime.set_value(SettingsManager.get_value("user", "overlay/undimchime", DefaultSettings.get_default_setting("overlay/undimchime")))
 	undimchime.set_widget_node(self)
@@ -51,22 +44,6 @@ func _ready():
 	chimedevice.set_values(displaydevices)
 	chimedevice.set_value(SettingsManager.get_value("user", "overlay/chimedevice", DefaultSettings.get_default_setting("overlay/chimedevice")))
 	chimedevice.set_widget_node(self)
-
-	var dimdownopacity = preload("res://ui/elements/options/slideroption.tscn").instance()
-	get_node(SettingsNode + "LeftSettings").add_child(dimdownopacity)
-	dimdownopacity.set_label("Dim to opacity:")
-	dimdownopacity.set_slider_range(0, 1, 0.01)
-	dimdownopacity.set_option_name("overlay/dimdownopacity")
-	dimdownopacity.set_value(SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity")))
-	dimdownopacity.set_widget_node(self)
-
-	var dimdownafter = preload("res://ui/elements/options/numberoption.tscn").instance()
-	get_node(SettingsNode + "LeftSettings").add_child(dimdownafter)
-	dimdownafter.set_label("Dim after (seconds):")
-	dimdownafter.set_spinbox_range(0, 180, 1)
-	dimdownafter.set_option_name("overlay/dimdownafter")
-	dimdownafter.set_value(SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter")))
-	dimdownafter.set_widget_node(self)
 	
 	# Right side
 	var overlaysize = preload("res://ui/elements/options/slideroption.tscn").instance()
@@ -157,3 +134,12 @@ func _on_originoption_item_selected(id):
 func set_config_value(option, value):
 	SettingsManager.set_value("user", option, value)
 	SignalManager.emit_signal("settings_changed")
+
+# Open the correct window for configuring the tracking mode
+func _on_ConfigureTrackingButton_pressed():
+	if SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
+		var trackingdialog = preload("res://ui/dialogs/absolutetrackingdialog.tscn").instance()
+		add_child(trackingdialog)
+		
+		trackingdialog.set_settings_dialog(self)
+		trackingdialog.popup_centered()
