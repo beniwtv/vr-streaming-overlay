@@ -43,6 +43,8 @@ func delete_secret_file() -> void:
 
 # Creates a new secret file with the password provided
 func create_new_secret_file(password : String) -> bool:
+	user_password = password
+	
 	delete_secret_file()
 	return save()
 
