@@ -20,3 +20,6 @@ signal redraw_overlay
 
 # Fired from widgets when an interesting event happened
 signal event_happened
+
+# Fired when an interesting event happened
+signal event_happened_silent

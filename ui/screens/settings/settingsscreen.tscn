@@ -21,4 +21,4 @@ visible = false
 visible = false
 
 [node name="Credits" parent="." instance=ExtResource( 4 )]
-
+visible = false

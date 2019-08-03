@@ -6,7 +6,15 @@ var target_size = Vector2()
 
 var SettingsNode : String = "MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/HBoxContainer/"
 
+onready var vr3dscene = get_node("3DVRViewport")
+onready var debugrect = get_node("MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/3DDebugRect")
+
 func _ready() -> void:
+	vr3dscene.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	debugrect.texture = vr3dscene.get_texture()
+		
 	# Set default audio device
 	AudioServer.set_device(SettingsManager.get_value("user", "overlay/chimedevice", DefaultSettings.get_default_setting("overlay/chimedevice")))
 	
@@ -26,6 +34,7 @@ func _ready() -> void:
 		# Set our resolution for the 2D scene
 		target_size = arvr_interface.get_render_targetsize()
 		$VRViewport.size = target_size
+		$"3DVRViewport".size = target_size
 		
 		SignalManager.emit_signal("render_targetsize", target_size)
 		

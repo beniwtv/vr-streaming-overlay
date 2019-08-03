@@ -8,6 +8,7 @@ func _ready() -> void:
 	SignalManager.connect("secrets_loaded", self, "_on_redraw_overlay")
 	SignalManager.connect("event_happened", self, "_on_event_happened")
 	SignalManager.connect("settings_changed", self, "_on_settings_changed")
+	SignalManager.connect("event_happened_silent", self, "_on_event_happened_silent")
 
 	dim_timer = get_node("DimTimer")
 	dim_timer.wait_time = SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter"))
@@ -76,10 +77,16 @@ func _on_DimTimer_timeout():
 	$WidgetsContainer.modulate.a = SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity"))
 	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity"))
 
+func _on_event_happened_silent():
+	undim_overlay()
+	
 func _on_event_happened():
 	if SettingsManager.get_value("user", "overlay/undimchime", DefaultSettings.get_default_setting("overlay/undimchime")):
 		$AudioStreamPlayer.play(0.0)
-	
+
+	undim_overlay()
+
+func undim_overlay():
 	$WidgetsContainer.modulate.a = 255
 	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity"))
 	

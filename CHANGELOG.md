@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Events, when something on the overlay happens (e.g. new chat message)
 - Option(s) to dim/undim overlay based on events
 - Option to play a chime when an event happens (with audio output/device selection)
+- Added undim when looking at the overlay (3 seconds by default)
 
 ### Changed
 - Fixed some stuff in the credits
