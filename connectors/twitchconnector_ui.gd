@@ -24,7 +24,6 @@ func _on_twitch_verify(result, response_code, headers, body) -> void:
 	$HTTPRequest.disconnect("request_completed", self, "_on_twitch_verify")
 	
 	var userResponse : JSONParseResult = JSON.parse(body.get_string_from_utf8())
-	assert(userResponse.error==OK)
 
 	if response_code == 200:
 		var response = {
@@ -41,11 +40,20 @@ func _on_twitch_verify(result, response_code, headers, body) -> void:
 		
 		receiver.connection_verified(response)
 	else:
-		var response = {
-			"error": true,
-			"message": userResponse.result["message"],
-			"valid": false
-		}
+		var response : Dictionary
+		
+		if userResponse:
+			response = {
+				"error": true,
+				"message": userResponse.result["message"],
+				"valid": false
+			}
+		else:
+			response = {
+				"error": true,
+				"message": "Temporary connection problem. Please verify your connection.",
+				"valid": true
+			}
 		
 		if info:
 			response["uuid"] = info["uuid"]

@@ -47,6 +47,7 @@ func apply_config(widget_id, config):
 		var dynamic_font = DynamicFont.new()
 		dynamic_font.font_data = load(config["font"].file)
 		dynamic_font.size = config["font"].size
+		dynamic_font.add_fallback(load("res://ui/font/TwitterColorEmoji-SVGinOT.ttf"))
 		set("custom_fonts/normal_font", dynamic_font)
 	
 	connect_to_twitch()

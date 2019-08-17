@@ -6,12 +6,11 @@ licenses.
 
 ## Third party assets
 
-**Ubuntu Font**  
-© Copyright 2010,2011 Canonical Ltd.  
-https://design.ubuntu.com/font/
-
-This Font Software is licensed under the Ubuntu Font Licence, Version
-1.0. https://launchpad.net/ubuntu-font-licence
+**Twemoji-Color Font**  
+© Copyright 2016 Brad Erickson CC-BY-4.0/MIT
+© Copyright 2016 Twitter, Inc. CC-BY-4.0
+© Copyright 2013 Joe Loughry and Terence Eden MIT
+https://github.com/eosrei/twemoji-color-font/
 
 **Hack Font**  
 © Copyright (c) 2018 Source Foundry Authors

@@ -16,6 +16,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Copyright" type="RichTextLabel" parent="MarginContainer"]
 margin_left = 10.0
@@ -34,12 +37,11 @@ GitHub: [url]https://github.com/relamptk/vr-streaming-overlay[/url]
 
 -> Third party assets:
 
-[b]Ubuntu Font[/b]
-© Copyright 2010,2011 Canonical Ltd.
-[url]https://design.ubuntu.com/font/[/url]
-
-This Font Software is licensed under the Ubuntu Font Licence, Version
-1.0. [url]https://launchpad.net/ubuntu-font-licence[/url]
+[b]Twemoji-Color Font[/b]
+© Copyright 2016 Brad Erickson CC-BY-4.0/MIT
+© Copyright 2016 Twitter, Inc. CC-BY-4.0
+© Copyright 2013 Joe Loughry and Terence Eden MIT
+[url]https://github.com/eosrei/twemoji-color-font/[/url]
 
 [b]Hack Font[/b]
 © Copyright (c) 2018 Source Foundry Authors
@@ -82,12 +84,11 @@ GitHub: https://github.com/relamptk/vr-streaming-overlay
 
 -> Third party assets:
 
-Ubuntu Font
-© Copyright 2010,2011 Canonical Ltd.
-https://design.ubuntu.com/font/
-
-This Font Software is licensed under the Ubuntu Font Licence, Version
-1.0. https://launchpad.net/ubuntu-font-licence
+Twemoji-Color Font
+© Copyright 2016 Brad Erickson CC-BY-4.0/MIT
+© Copyright 2016 Twitter, Inc. CC-BY-4.0
+© Copyright 2013 Joe Loughry and Terence Eden MIT
+https://github.com/eosrei/twemoji-color-font/
 
 Hack Font
 © Copyright (c) 2018 Source Foundry Authors
