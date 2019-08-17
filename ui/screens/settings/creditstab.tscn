@@ -7,6 +7,9 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -37,6 +40,14 @@ GitHub: [url]https://github.com/relamptk/vr-streaming-overlay[/url]
 
 This Font Software is licensed under the Ubuntu Font Licence, Version
 1.0. [url]https://launchpad.net/ubuntu-font-licence[/url]
+
+[b]Hack Font[/b]
+© Copyright (c) 2018 Source Foundry Authors
+MIT License
+[url]https://sourcefoundry.org/hack/[/url]
+
+BITSTREAM VERA LICENSE
+Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a trademark of Bitstream, Inc.
 
 [b]Virtual Reality Penguin[/b]
 Creative Commons Zero 1.0 Public Domain License
@@ -77,6 +88,14 @@ https://design.ubuntu.com/font/
 
 This Font Software is licensed under the Ubuntu Font Licence, Version
 1.0. https://launchpad.net/ubuntu-font-licence
+
+Hack Font
+© Copyright (c) 2018 Source Foundry Authors
+MIT License
+https://sourcefoundry.org/hack/
+
+BITSTREAM VERA LICENSE
+Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a trademark of Bitstream, Inc.
 
 Virtual Reality Penguin
 Creative Commons Zero 1.0 Public Domain License

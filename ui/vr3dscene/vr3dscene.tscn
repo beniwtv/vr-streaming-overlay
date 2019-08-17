@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/vr3dscene/vr3dscene.gd" type="Script" id=1]
+[ext_resource path="res://addons/vr-common/functions/Function_pointer.tscn" type="PackedScene" id=2]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 1, 1 )
@@ -20,11 +21,14 @@ enabled = true
 cast_to = Vector3( 0, 0, -20 )
 collide_with_areas = true
 
-[node name="ARVRController" type="ARVRController" parent="ARVROrigin"]
-controller_id = 1
+[node name="LeftHand" type="ARVRController" parent="ARVROrigin"]
 
-[node name="ARVRController2" type="ARVRController" parent="ARVROrigin"]
+[node name="Function_pointer" parent="ARVROrigin/LeftHand" instance=ExtResource( 2 )]
+
+[node name="RightHand" type="ARVRController" parent="ARVROrigin"]
 controller_id = 2
+
+[node name="Function_pointer" parent="ARVROrigin/RightHand" instance=ExtResource( 2 )]
 
 [node name="OverlayArea" type="MeshInstance" parent="ARVROrigin"]
 transform = Transform( 1, 0, 0, 0, 0.124963, -0.992161, 0, 0.992161, 0.124963, -0.0470977, 0, -5.9228 )

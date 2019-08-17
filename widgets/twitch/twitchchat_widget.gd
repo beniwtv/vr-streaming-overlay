@@ -43,6 +43,12 @@ func apply_config(widget_id, config):
 				username = i["name"]
 				chat_token = i["token"]
 	
+	if config.has("font"):
+		var dynamic_font = DynamicFont.new()
+		dynamic_font.font_data = load(config["font"].file)
+		dynamic_font.size = config["font"].size
+		set("custom_fonts/normal_font", dynamic_font)
+	
 	connect_to_twitch()
 
 # Called when the node enters the scene tree for the first time.

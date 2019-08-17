@@ -34,7 +34,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 1252.0
 margin_bottom = 515.0
 size_flags_horizontal = 3

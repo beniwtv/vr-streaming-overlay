@@ -16,6 +16,9 @@ func add_config_options(widget_id, config):
 
 	var show_timestamps_value = false
 	if config.has("show_timestamps"): show_timestamps_value = config["show_timestamps"]
+
+	var font_select_value = DefaultSettings.get_default_setting("widgets/font")
+	if config.has("font"): font_select_value = config["font"]
 	
 	var connections = PasswordStorage.get_secret("connections")
 	if !connections: connections = []
@@ -54,8 +57,14 @@ func add_config_options(widget_id, config):
 	show_timestamps.set_option_name("show_timestamps")
 	show_timestamps.set_value(show_timestamps_value)
 	show_timestamps.set_widget_node(self)
+
+	var font_select = preload("res://ui/elements/options/fontoption.tscn").instance()
+	add_child(font_select)
+	font_select.set_label("Font:")
+	font_select.set_option_name("font")
+	font_select.set_value(font_select_value)
+	font_select.set_widget_node(self)
 	
 func set_config_value(key, value):
 	config[key] = value
 	SignalManager.emit_signal("options_changed")
- 

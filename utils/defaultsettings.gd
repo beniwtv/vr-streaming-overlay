@@ -26,6 +26,16 @@ var overlay_rotation_x = 0
 var overlay_rotation_y = 0
 var overlay_rotation_z = 0
 
+# Overlay position / rotation (hand tracking)
+var overlay_position_x_hand = 0.16
+var overlay_position_y_hand = -0.9
+var overlay_position_z_hand = -0.9
+
+var overlay_rotation_x_hand = 0.65
+var overlay_rotation_y_hand = 0.1
+var overlay_rotation_z_hand_left = 1.7
+var overlay_rotation_z_hand_right = -1.7
+
 # Default settings for widgets
 var margin_container_margin_top = 10
 var margin_container_margin_left = 10
@@ -69,6 +79,13 @@ var widgets_configuration : Array = [{
 	"id": twitch_id,
 	"position": "m:m"
 }]
+
+# Widget defaults
+var widgets_font : Dictionary = {
+	"name": "Hack-Regular.ttf",
+	"file": "res://ui/font/Hack-Regular.ttf",
+	"size": 52
+}
 
 func get_default_setting(setting):
 	var settingParts = setting.split("/", setting)

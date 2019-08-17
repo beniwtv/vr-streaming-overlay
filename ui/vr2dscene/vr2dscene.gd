@@ -13,7 +13,7 @@ func _ready() -> void:
 	dim_timer = get_node("DimTimer")
 	dim_timer.wait_time = SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter"))
 	
-	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")):
+	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")) and SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
 		dim_timer.start()
 	
 	$VRBackground.color = SettingsManager.get_value("user", "overlay/color", DefaultSettings.get_default_setting("overlay/color"))
@@ -32,13 +32,15 @@ func _on_settings_changed() -> void:
 	dim_timer.stop()
 	dim_timer.wait_time = SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter"))
 
-	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")):
+	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")) and SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
 		dim_timer.start()
+	else:
+		undim_overlay()
 	
 func _on_redraw_overlay() -> void:
 	# Remove all widgets
 	for i in $WidgetsContainer.get_children():
-    	i.queue_free()
+		i.queue_free()
 	
 	# Somehow we need to wait two frames for Godot...
 	yield(get_tree(), "idle_frame")
@@ -92,5 +94,5 @@ func undim_overlay():
 	
 	$DimTimer.stop()
 	
-	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")):
+	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")) and SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
 		$DimTimer.start()

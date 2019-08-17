@@ -10,13 +10,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Option(s) to dim/undim overlay based on events
 - Option to play a chime when an event happens (with audio output/device selection)
 - Added undim when looking at the overlay (3 seconds by default)
+- Add font option to Twitch widget + added Hack font
 
 ### Changed
 - Fixed some stuff in the credits
 - Refactored 80%+ for static typing
+- Improved tracking on hands of the overlay
 
 ### Fixed
 - Remove old secret file before creating a new one, else we can't create it
+- Prevent dimming of the overlay on hand tracking (not needed there)
 
 ## [0.0.2-alpha] - 2019-05-18
 ### Added

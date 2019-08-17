@@ -1,0 +1,125 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/dialogs/selectfontdialog.gd" type="Script" id=1]
+
+[node name="AddConnectionDialog" type="WindowDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -237.5
+margin_top = -107.0
+margin_right = 362.5
+margin_bottom = 493.0
+rect_min_size = Vector2( 400, 600 )
+popup_exclusive = true
+window_title = "Select font"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 590.0
+margin_bottom = 590.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 580.0
+margin_bottom = 398.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FontBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 460.0
+margin_bottom = 398.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/FontBoxContainer"]
+margin_right = 460.0
+margin_bottom = 14.0
+text = "Select font:"
+
+[node name="FontList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer/FontBoxContainer"]
+margin_top = 18.0
+margin_right = 460.0
+margin_bottom = 398.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.75
+
+[node name="SizeBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 464.0
+margin_right = 580.0
+margin_bottom = 398.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeBoxContainer"]
+margin_right = 116.0
+margin_bottom = 14.0
+text = "Font size:"
+
+[node name="FontSizeList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeBoxContainer"]
+margin_top = 18.0
+margin_right = 116.0
+margin_bottom = 398.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PreviewLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 454.0
+margin_right = 580.0
+margin_bottom = 468.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.3
+text = "The quick brown fox jumps over the lazy dog."
+align = 1
+valign = 1
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 525.0
+margin_right = 580.0
+margin_bottom = 555.0
+size_flags_horizontal = 3
+custom_constants/separation = 30
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 559.0
+margin_right = 580.0
+margin_bottom = 579.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer"]
+margin_left = 491.0
+margin_right = 545.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[node name="OKButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonContainer"]
+margin_left = 549.0
+margin_right = 580.0
+margin_bottom = 20.0
+text = "OK"
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/FontBoxContainer/FontList" to="." method="_on_FontList_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/SizeBoxContainer/FontSizeList" to="." method="_on_FontSizeList_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonContainer/OKButton" to="." method="_on_OKButton_pressed"]

@@ -13,6 +13,14 @@ https://design.ubuntu.com/font/
 This Font Software is licensed under the Ubuntu Font Licence, Version
 1.0. https://launchpad.net/ubuntu-font-licence
 
+**Hack Font**  
+© Copyright (c) 2018 Source Foundry Authors
+MIT License
+https://sourcefoundry.org/hack/
+
+BITSTREAM VERA LICENSE
+Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a trademark of Bitstream, Inc.
+
 **Virtual Reality Penguin**  
 Creative Commons Zero 1.0 Public Domain License  
 https://openclipart.org/detail/284554/virtual-reality-penguin

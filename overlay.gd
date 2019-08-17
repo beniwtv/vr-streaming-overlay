@@ -86,13 +86,34 @@ func _on_trackers_changed(tracker_name : String, tracker_type : int, tracker_id)
 	attempt_tracking()
 	
 func attempt_tracking():
-	var position_x : float = SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x"))
-	var position_y : float = SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y"))
-	var position_z : float = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_y"))
+	var position_x : float
+	var position_y : float
+	var position_z : float
 	
-	var rotation_x : float = SettingsManager.get_value("user", "overlay/rotation_x", DefaultSettings.get_default_setting("overlay/rotation_x"))
-	var rotation_y : float = SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y"))
-	var rotation_z : float = SettingsManager.get_value("user", "overlay/rotation_z", DefaultSettings.get_default_setting("overlay/rotation_z"))
+	var rotation_x : float
+	var rotation_y : float
+	var rotation_z : float
+	
+	if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
+		position_x = DefaultSettings.get_default_setting("overlay/position_x_hand")
+		position_y = SettingsManager.get_value("user", "overlay/position_y_hand", DefaultSettings.get_default_setting("overlay/position_y_hand"))
+		position_z = SettingsManager.get_value("user", "overlay/position_z_hand", DefaultSettings.get_default_setting("overlay/position_y_hand"))
+		
+		rotation_x = DefaultSettings.get_default_setting("overlay/rotation_x_hand")
+		rotation_y = DefaultSettings.get_default_setting("overlay/rotation_y_hand")
+		
+		if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() == 0:
+			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_left")
+		else:
+			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_right")
+	else:
+		position_x = SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x"))
+		position_y = SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y"))
+		position_z = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_y"))
+	
+		rotation_x = SettingsManager.get_value("user", "overlay/rotation_x", DefaultSettings.get_default_setting("overlay/rotation_x"))
+		rotation_y = SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y"))
+		rotation_z = SettingsManager.get_value("user", "overlay/rotation_z", DefaultSettings.get_default_setting("overlay/rotation_z"))
 	
 	var transform : Transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
 	transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)	

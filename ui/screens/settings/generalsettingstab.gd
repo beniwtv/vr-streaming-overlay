@@ -61,6 +61,7 @@ func _ready():
 	position_x.set_option_name("overlay/position_x")
 	position_x.set_value(SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x")))
 	position_x.set_widget_node(self)
+	position_x.add_to_group("absolute_mode")
 	
 	var position_y = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(position_y)
@@ -69,6 +70,7 @@ func _ready():
 	position_y.set_option_name("overlay/position_y")
 	position_y.set_value(SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y")))
 	position_y.set_widget_node(self)
+	position_y.add_to_group("absolute_mode")
 	
 	var position_z = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(position_z)
@@ -77,6 +79,7 @@ func _ready():
 	position_z.set_option_name("overlay/position_z")
 	position_z.set_value(SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_z")))
 	position_z.set_widget_node(self)
+	position_z.add_to_group("absolute_mode")
 	
 	var rotation_x = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(rotation_x)
@@ -85,6 +88,7 @@ func _ready():
 	rotation_x.set_option_name("overlay/rotation_x")
 	rotation_x.set_value(SettingsManager.get_value("user", "overlay/rotation_x", DefaultSettings.get_default_setting("overlay/rotation_x")))
 	rotation_x.set_widget_node(self)
+	rotation_x.add_to_group("absolute_mode")
 	
 	var rotation_y = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(rotation_y)
@@ -93,6 +97,7 @@ func _ready():
 	rotation_y.set_option_name("overlay/rotation_y")
 	rotation_y.set_value(SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y")))
 	rotation_y.set_widget_node(self)
+	rotation_y.add_to_group("absolute_mode")
 	
 	var rotation_z = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(rotation_z)
@@ -101,6 +106,25 @@ func _ready():
 	rotation_z.set_option_name("overlay/rotation_z")
 	rotation_z.set_value(SettingsManager.get_value("user", "overlay/rotation_z", DefaultSettings.get_default_setting("overlay/rotation_z")))
 	rotation_z.set_widget_node(self)
+	rotation_z.add_to_group("absolute_mode")
+	
+	var position_y_hand = preload("res://ui/elements/options/slideroption.tscn").instance()
+	get_node(SettingsNode + "RightSettings").add_child(position_y_hand)
+	position_y_hand.set_label("Adjust position (left/right):")
+	position_y_hand.set_slider_range(-10, 10, 0.01)
+	position_y_hand.set_option_name("overlay/position_y_hand")
+	position_y_hand.set_value(SettingsManager.get_value("user", "overlay/position_y_hand", DefaultSettings.get_default_setting("overlay/position_y_hand")))
+	position_y_hand.set_widget_node(self)
+	position_y_hand.add_to_group("hand_mode")
+	
+	var position_z_hand = preload("res://ui/elements/options/slideroption.tscn").instance()
+	get_node(SettingsNode + "RightSettings").add_child(position_z_hand)
+	position_z_hand.set_label("Adjust position (far/near):")
+	position_z_hand.set_slider_range(-5, 0, 0.01)
+	position_z_hand.set_option_name("overlay/position_z_hand")
+	position_z_hand.set_value(SettingsManager.get_value("user", "overlay/position_z_hand", DefaultSettings.get_default_setting("overlay/position_z_hand")))
+	position_z_hand.set_widget_node(self)
+	position_z_hand.add_to_group("hand_mode")
 	
 	get_node(SettingsNode + "LeftSettings/TrackingOrigin/OptionButton").add_item('Seated', 0)
 	get_node(SettingsNode + "LeftSettings/TrackingOrigin/OptionButton").add_item('Standing', 1)
@@ -108,6 +132,8 @@ func _ready():
 	for i in range(0, get_node(SettingsNode + "LeftSettings/TrackingOrigin/OptionButton").get_item_count()):
 		if SettingsManager.get_value("user", "overlay/origin", DefaultSettings.get_default_setting("overlay/origin")) == get_node(SettingsNode + "LeftSettings/TrackingOrigin/OptionButton").get_item_id(i): 
 			get_node(SettingsNode + "LeftSettings/TrackingOrigin/OptionButton").select(i)	
+
+	adjust_hand_mode_ui()
 
 	SignalManager.connect("vr_init", self, "_on_vr_init")
 
@@ -125,6 +151,8 @@ func _on_handoption_item_selected(id):
 		get_node(SettingsNode + "LeftSettings/TrackingOrigin").visible = true
 	else:
 		get_node(SettingsNode + "LeftSettings/TrackingOrigin").visible = false
+		
+	adjust_hand_mode_ui()
 
 func _on_originoption_item_selected(id):
 	SettingsManager.set_value("user", "overlay/origin", get_node(SettingsNode + "LeftSettings/TrackingOrigin/OptionButton").get_selected_id())
@@ -143,3 +171,15 @@ func _on_ConfigureTrackingButton_pressed():
 		
 		trackingdialog.set_settings_dialog(self)
 		trackingdialog.popup_centered()
+
+func adjust_hand_mode_ui():
+	if SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
+		for node in get_tree().get_nodes_in_group("absolute_mode"):
+			node.visible = true
+		for node in get_tree().get_nodes_in_group("hand_mode"):
+			node.visible = false
+	else:
+		for node in get_tree().get_nodes_in_group("absolute_mode"):
+			node.visible = false
+		for node in get_tree().get_nodes_in_group("hand_mode"):
+			node.visible = true
