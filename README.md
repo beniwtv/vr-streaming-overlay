@@ -3,10 +3,8 @@
 This is a SteamVR overlay for streamers on Linux.
 (It is made with Godot, so theoretically this could run on Windows and MacOSX too, feedback and patches welcome ;)
 
-**Note:** The master on this repository is kept in sync with the Godot / Godot OpenVR master.
+**Note:** The master on this repository is kept roughly in sync with the Godot / Godot OpenVR master.
 For official releases of Godot please check the releases page and/or the respective branches.
-
-Right now this needs a specially compiled Godot OpenVR plugin for which I have not had the time to make a pull request to get it into Godot OpenVR. I have a forked repository of godot_openvr with a branch called *vroverlay*: https://github.com/beniwtv/godot_openvr/tree/vroverlay -> place the *demo/addons/godot-openvr* folder into *addons/godot-openvr*.
 
 **Note:** The changed version of the plugin is only compiled for Linux at the moment.
 
@@ -23,9 +21,7 @@ Current features:
 
 Planned features:
 - Trigger gesture to show/hide overlay (attached left/right hand)
-- Twitch emotes integration
 - Integration of other streaming services (patches will be welcome ;)
-
 
 Linux notes
 -----------

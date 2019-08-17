@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed some stuff in the credits
 - Refactored 80%+ for static typing
 - Improved tracking on hands of the overlay
+- Properly include godot-openvr addon like other addons for ease of use
 
 ### Fixed
 - Remove old secret file before creating a new one, else we can't create it
