@@ -94,18 +94,19 @@ func attempt_tracking():
 	var rotation_y : float
 	var rotation_z : float
 	
+	var transform : Transform
+	
 	if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
-		position_x = DefaultSettings.get_default_setting("overlay/position_x_hand")
-		position_y = SettingsManager.get_value("user", "overlay/position_y_hand", DefaultSettings.get_default_setting("overlay/position_y_hand"))
-		position_z = SettingsManager.get_value("user", "overlay/position_z_hand", DefaultSettings.get_default_setting("overlay/position_y_hand"))
-		
-		rotation_x = DefaultSettings.get_default_setting("overlay/rotation_x_hand")
-		rotation_y = DefaultSettings.get_default_setting("overlay/rotation_y_hand")
+		position_z = SettingsManager.get_value("user", "overlay/position_z_hand", DefaultSettings.get_default_setting("overlay/position_z_hand"))
 		
 		if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() == 0:
 			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_left")
 		else:
 			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_right")
+		
+		transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(0, 0, position_z))
+		transform = transform.rotated(Vector3(0, 0, 1), rotation_z)	
+		transform = transform.translated(Vector3(0, 0, 1) * position_z)
 	else:
 		position_x = SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x"))
 		position_y = SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y"))
@@ -115,12 +116,12 @@ func attempt_tracking():
 		rotation_y = SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y"))
 		rotation_z = SettingsManager.get_value("user", "overlay/rotation_z", DefaultSettings.get_default_setting("overlay/rotation_z"))
 	
-	var transform : Transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
-	transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)	
-	transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)	
-	transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)	
+		transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
+		transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)	
+		transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)	
+		transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)	
 
-	transform = transform.orthonormalized()
+		transform = transform.orthonormalized()
 
 	if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
 		var trackingIdFound = null

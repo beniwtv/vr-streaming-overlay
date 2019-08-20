@@ -26,6 +26,11 @@ SignalManager="*res://utils/signalmanager.tscn"
 DefaultSettings="*res://utils/defaultsettings.tscn"
 PasswordStorage="*res://utils/passwordstorage.tscn"
 
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=1280

@@ -108,15 +108,6 @@ func _ready():
 	rotation_z.set_widget_node(self)
 	rotation_z.add_to_group("absolute_mode")
 	
-	var position_y_hand = preload("res://ui/elements/options/slideroption.tscn").instance()
-	get_node(SettingsNode + "RightSettings").add_child(position_y_hand)
-	position_y_hand.set_label("Adjust position (left/right):")
-	position_y_hand.set_slider_range(-10, 10, 0.01)
-	position_y_hand.set_option_name("overlay/position_y_hand")
-	position_y_hand.set_value(SettingsManager.get_value("user", "overlay/position_y_hand", DefaultSettings.get_default_setting("overlay/position_y_hand")))
-	position_y_hand.set_widget_node(self)
-	position_y_hand.add_to_group("hand_mode")
-	
 	var position_z_hand = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(position_z_hand)
 	position_z_hand.set_label("Adjust position (far/near):")
@@ -167,6 +158,12 @@ func set_config_value(option, value):
 func _on_ConfigureTrackingButton_pressed():
 	if SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
 		var trackingdialog = preload("res://ui/dialogs/absolutetrackingdialog.tscn").instance()
+		add_child(trackingdialog)
+		
+		trackingdialog.set_settings_dialog(self)
+		trackingdialog.popup_centered()
+	else:
+		var trackingdialog = preload("res://ui/dialogs/handtrackingdialog.tscn").instance()
 		add_child(trackingdialog)
 		
 		trackingdialog.set_settings_dialog(self)

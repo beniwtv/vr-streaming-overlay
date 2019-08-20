@@ -1,6 +1,5 @@
 extends Spatial
 
-var delay = 0;
 var collision_seconds = 0;
 var seconds_required_to_undim = 0;
 
@@ -20,7 +19,7 @@ func _physics_process(delta):
 	if collision_seconds >= seconds_required_to_undim:
 		collision_seconds = 0
 		SignalManager.emit_signal("event_happened_silent")
-
+	
 func _on_settings_changed() -> void:
 	seconds_required_to_undim = SettingsManager.get_value("user", "overlay/undimstareseconds", DefaultSettings.get_default_setting("overlay/undimstareseconds"))
 	collision_seconds = 0

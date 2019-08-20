@@ -25,7 +25,7 @@ func set_settings_dialog(dialog : Node):
 	undimstareseconds.set_spinbox_range(0, 180, 1)
 	undimstareseconds.set_option_name("overlay/undimstareseconds")
 	undimstareseconds.set_value(SettingsManager.get_value("user", "overlay/undimstareseconds", DefaultSettings.get_default_setting("overlay/undimstareseconds")))
-	undimstareseconds.set_widget_node(self)
+	undimstareseconds.set_widget_node(settings_dialog)
 
 	var dimdownopacity = preload("res://ui/elements/options/slideroption.tscn").instance()
 	$MarginContainer/VBoxContainer.add_child(dimdownopacity)
@@ -33,7 +33,7 @@ func set_settings_dialog(dialog : Node):
 	dimdownopacity.set_slider_range(0, 1, 0.01)
 	dimdownopacity.set_option_name("overlay/dimdownopacity")
 	dimdownopacity.set_value(SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity")))
-	dimdownopacity.set_widget_node(self)
+	dimdownopacity.set_widget_node(settings_dialog)
 
 	var dimdownafter = preload("res://ui/elements/options/numberoption.tscn").instance()
 	$MarginContainer/VBoxContainer.add_child(dimdownafter)
@@ -41,4 +41,4 @@ func set_settings_dialog(dialog : Node):
 	dimdownafter.set_spinbox_range(0, 180, 1)
 	dimdownafter.set_option_name("overlay/dimdownafter")
 	dimdownafter.set_value(SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter")))
-	dimdownafter.set_widget_node(self)
+	dimdownafter.set_widget_node(settings_dialog)

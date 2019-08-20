@@ -1,6 +1,11 @@
 extends Control
 
 var dim_timer
+var controller_transform : Transform
+
+var angle_seconds = 0;
+var seconds_required_to_show = 0;
+var angle_required = 80;
 
 func _ready() -> void:
 	SignalManager.connect("render_targetsize", self, "_on_render_targetsize_changed")
@@ -19,6 +24,37 @@ func _ready() -> void:
 	$VRBackground.color = SettingsManager.get_value("user", "overlay/color", DefaultSettings.get_default_setting("overlay/color"))
 	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity"))
 
+	seconds_required_to_show = SettingsManager.get_value("user", "overlay/showseconds", DefaultSettings.get_default_setting("overlay/showseconds"))
+	angle_required = SettingsManager.get_value("user", "overlay/minangle", DefaultSettings.get_default_setting("overlay/minangle"))
+
+func _process(delta):
+	# Detect controller gestures
+	if SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 0:
+		controller_transform = get_node("../../3DVRViewport/VR3DScene/ARVROrigin/LeftHand").transform
+	
+		var angle : float = rad2deg(controller_transform.basis.get_euler().z)
+		
+		if angle >= angle_required:
+			angle_seconds = angle_seconds + delta
+		else:
+			angle_seconds = 0
+	elif SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 1:
+		controller_transform = get_node("../../3DVRViewport/VR3DScene/ARVROrigin/RightHand").transform
+	
+		var angle : float = rad2deg(controller_transform.basis.get_euler().z)
+		
+		if angle <= angle_required * -1:
+			angle_seconds = angle_seconds + delta
+		else:
+			angle_seconds = 0
+	else:
+		return
+
+	if angle_seconds >= seconds_required_to_show:
+		visible = true
+	else:
+		visible = false
+
 func _on_render_targetsize_changed(size : Vector2) -> void:
 	rect_size = size
 	$VRBackground.rect_size = size
@@ -36,6 +72,10 @@ func _on_settings_changed() -> void:
 		dim_timer.start()
 	else:
 		undim_overlay()
+	
+	seconds_required_to_show = SettingsManager.get_value("user", "overlay/showseconds", DefaultSettings.get_default_setting("overlay/showseconds"))
+	angle_required = SettingsManager.get_value("user", "overlay/minangle", DefaultSettings.get_default_setting("overlay/minangle"))
+	angle_seconds = 0
 	
 func _on_redraw_overlay() -> void:
 	# Remove all widgets

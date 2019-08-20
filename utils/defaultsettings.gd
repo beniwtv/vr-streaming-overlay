@@ -14,6 +14,8 @@ var overlay_undimchime = true
 var overlay_chimedevice = "Default"
 var overlay_undimstare = true
 var overlay_undimstareseconds = 3
+var overlay_showseconds = 0.8
+var overlay_minangle = 80
 
 # Overlay position / rotation
 var overlay_size = 1.5
@@ -27,12 +29,7 @@ var overlay_rotation_y = 0
 var overlay_rotation_z = 0
 
 # Overlay position / rotation (hand tracking)
-var overlay_position_x_hand = 0.16
-var overlay_position_y_hand = -0.9
-var overlay_position_z_hand = -0.9
-
-var overlay_rotation_x_hand = 0.65
-var overlay_rotation_y_hand = 0.1
+var overlay_position_z_hand = -0.54
 var overlay_rotation_z_hand_left = 1.7
 var overlay_rotation_z_hand_right = -1.7
 

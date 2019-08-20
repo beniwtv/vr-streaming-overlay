@@ -18,9 +18,9 @@ Current features:
 - Track overlay with left/right hand
 - Configurable position and rotation relative to tracking device or absolute in VR world
 - Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
+- Trigger gesture to show/hide overlay (attached left/right hand)
 
 Planned features:
-- Trigger gesture to show/hide overlay (attached left/right hand)
 - Integration of other streaming services (patches will be welcome ;)
 
 Linux notes

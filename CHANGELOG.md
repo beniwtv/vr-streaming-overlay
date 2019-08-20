@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Option to play a chime when an event happens (with audio output/device selection)
 - Added undim when looking at the overlay (3 seconds by default)
 - Add font option to Twitch widget + added Hack font
+- Hand tracking now functional, with settings dialog
 
 ### Changed
 - Fixed some stuff in the credits
