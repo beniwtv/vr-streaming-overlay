@@ -3,6 +3,8 @@ extends Control
 var OpenVRConfig
 var OpenVROverlay
 var target_size = Vector2()
+var overlay_id
+var overlay_id2
 
 var SettingsNode : String = "MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/HBoxContainer/"
 
@@ -40,10 +42,15 @@ func _ready() -> void:
 		
 		# Create and display our overlay
 		OpenVROverlay = preload("res://addons/godot-openvr/OpenVROverlay.gdns").new()
-		OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay","VR Streaming Overlay") # Unique key and friendly name
-		OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")))
+		overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay","VR Streaming Overlay") # Unique key and friendly name
+		OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")), overlay_id)
 
-		OpenVROverlay.show_overlay()
+		OpenVROverlay.show_overlay(overlay_id)
+		
+		#overlay_id2 = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay2","VR Streaming Overlay2") # Unique key and friendly name
+		#OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")), overlay_id2)
+
+		#OpenVROverlay.show_overlay(overlay_id2)
 		
 		SignalManager.emit_signal("vr_init", "done")
 		
@@ -95,6 +102,7 @@ func attempt_tracking():
 	var rotation_z : float
 	
 	var transform : Transform
+	var transform2 : Transform
 	
 	if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
 		position_z = SettingsManager.get_value("user", "overlay/position_z_hand", DefaultSettings.get_default_setting("overlay/position_z_hand"))
@@ -105,23 +113,30 @@ func attempt_tracking():
 			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_right")
 		
 		transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(0, 0, position_z))
-		transform = transform.rotated(Vector3(0, 0, 1), rotation_z)	
+		transform = transform.rotated(Vector3(0, 0, 1), rotation_z)
 		transform = transform.translated(Vector3(0, 0, 1) * position_z)
 	else:
 		position_x = SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x"))
 		position_y = SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y"))
-		position_z = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_y"))
+		position_z = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_z"))
 	
 		rotation_x = SettingsManager.get_value("user", "overlay/rotation_x", DefaultSettings.get_default_setting("overlay/rotation_x"))
 		rotation_y = SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y"))
 		rotation_z = SettingsManager.get_value("user", "overlay/rotation_z", DefaultSettings.get_default_setting("overlay/rotation_z"))
 	
 		transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
-		transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)	
-		transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)	
-		transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)	
+		transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)
+		transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)
+		transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)
 
 		transform = transform.orthonormalized()
+		
+		transform2 = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z - 1))
+		transform2.basis = transform2.basis.rotated(Vector3(1, 0, 0), rotation_x)
+		transform2.basis = transform2.basis.rotated(Vector3(0, 1, 0), rotation_y)
+		transform2.basis = transform2.basis.rotated(Vector3(0, 0, 1), rotation_z)
+
+		transform2 = transform2.orthonormalized()
 
 	if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
 		var trackingIdFound = null
@@ -140,6 +155,7 @@ func attempt_tracking():
 						trackingIdFound = name_parts[name_parts.size() - 1]
 		
 		if trackingIdFound:
-			OpenVROverlay.track_relative_to_device(trackingIdFound, transform)
+			OpenVROverlay.track_relative_to_device(trackingIdFound, transform, overlay_id)
 	else:
-		OpenVROverlay.overlay_position_absolute(transform)
+		OpenVROverlay.overlay_position_absolute(transform, overlay_id)
+		#OpenVROverlay.overlay_position_absolute(transform2, overlay_id2)

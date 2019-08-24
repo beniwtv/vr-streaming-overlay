@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added undim when looking at the overlay (3 seconds by default)
 - Add font option to Twitch widget + added Hack font
 - Hand tracking now functional, with settings dialog
+- Added compact mode display for Twitch chat widget
+- Godot OpenVR library now compiled using Ubuntu 18.04 (hopefully prevents crashes)
 
 ### Changed
 - Fixed some stuff in the credits
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Remove old secret file before creating a new one, else we can't create it
 - Prevent dimming of the overlay on hand tracking (not needed there)
+- Fixed secret file corruption when closing overlay application without logging in
 
 ## [0.0.2-alpha] - 2019-05-18
 ### Added

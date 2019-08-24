@@ -35,7 +35,7 @@ func adjust_size() -> void:
 func adjust_position() -> void:
 	var position_x : float = SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x"))
 	var position_y : float = SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y"))
-	var position_z : float = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_y"))
+	var position_z : float = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_z"))
 	
 	var rotation_x : float = SettingsManager.get_value("user", "overlay/rotation_x", DefaultSettings.get_default_setting("overlay/rotation_x"))
 	var rotation_y : float = SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y"))

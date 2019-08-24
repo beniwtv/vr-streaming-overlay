@@ -14,6 +14,9 @@ func add_config_options(widget_id, config):
 	var text_color_value = "#FFFFFF"
 	if config.has("text_color"): text_color_value = config["text_color"]
 
+	var compact_mode_value = false
+	if config.has("compact_mode_"): compact_mode_value = config["compact_mode"]
+
 	var show_timestamps_value = false
 	if config.has("show_timestamps"): show_timestamps_value = config["show_timestamps"]
 
@@ -50,6 +53,13 @@ func add_config_options(widget_id, config):
 	text_color.set_option_name("text_color")
 	text_color.set_value(text_color_value)
 	text_color.set_widget_node(self)
+	
+	var compact_mode = preload("res://ui/elements/options/toggleoption.tscn").instance()
+	add_child(compact_mode)
+	compact_mode.set_label("Compact view:")
+	compact_mode.set_option_name("compact_mode")
+	compact_mode.set_value(compact_mode_value)
+	compact_mode.set_widget_node(self)
 	
 	var show_timestamps = preload("res://ui/elements/options/toggleoption.tscn").instance()
 	add_child(show_timestamps)

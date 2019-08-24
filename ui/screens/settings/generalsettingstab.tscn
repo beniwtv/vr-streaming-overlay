@@ -38,13 +38,13 @@ size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 1252.0
-margin_bottom = 289.0
+margin_bottom = 515.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LeftSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 607.0
-margin_bottom = 289.0
+margin_bottom = 515.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -101,17 +101,18 @@ text = "Configure this mode..."
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 611.0
 margin_right = 641.0
-margin_bottom = 289.0
+margin_bottom = 515.0
 custom_constants/separation = 30
 
 [node name="RightSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 645.0
 margin_right = 1252.0
-margin_bottom = 289.0
+margin_bottom = 515.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="3DDebugRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+visible = false
 margin_top = 293.0
 margin_right = 1252.0
 margin_bottom = 582.0
@@ -122,7 +123,7 @@ expand = true
 stretch_mode = 6
 
 [node name="StatusBox" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 586.0
+margin_top = 519.0
 margin_right = 1252.0
 margin_bottom = 674.0
 size_flags_horizontal = 3

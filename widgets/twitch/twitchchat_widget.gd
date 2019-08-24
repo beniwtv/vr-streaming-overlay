@@ -22,6 +22,7 @@ var last_check = 0
 # Configuration data
 var username = null
 var chat_token = null
+var compact_mode = false
 
 var channels = PoolStringArray()
 var text_color = Color(255, 255, 255)
@@ -35,6 +36,7 @@ func apply_config(widget_id, config):
 	if config.has("ratio"): size_flags_stretch_ratio = config["ratio"]
 	if config.has("channels"): channels = PoolStringArray(config["channels"])
 	if config.has("text_color"): text_color = config["text_color"]
+	if config.has("compact_mode"): compact_mode = config["compact_mode"]
 	if config.has("show_timestamps"): show_timestamps = config["show_timestamps"]
 	
 	if config.has("connection"):
@@ -279,9 +281,10 @@ func parse_irc_line(lines):
 			
 			var badges_string = "[img]res://widgets/twitch/moderator.png[/img]" if mod else ""
 			var timestamp = "[color=#" + text_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
+			var line_sep = " - " if compact_mode else "\n"
 			
-			chat_lines.append(timestamp + "[color=" + color + "]" + author + "[/color] " + badges_string + "\n")
-			chat_lines.append("[color=#" + text_color.to_html(true) + "]" + message + "[/color]\n\n")			
+			chat_lines.append(timestamp + "[color=" + color + "]" + author + "[/color] " + badges_string + line_sep)
+			chat_lines.append("[color=#" + text_color.to_html(true) + "]" + message + "[/color]\n\n")
 
 			redraw_chat()
 			

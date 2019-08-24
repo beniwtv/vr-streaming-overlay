@@ -22,6 +22,7 @@ cast_to = Vector3( 0, 0, -20 )
 collide_with_areas = true
 
 [node name="LeftHand" type="ARVRController" parent="ARVROrigin"]
+controller_id = 1
 
 [node name="Function_pointer" parent="ARVROrigin/LeftHand" instance=ExtResource( 2 )]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://widgets/twitch/twitchchat_widget.gd" type="Script" id=2]
+[ext_resource path="res://widgets/twitch/twitchchat_widget.gd" type="Script" id=1]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://ui/font/Hack-Regular.ttf"
@@ -20,7 +20,7 @@ size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 scroll_following = true
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

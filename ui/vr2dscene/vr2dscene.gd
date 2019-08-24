@@ -48,6 +48,7 @@ func _process(delta):
 		else:
 			angle_seconds = 0
 	else:
+		visible = true
 		return
 
 	if angle_seconds >= seconds_required_to_show:

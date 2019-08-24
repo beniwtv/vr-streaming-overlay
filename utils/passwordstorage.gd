@@ -74,5 +74,6 @@ func save() -> bool:
 	return true
 
 func _exit_tree() -> void:
-	# Always save secret file when quitting the project
-	save()
+	# Always save secret file when quitting the project, if we have a password
+	if user_password:
+		save()
