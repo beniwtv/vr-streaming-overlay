@@ -59,7 +59,8 @@ func _ready():
 	print("Twitch widget loading!")
 	
 	# Prepare our chat lines array
-	chat_lines.append("\n")
+	for i in range(0, 200):
+		chat_lines.append("\n")
 
 func _exit_tree():
 	print("Twitch widget unloading!")
@@ -279,11 +280,11 @@ func parse_irc_line(lines):
 				elif i.find("display-name") > -1:
 					author = i.split("=")[1]
 			
-			var badges_string = "[img]res://widgets/twitch/moderator.png[/img]" if mod else ""
+			var badges_string = " [img]res://widgets/twitch/moderator.png[/img]" if mod else ""
 			var timestamp = "[color=#" + text_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
 			var line_sep = " - " if compact_mode else "\n"
 			
-			chat_lines.append(timestamp + "[color=" + color + "]" + author + "[/color] " + badges_string + line_sep)
+			chat_lines.append(timestamp + "[color=" + color + "]" + author + "[/color]" + badges_string + line_sep)
 			chat_lines.append("[color=#" + text_color.to_html(true) + "]" + message + "[/color]\n\n")
 
 			redraw_chat()
@@ -293,7 +294,7 @@ func parse_irc_line(lines):
 # Redraws chat text in the richtextlabel
 func redraw_chat():
 	chat_lines.invert()
-	chat_lines.resize(20)
+	chat_lines.resize(200)
 	chat_lines.invert()
 	
 	clear()

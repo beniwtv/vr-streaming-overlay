@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/overlay/vr2dscene/vr2dscene.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/overlay/vr2dscene/notification.wav" type="AudioStream" id=3]
+
+[node name="VR2DScene" type="Control"]
+margin_right = 2160.0
+margin_bottom = 2100.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="DimTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="VRBackground" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -2120.0
+margin_bottom = -2060.0
+
+[node name="WidgetsContainer" type="Container" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1150.0
+margin_bottom = -1542.0
+[connection signal="timeout" from="DimTimer" to="." method="_on_DimTimer_timeout"]
