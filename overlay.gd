@@ -43,12 +43,12 @@ func _ready() -> void:
 		else:
 			get_node(SettingsNode + "LeftSettings/TrackingOrigin").visible = false
 		
-		# Load configured overlays
+		# Load configured overlays and pointers
 		var overlay = load("res://ui/overlay/overlayinstance.tscn").instance()
 		$Overlays.add_child(overlay)
 		
-		#var overlay2 = load("res://ui/overlay/overlayinstance.tscn").instance()
-		#$Overlays.add_child(overlay2)
+		#var pointer1 = load("res://ui/pointer/pointerinstance.tscn").instance()
+		#$Overlays.add_child(pointer1)
 		
 		# Set our resolution for the 2D scene
 		var target_size : Vector2 = arvr_interface.get_render_targetsize()
