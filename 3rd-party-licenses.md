@@ -24,10 +24,6 @@ Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a t
 Creative Commons Zero 1.0 Public Domain License  
 https://openclipart.org/detail/284554/virtual-reality-penguin
 
-**Some of the Godot icons**
-CC BY 4.0 International License
-https://github.com/godotengine/godot-design
-
 **Chime notification sound from Brandon75689**
 OGA-BY 3.0 / CC0
 https://opengameart.org/content/point-bell

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/elements/items/connectionlistitem.gd" type="Script" id=1]
-[ext_resource path="res://ui/icons/checked.png" type="Texture" id=2]
+[ext_resource path="res://ui/theme/verified.png" type="Texture" id=2]
 [ext_resource path="res://ui/icons/invalid.png" type="Texture" id=3]
-[ext_resource path="res://ui/icons/edit.png" type="Texture" id=4]
-[ext_resource path="res://ui/icons/remove.png" type="Texture" id=5]
+[ext_resource path="res://ui/theme/edit.png" type="Texture" id=4]
+[ext_resource path="res://ui/theme/remove.png" type="Texture" id=5]
 
 [node name="ConnectionListItem" type="Control"]
 anchor_right = 1.0
@@ -79,6 +79,7 @@ margin_bottom = 720.0
 hint_tooltip = "Edit and re-validate"
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text = "Edit"
 icon = ExtResource( 4 )
 
 [node name="DeleteConnectionButton" type="Button" parent="HBoxContainer"]
@@ -88,7 +89,7 @@ margin_bottom = 720.0
 hint_tooltip = "Remove connection"
 size_flags_horizontal = 3
 size_flags_vertical = 3
+text = "Remove"
 icon = ExtResource( 5 )
-
 [connection signal="pressed" from="HBoxContainer/EditConnectionButton" to="." method="_on_EditConnectionButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DeleteConnectionButton" to="." method="_on_DeleteConnectionButton_pressed"]

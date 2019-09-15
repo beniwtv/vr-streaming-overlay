@@ -5,8 +5,8 @@
 [ext_resource path="res://ui/overlay/vr3dscene/vr3dscene.tscn" type="PackedScene" id=3]
 
 [node name="OverlayInstance" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

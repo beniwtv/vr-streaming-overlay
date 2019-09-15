@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.co##m/en/1.0.0/
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [UNRELEASED] - 2019-XX-XX
+
+## [0.0.3-alpha - 2019-09-15
 ### Added
 - Events, when something on the overlay happens (e.g. new chat message)
 - Option(s) to dim/undim overlay based on events
@@ -14,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Hand tracking now functional, with settings dialog
 - Added compact mode display for Twitch chat widget
 - Godot OpenVR library now compiled using Ubuntu 18.04 (hopefully prevents crashes)
+- Added new UI theme (still needs some fixes)
+- Added multiple overlay support
 
 ### Changed
 - Fixed some stuff in the credits
@@ -46,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial very rough alpha build
 
-[Unreleased]: https://github.com/relamptk/vr-streaming-overlay/compare/0.0.2-alpha...HEAD
+[Unreleased]: https://github.com/relamptk/vr-streaming-overlay/compare/0.0.3-alpha...HEAD
+[0.0.3-alpha]: https://github.com/relamptk/vr-streaming-overlay/releases/tag/0.0.3-alpha
 [0.0.2-alpha]: https://github.com/relamptk/vr-streaming-overlay/releases/tag/0.0.2-alpha
 [0.0.1-alpha]: https://github.com/relamptk/vr-streaming-overlay/releases/tag/0.0.1-alpha

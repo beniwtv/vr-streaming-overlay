@@ -1,0 +1,153 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ui/screens/settings/overlaystab.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/controls-and-icons.png" type="Texture" id=2]
+[ext_resource path="res://ui/screens/settings/overlay/generalsettingstab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/screens/settings/overlay/widgetstab.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 182, 2, 26, 26 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 68, 8, 14, 14 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = SubResource( 4 )
+margin_left = 6.0
+margin_right = 6.0
+margin_top = 6.0
+margin_bottom = 6.0
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 68, 8, 14, 14 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = SubResource( 2 )
+margin_left = 6.0
+margin_right = 6.0
+margin_top = 6.0
+margin_bottom = 6.0
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[node name="Overlays" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 30
+custom_constants/margin_left = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 30.0
+margin_right = 1262.0
+margin_bottom = 684.0
+
+[node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+editor/display_folded = true
+margin_right = 1252.0
+margin_bottom = 55.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="overlayHelpLabel" type="Label" parent="MarginContainer/VBoxContainer/HeaderContainer"]
+margin_right = 1109.0
+margin_bottom = 55.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+size_flags_stretch_ratio = 8.0
+text = "Overlays are displayed in the virtual VR world, and can hold widgets to display information.
+Click  the \"Add overlay\" button to add a new overlay."
+
+[node name="AddButton" type="Button" parent="MarginContainer/VBoxContainer/HeaderContainer"]
+margin_left = 1113.0
+margin_right = 1252.0
+margin_bottom = 55.0
+hint_tooltip = "Click here to create a new overlay"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Add overlay"
+icon = SubResource( 1 )
+align = 2
+
+[node name="OverlaysContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 59.0
+margin_right = 1252.0
+margin_bottom = 609.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 10.0
+
+[node name="OverlayList" type="Tree" parent="MarginContainer/VBoxContainer/OverlaysContainer"]
+margin_right = 177.0
+margin_bottom = 550.0
+rect_clip_content = false
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/selected_focus = SubResource( 5 )
+custom_styles/selected = SubResource( 3 )
+custom_constants/button_margin = 5
+hide_folding = true
+hide_root = true
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/OverlaysContainer"]
+margin_left = 181.0
+margin_right = 185.0
+margin_bottom = 550.0
+
+[node name="OverlaySettings" type="MarginContainer" parent="MarginContainer/VBoxContainer/OverlaysContainer"]
+margin_left = 189.0
+margin_right = 1252.0
+margin_bottom = 550.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer/OverlaysContainer/OverlaySettings"]
+visible = false
+margin_right = 1063.0
+margin_bottom = 550.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 0
+
+[node name="General settings" parent="MarginContainer/VBoxContainer/OverlaysContainer/OverlaySettings/TabContainer" instance=ExtResource( 3 )]
+
+[node name="Widgets" parent="MarginContainer/VBoxContainer/OverlaysContainer/OverlaySettings/TabContainer" instance=ExtResource( 4 )]
+visible = false
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+margin_top = 613.0
+margin_right = 1252.0
+margin_bottom = 617.0
+
+[node name="StatusBox" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 621.0
+margin_right = 1252.0
+margin_bottom = 654.0
+size_flags_horizontal = 3
+size_flags_vertical = 15
+size_flags_stretch_ratio = 0.6
+text = "VR init..."
+align = 1
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HeaderContainer/AddButton" to="." method="_on_AddButton_pressed"]
+[connection signal="button_pressed" from="MarginContainer/VBoxContainer/OverlaysContainer/OverlayList" to="." method="_on_OverlayList_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/OverlaysContainer/OverlayList" to="." method="_on_OverlayList_item_selected"]

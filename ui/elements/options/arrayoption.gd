@@ -12,6 +12,9 @@ func _ready() -> void:
 func set_label(text : String) -> void:
 	$BaseOption.set_label(text)
 
+func get_option_name() -> String:
+	return option_name
+
 func set_option_name(name : String) -> void:
 	option_name = name
 

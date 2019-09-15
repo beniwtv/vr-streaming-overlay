@@ -12,18 +12,11 @@ func _ready() -> void:
 	ARVRServer.connect("tracker_added", self, "_on_trackers_changed")
 	ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
 	
-	# Wait for everything to be ready!?
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	
 	# Create and display our overlay
 	OpenVROverlay = preload("res://addons/godot-openvr/OpenVROverlay.gdns").new()
-
-	var texid_overlay = VisualServer.texture_get_texid(VisualServer.viewport_get_texture($VRViewport.get_viewport_rid()))
+	add_child(OpenVROverlay)
 	
-	overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay-pointer-" + str(get_index()), "VR Streaming Overlay - Pointer #" + str(get_index()), texid_overlay) # Unique key and friendly name
+	overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay-pointer-" + str(get_index()), "VR Streaming Overlay - Pointer #" + str(get_index()), $VRViewport.get_path()) # Unique key and friendly name
 	OpenVROverlay.set_overlay_width_in_meters(0.005, overlay_id)
 
 	OpenVROverlay.show_overlay(overlay_id)

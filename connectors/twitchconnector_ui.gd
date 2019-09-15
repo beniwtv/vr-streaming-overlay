@@ -5,7 +5,7 @@ var info : Dictionary = {}
 
 func set_connection_info(info : Dictionary) -> void:
 	self.info = info
-	$VBoxContainer/Token.text = info["token"]
+	$VBoxContainer/MarginContainer/Token.text = info["token"]
 
 func verify_connection(receiver : Node) -> void:
 	self.receiver = receiver
@@ -13,7 +13,7 @@ func verify_connection(receiver : Node) -> void:
 	var headers : Array = [
 		"User-Agent: VR Streaming Overlay/1.0 (Godot)",
 		"Accept: application/json",
-		"Authorization: Bearer " + $VBoxContainer/Token.text
+		"Authorization: Bearer " + $VBoxContainer/MarginContainer/Token.text
 	]
 	
 	$HTTPRequest.connect("request_completed", self, "_on_twitch_verify")
@@ -32,7 +32,7 @@ func _on_twitch_verify(result, response_code, headers, body) -> void:
 			"icon": load("res://connectors/twitchconnector.png"),
 			"valid": true,
 			"type": "twitch",
-			"token": $VBoxContainer/Token.text
+			"token": $VBoxContainer/MarginContainer/Token.text
 		}
 		
 		if info:

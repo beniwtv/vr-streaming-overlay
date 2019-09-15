@@ -20,4 +20,4 @@ margin_bottom = 700.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "LABEL"
-
+valign = 1

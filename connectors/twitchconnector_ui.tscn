@@ -13,7 +13,7 @@ anchor_bottom = 1.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 692.0
+margin_bottom = 682.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -36,10 +36,17 @@ text = "To connect to Twitch, we need a so called \"authentication token\". Ther
 	
 	4) Authorize your new application when asked and your authentication token will be displayed. Enter this token below:"
 
-[node name="Token" type="LineEdit" parent="VBoxContainer"]
-margin_top = 696.0
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 686.0
 margin_right = 1280.0
 margin_bottom = 720.0
+custom_constants/margin_top = 10
+
+[node name="Token" type="LineEdit" parent="VBoxContainer/MarginContainer"]
+margin_top = 10.0
+margin_right = 1280.0
+margin_bottom = 34.0
+clear_button_enabled = true
 placeholder_text = "Authentication token"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]

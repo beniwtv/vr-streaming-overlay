@@ -14,17 +14,19 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/margin_top = 10
+custom_constants/margin_right = 5
+custom_constants/margin_top = 30
 custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Copyright" type="RichTextLabel" parent="MarginContainer"]
 margin_left = 10.0
-margin_top = 10.0
-margin_right = 1272.0
-margin_bottom = 684.0
+margin_top = 30.0
+margin_right = 1267.0
+margin_bottom = 674.0
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -54,10 +56,6 @@ Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a t
 [b]Virtual Reality Penguin[/b]
 Creative Commons Zero 1.0 Public Domain License
 [url]https://openclipart.org/detail/284554/virtual-reality-penguin[/url]
-
-[b]Some of the icons from Godot[/b]
-CC BY 4.0 International License
-[url]https://github.com/godotengine/godot-design[/url]
 
 [b]Chime notification sound from Brandon75689[/b]
 OGA-BY 3.0 / CC0
@@ -101,10 +99,6 @@ Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is a t
 Virtual Reality Penguin
 Creative Commons Zero 1.0 Public Domain License
 https://openclipart.org/detail/284554/virtual-reality-penguin
-
-Some of the icons from Godot
-CC BY 4.0 International License
-https://github.com/godotengine/godot-design
 
 Chime notification sound from Brandon75689
 OGA-BY 3.0 / CC0

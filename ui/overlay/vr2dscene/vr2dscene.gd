@@ -2,43 +2,120 @@ extends Control
 
 var dim_timer
 var controller_transform : Transform
+var overlay_config : Dictionary
+var angle_seconds : float = 0
 
-var angle_seconds = 0;
-var seconds_required_to_show = 0;
-var angle_required = 80;
+# User settings
+var hand_value : int
+var seconds_required_to_show : float
+var angle_required : int
+var color_value : Color
+var opacity_value : float
+var dimdownafter : int
+var dimundim : bool
+var undimchime : bool
+var chimedevice: String
+var dimdownopacity : float
+
+# Widget configuration
+var widgets : Array
+var widgethash : int
 
 func _ready() -> void:
-	SignalManager.connect("render_targetsize", self, "_on_render_targetsize_changed")
-	SignalManager.connect("redraw_overlay", self, "_on_redraw_overlay")
-	SignalManager.connect("secrets_loaded", self, "_on_redraw_overlay")
+	SignalManager.connect("secrets_loaded", self, "redraw_overlay")
 	SignalManager.connect("event_happened", self, "_on_event_happened")
-	SignalManager.connect("settings_changed", self, "_on_settings_changed")
 	SignalManager.connect("event_happened_silent", self, "_on_event_happened_silent")
 
 	dim_timer = get_node("DimTimer")
-	dim_timer.wait_time = SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter"))
+	dim_timer.wait_time = DefaultSettings.get_default_setting("overlay/dimdownafter")
 	
-	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")) and SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
+	if DefaultSettings.get_default_setting("overlay/dimundim") and DefaultSettings.get_default_setting("overlay/hand") == 2:
 		dim_timer.start()
 	
-	$VRBackground.color = SettingsManager.get_value("user", "overlay/color", DefaultSettings.get_default_setting("overlay/color"))
-	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity"))
+	$VRBackground.color = DefaultSettings.get_default_setting("overlay/color")
+	$VRBackground.modulate.a = DefaultSettings.get_default_setting("overlay/opacity")
+	
+	hand_value = DefaultSettings.get_default_setting("overlay/hand")
+	seconds_required_to_show = DefaultSettings.get_default_setting("overlay/showseconds")
+	angle_required = DefaultSettings.get_default_setting("overlay/minangle")
+	color_value = DefaultSettings.get_default_setting("overlay/color")
+	opacity_value = DefaultSettings.get_default_setting("overlay/opacity")
+	dimdownafter = DefaultSettings.get_default_setting("overlay/dimdownafter")
+	dimundim = DefaultSettings.get_default_setting("overlay/dimundim")
+	undimchime = DefaultSettings.get_default_setting("overlay/undimchime")
+	dimdownopacity = DefaultSettings.get_default_setting("overlay/dimdownopacity")
+	
+func set_configuration(config : Dictionary, widgets : Array, render_target_size : Vector2) -> void:
+	if widgethash != widgets.hash():
+		widgethash = widgets.duplicate(true).hash()
+		self.widgets = widgets
+		redraw_overlay()
+	
+	# Set VR texture size
+	rect_size = render_target_size
+	$VRBackground.rect_size = render_target_size
+	$WidgetsContainer.rect_size = render_target_size
+	
+	# Parse overlay configuration
+	overlay_config = config
+	
+	hand_value = DefaultSettings.get_default_setting("overlay/hand")
+	if overlay_config.has("hand"): hand_value = overlay_config["hand"]
 
-	seconds_required_to_show = SettingsManager.get_value("user", "overlay/showseconds", DefaultSettings.get_default_setting("overlay/showseconds"))
-	angle_required = SettingsManager.get_value("user", "overlay/minangle", DefaultSettings.get_default_setting("overlay/minangle"))
+	seconds_required_to_show = DefaultSettings.get_default_setting("overlay/showseconds")
+	if overlay_config.has("showseconds"): seconds_required_to_show = overlay_config["showseconds"]
 
+	angle_required = DefaultSettings.get_default_setting("overlay/minangle")
+	if overlay_config.has("minangle"): angle_required = overlay_config["minangle"]
+
+	$WidgetsContainer.modulate.a = 255
+
+	color_value = DefaultSettings.get_default_setting("overlay/color")
+	if overlay_config.has("color"): color_value = overlay_config["color"]
+	$VRBackground.color = color_value
+	
+	opacity_value = DefaultSettings.get_default_setting("overlay/opacity")
+	if overlay_config.has("opacity"): opacity_value = overlay_config["opacity"]
+	$VRBackground.modulate.a = opacity_value
+
+	dim_timer.stop()
+	
+	dimdownafter = DefaultSettings.get_default_setting("overlay/dimdownafter")
+	if overlay_config.has("dimdownafter"): dimdownafter = overlay_config["dimdownafter"]
+	dim_timer.wait_time = dimdownafter
+
+	dimundim = DefaultSettings.get_default_setting("overlay/dimundim")
+	if overlay_config.has("dimundim"): dimundim = overlay_config["dimundim"]
+
+	if dimundim and hand_value == 2:
+		dim_timer.start()
+	else:
+		undim_overlay()
+
+	undimchime = DefaultSettings.get_default_setting("overlay/undimchime")
+	if overlay_config.has("undimchime"): undimchime = overlay_config["undimchime"]
+
+	chimedevice = DefaultSettings.get_default_setting("overlay/chimedevice")
+	if overlay_config.has("chimedevice"): chimedevice = overlay_config["chimedevice"]
+
+	dimdownopacity = DefaultSettings.get_default_setting("overlay/dimdownopacity")
+	if overlay_config.has("dimdownopacity"): dimdownopacity = overlay_config["dimdownopacity"]
+	
+	angle_seconds = 0
+
+# In hand mode, calculates the controler's angle and shows/hides the overlay
 func _process(delta):
 	# Detect controller gestures
-	if SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 0:
+	if hand_value == 0:
 		controller_transform = get_node("../../3DVRViewport/VR3DScene/ARVROrigin/LeftHand").transform
-	
+
 		var angle : float = rad2deg(controller_transform.basis.get_euler().z)
-		
+
 		if angle >= angle_required:
 			angle_seconds = angle_seconds + delta
 		else:
 			angle_seconds = 0
-	elif SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 1:
+	elif hand_value == 1:
 		controller_transform = get_node("../../3DVRViewport/VR3DScene/ARVROrigin/RightHand").transform
 	
 		var angle : float = rad2deg(controller_transform.basis.get_euler().z)
@@ -56,48 +133,25 @@ func _process(delta):
 	else:
 		visible = false
 
-func _on_render_targetsize_changed(size : Vector2) -> void:
-	rect_size = size
-	$VRBackground.rect_size = size
-	$WidgetsContainer.rect_size = size
-
-func _on_settings_changed() -> void:
-	$WidgetsContainer.modulate.a = 255
-	$VRBackground.color = SettingsManager.get_value("user", "overlay/color", DefaultSettings.get_default_setting("overlay/color"))
-	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity"))
-
-	dim_timer.stop()
-	dim_timer.wait_time = SettingsManager.get_value("user", "overlay/dimdownafter", DefaultSettings.get_default_setting("overlay/dimdownafter"))
-
-	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")) and SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
-		dim_timer.start()
-	else:
-		undim_overlay()
-	
-	seconds_required_to_show = SettingsManager.get_value("user", "overlay/showseconds", DefaultSettings.get_default_setting("overlay/showseconds"))
-	angle_required = SettingsManager.get_value("user", "overlay/minangle", DefaultSettings.get_default_setting("overlay/minangle"))
-	angle_seconds = 0
-	
-func _on_redraw_overlay() -> void:
+# Re-draw all widgets in this overlay (for example, due to configuration changes)
+func redraw_overlay() -> void:
 	# Remove all widgets
 	for i in $WidgetsContainer.get_children():
 		i.queue_free()
-	
+
 	# Somehow we need to wait two frames for Godot...
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 
 	# Create fresh widgets
-	var arrayWidgets : Array = SettingsManager.get_value("user", "widgets/configuration", DefaultSettings.get_default_setting("widgets/configuration"))
-	
-	for i in range(0, arrayWidgets.size()):
-		var metadata = arrayWidgets[i]
-		
+	for i in range(0, widgets.size()):
+		var metadata = widgets[i]
+
 		var widget_data : Node = load(metadata["data"]["widget"]).new()
 		var widget : Node = load(widget_data.get_widget_render_scene()).instance()
 		widget.apply_config(metadata["id"], metadata["data"]["config"])
 		widget.set_meta("widget_id", metadata["id"])
-		
+
 		if metadata["data"]["parent"]:
 			var parentitem : Node = _walk_nodes($WidgetsContainer, metadata["data"]["parent"])
 			parentitem.add_child(widget)
@@ -110,30 +164,36 @@ func _walk_nodes(node, widget_id) -> Node:
 	else:
 		var founditem : Node
 	
-		for i in node.get_children():				
+		for i in node.get_children():
 			founditem = _walk_nodes(i, widget_id)
 			if founditem: return founditem
 		
 		return node
 	
-func _on_DimTimer_timeout():
-	$WidgetsContainer.modulate.a = SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity"))
-	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/dimdownopacity", DefaultSettings.get_default_setting("overlay/dimdownopacity"))
+# This dims the overlay down if necessary
+func _on_DimTimer_timeout() -> void:
+	$WidgetsContainer.modulate.a = dimdownopacity
+	$VRBackground.modulate.a = dimdownopacity
 
-func _on_event_happened_silent():
+# When events happen (e.g. generated by widgets, undim the overlay if necessary
+func _on_event_happened_silent() -> void:
 	undim_overlay()
+
+# When events happen (e.g. generated by widgets, undim the overlay if necessary
+func _on_event_happened() -> void:
+	# Set default audio device
+	AudioServer.set_device(chimedevice)
 	
-func _on_event_happened():
-	if SettingsManager.get_value("user", "overlay/undimchime", DefaultSettings.get_default_setting("overlay/undimchime")):
+	if undimchime:
 		$AudioStreamPlayer.play(0.0)
-
+	
 	undim_overlay()
 
-func undim_overlay():
+func undim_overlay() -> void:
 	$WidgetsContainer.modulate.a = 255
-	$VRBackground.modulate.a = SettingsManager.get_value("user", "overlay/opacity", DefaultSettings.get_default_setting("overlay/opacity"))
+	$VRBackground.modulate.a = opacity_value
 	
 	$DimTimer.stop()
 	
-	if SettingsManager.get_value("user", "overlay/dimundim", DefaultSettings.get_default_setting("overlay/dimundim")) and SettingsManager.get_value("user", "overlay/hand", DefaultSettings.get_default_setting("overlay/hand")) == 2:
+	if dimundim and hand_value == 2:
 		$DimTimer.start()

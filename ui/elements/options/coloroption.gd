@@ -9,10 +9,13 @@ export(NodePath) var widget_node
 func _ready() -> void:
 	set_label(label)
 
-	$BaseOption/HBoxContainer/ColorPickerButton.connect("color_changed", self, "_on_ColorPickerButton_color_changed")
+	$BaseOption/HBoxContainer/ColorPickerButton.connect("popup_closed", self, "_on_ColorPickerButton_popup_closed")
 
 func set_label(text : String) -> void:
 	$BaseOption.set_label(text)
+
+func get_option_name() -> String:
+	return option_name
 
 func set_option_name(name : String) -> void:
 	option_name = name
@@ -27,6 +30,6 @@ func set_widget_node(path : Node) -> void:
 	widget_node = path
 
 # Optional functions related to the specific control
-func _on_ColorPickerButton_color_changed(color : Color) -> void:
+func _on_ColorPickerButton_popup_closed() -> void:
 	if widget_node:
-		widget_node.set_config_value(option_name, color)
+		widget_node.set_config_value(option_name, $BaseOption/HBoxContainer/ColorPickerButton.color)

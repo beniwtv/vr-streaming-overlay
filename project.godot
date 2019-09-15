@@ -35,6 +35,7 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1280
 window/size/height=720
+window/size/resizable=false
 window/vsync/use_vsync=false
 
 [gdnative]
@@ -92,5 +93,6 @@ ssl/certificates="res://ca-certificates.crt"
 
 [rendering]
 
+environment/default_clear_color=Color( 0.156863, 0.156863, 0.156863, 1 )
 quality/filters/msaa=1
 environment/default_environment="res://default_env.tres"

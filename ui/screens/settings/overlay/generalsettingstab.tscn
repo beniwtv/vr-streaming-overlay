@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/screens/settings/overlay/generalsettingstab.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 50, 50 )
+colors = PoolColorArray( 0.705882, 0.0745098, 0.0745098, 1, 0.113725, 0.172549, 0.796078, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="General settings" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_top = 30.0
+margin_right = 1272.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 1272.0
+margin_bottom = 654.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeftSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 617.0
+margin_bottom = 654.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 621.0
+margin_right = 651.0
+margin_bottom = 654.0
+custom_constants/separation = 30
+
+[node name="RightSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 655.0
+margin_right = 1272.0
+margin_bottom = 654.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="3DDebugRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 293.0
+margin_right = 1252.0
+margin_bottom = 582.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 6

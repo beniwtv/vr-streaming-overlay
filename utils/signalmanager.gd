@@ -23,3 +23,9 @@ signal event_happened
 
 # Fired when an interesting event happened
 signal event_happened_silent
+
+# Fired when a new overlay is requested to be added to OpenVR
+signal overlay_add
+
+# Fired when a overlay is requested to be removed from OpenVR
+signal overlay_remove

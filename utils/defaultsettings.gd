@@ -3,6 +3,7 @@ extends Node
 var UUID = preload("res://addons/godot-uuid/uuid.gd")
 
 # General settings
+var overlay_name = "New overlay"
 var overlay_hand = 2
 var overlay_color = Color(0, 0, 0)
 var overlay_opacity = 0.8

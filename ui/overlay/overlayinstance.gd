@@ -2,44 +2,45 @@ extends Control
 
 var OpenVROverlay
 var overlay_id : int
-
-var SettingsNode : String = "../../MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/HBoxContainer/"
+var overlay_config : Dictionary
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	SignalManager.connect("render_targetsize", self, "_on_render_targetsize_changed")
-	SignalManager.connect("settings_changed", self, "_on_settings_changed")
-	
+func _ready() -> void:	
 	# Listen for trackers becoming available / going away
 	ARVRServer.connect("tracker_added", self, "_on_trackers_changed")
 	ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
-	
-	# Wait for everything to be ready!?
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	
+
 	# Create and display our overlay
 	OpenVROverlay = preload("res://addons/godot-openvr/OpenVROverlay.gdns").new()
+	add_child(OpenVROverlay)
 
-	var texid_overlay = VisualServer.texture_get_texid(VisualServer.viewport_get_texture($VRViewport.get_viewport_rid()))
-	
-	overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay-" + str(get_index()), "VR Streaming Overlay - Overlay #" + str(get_index()), texid_overlay) # Unique key and friendly name
-	OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")), overlay_id)
+	overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay-" + str(get_index()), "VR Streaming Overlay - Overlay #" + str(get_index()), $VRViewport.get_path()) # Unique key and friendly name
+	OpenVROverlay.set_overlay_width_in_meters(DefaultSettings.get_default_setting("overlay/size"), overlay_id)
 
 	OpenVROverlay.show_overlay(overlay_id)
 	
 	attempt_tracking()
 
-func _on_render_targetsize_changed(size : Vector2) -> void:
-	$VRViewport.size = size
-	$"3DVRViewport".size = size
+func destroy() -> void:
+	OpenVROverlay.hide_overlay(overlay_id)
+	OpenVROverlay.destroy_overlay(overlay_id)
 
-func _on_settings_changed() -> void:
-	if OpenVROverlay:
-		OpenVROverlay.set_overlay_width_in_meters(SettingsManager.get_value("user", "overlay/size", DefaultSettings.get_default_setting("overlay/size")), overlay_id)
-		attempt_tracking()
+func set_configuration(config : Dictionary, widgets: Array, render_target_size : Vector2) -> void:
+	# Set texture size for VR texture
+	rect_size = render_target_size
+	$VRViewport.size = render_target_size
+	$"3DVRViewport".size = render_target_size
+	
+	# Parse overlay configuration
+	overlay_config = config
+	
+	var size_value = DefaultSettings.get_default_setting("overlay/size")
+	if overlay_config.has("size"): size_value = overlay_config["size"]
+	OpenVROverlay.set_overlay_width_in_meters(size_value, overlay_id)
+
+	$VRViewport/VR2DScene.set_configuration(config, widgets, render_target_size)
+	$"3DVRViewport/VR3DScene".set_configuration(config, widgets, render_target_size)
+	attempt_tracking()
 
 func _on_trackers_changed(tracker_name : String, tracker_type : int, tracker_id) -> void:
 	attempt_tracking()
@@ -55,11 +56,15 @@ func attempt_tracking() -> void:
 		var rotation_z : float
 		
 		var transform : Transform
-	
-		if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
-			position_z = SettingsManager.get_value("user", "overlay/position_z_hand", DefaultSettings.get_default_setting("overlay/position_z_hand"))
+		
+		var hand_value : int = DefaultSettings.get_default_setting("overlay/hand")
+		if overlay_config.has("hand"): hand_value = overlay_config["hand"]
+
+		if hand_value != 2:
+			position_z = DefaultSettings.get_default_setting("overlay/position_z_hand")
+			if overlay_config.has("position_z_hand"): position_z = overlay_config["position_z_hand"]
 			
-			if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() == 0:
+			if hand_value == 0:
 				rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_left")
 			else:
 				rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_right")
@@ -68,25 +73,28 @@ func attempt_tracking() -> void:
 			transform = transform.rotated(Vector3(0, 0, 1), rotation_z)
 			transform = transform.translated(Vector3(0, 0, 1) * position_z)
 		else:
-			position_x = SettingsManager.get_value("user", "overlay/position_x", DefaultSettings.get_default_setting("overlay/position_x"))
-			position_y = SettingsManager.get_value("user", "overlay/position_y", DefaultSettings.get_default_setting("overlay/position_y"))
-			position_z = SettingsManager.get_value("user", "overlay/position_z", DefaultSettings.get_default_setting("overlay/position_z"))
-		
-			rotation_x = SettingsManager.get_value("user", "overlay/rotation_x", DefaultSettings.get_default_setting("overlay/rotation_x"))
-			rotation_y = SettingsManager.get_value("user", "overlay/rotation_y", DefaultSettings.get_default_setting("overlay/rotation_y"))
-			rotation_z = SettingsManager.get_value("user", "overlay/rotation_z", DefaultSettings.get_default_setting("overlay/rotation_z"))
-		
-			var rand = rand_range(0, 5)
-			rand = 0
+			position_x = DefaultSettings.get_default_setting("overlay/position_x")
+			if overlay_config.has("position_x"): position_x = overlay_config["position_x"]
+			position_y = DefaultSettings.get_default_setting("overlay/position_y")
+			if overlay_config.has("position_y"): position_y = overlay_config["position_y"]
+			position_z = DefaultSettings.get_default_setting("overlay/position_z")
+			if overlay_config.has("position_z"): position_z = overlay_config["position_z"]
 			
-			transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z - rand))
+			rotation_x = DefaultSettings.get_default_setting("overlay/rotation_x")
+			if overlay_config.has("rotation_x"): rotation_x = overlay_config["rotation_x"]
+			rotation_y = DefaultSettings.get_default_setting("overlay/rotation_y")
+			if overlay_config.has("rotation_y"): rotation_y = overlay_config["rotation_y"]
+			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z")
+			if overlay_config.has("rotation_z"): rotation_z = overlay_config["rotation_z"]
+			
+			transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
 			transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)
 			transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)
 			transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)
 	
 			transform = transform.orthonormalized()
 
-		if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() != 2:
+		if hand_value != 2:
 			var trackingIdFound = null
 				
 			for i in range(0, ARVRServer.get_tracker_count()):
@@ -94,11 +102,11 @@ func attempt_tracking() -> void:
 					
 				match tracker.get_hand():
 					ARVRPositionalTracker.TRACKER_LEFT_HAND:
-						if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() == 0:
+						if hand_value == 0:
 							var name_parts = tracker.get_name().split("_")
 							trackingIdFound = name_parts[name_parts.size() - 1]
 					ARVRPositionalTracker.TRACKER_RIGHT_HAND:
-						if get_node(SettingsNode + "LeftSettings/TrackingHand/OptionButton").get_selected_id() == 1:
+						if hand_value == 1:
 							var name_parts = tracker.get_name().split("_")
 							trackingIdFound = name_parts[name_parts.size() - 1]
 			

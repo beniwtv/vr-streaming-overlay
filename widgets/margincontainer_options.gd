@@ -2,8 +2,9 @@ extends VBoxContainer
 
 var widget_id = null
 var config = null
+var receiver : Node = null
 
-func add_config_options(widget_id, config):
+func add_config_options(widget_id : String, config : Dictionary):
 	self.config = config
 	
 	var margin_top_value = DefaultSettings.get_default_setting("margin_container/margin_top")
@@ -50,6 +51,11 @@ func add_config_options(widget_id, config):
 	margin_bottom.set_value(margin_bottom_value)
 	margin_bottom.set_widget_node(self)
 
-func set_config_value(key, value):
+func set_receiver_node(receiver : Node) -> void:
+	self.receiver = receiver
+
+func set_config_value(key : String, value) -> void:
 	config[key] = value
-	SignalManager.emit_signal("options_changed")
+	
+	if receiver:
+		receiver.save_options_for_widget()
