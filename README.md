@@ -3,7 +3,7 @@
 This is a SteamVR overlay for streamers on Linux.
 (It is made with Godot, so theoretically this could run on Windows and MacOSX too, feedback and patches welcome ;)
 
-**Note:** The master on this repository is kept roughly in sync with the Godot / Godot OpenVR master.
+**Note:** The master on this repository is kept roughly in sync with Godot / Godot OpenVR master.
 For official releases of Godot please check the releases page and/or the respective branches.
 
 **Note:** The changed version of the plugin is only compiled for Linux at the moment.
@@ -11,7 +11,7 @@ For official releases of Godot please check the releases page and/or the respect
 Also note this is in *VERY* early state, but early testers/feedback are welcome of course!
 
 Current features:
-- Should support all SteamVR-supported headsets (only Vive tested though - feedback welcome)
+- Should support all SteamVR-supported headsets (only HTC Vive/Valve Index tested though - feedback welcome)
 - Adjustable background opacity and color
 - Adjustable overlay size in the VR world
 - Shows Twitch chat
@@ -25,7 +25,7 @@ Planned features:
 
 Linux notes
 -----------
-On Linux, Steam will not automatically add the SteamVR libraries to your $LD_LIBRARY_PATH variable. As such, when starting the overlay outside of Steam, it will fail to load the required libraries.
+On Linux, Steam may not automatically add the SteamVR libraries to your $LD_LIBRARY_PATH variable. If so, when starting the overlay outside of Steam, it may fail to load the required libraries.
 
 There are a couple of ways to fix this:
 

@@ -191,9 +191,11 @@ func set_active_overlay(overlay : Dictionary) -> void:
 	
 	# Reset everything to default before loading current overlay's configuration
 	for settings_node in get_tree().get_nodes_in_group("general_settings"):
+		settings_node.set_widget_node(null)
 		settings_node.set_value(DefaultSettings.get_default_setting("overlay/" + settings_node.get_option_name()))
+		settings_node.set_widget_node(self)
 	
-	# Now laod the overlay's configuration
+	# Now load the overlay's configuration
 	for settings_node in get_tree().get_nodes_in_group("general_settings"):
 		if settings_node.get_option_name() == "name":
 			settings_node.set_value(current_overlay["name"])

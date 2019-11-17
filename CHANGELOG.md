@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.co##m/en/1.0.0/
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [UNRELEASED] - 2019-XX-XX
+### Changed
+- Update code to use the new multi-overlay implementation of godot_openvr
+- Update to Godot 3.2 beta
+- Improvements to the README
+
+### Fixed
+- Fixed skinning issue in font selection dialog
+- Fixed skinning of sliders
+- Fixed "undim on stare"
+- Fixed not being able to accept login on enter
+- Fixed saving of "Play chime on event" checkbox
 
 ## [0.0.3-alpha - 2019-09-15
 ### Added

@@ -1,7 +1,5 @@
 extends Control
 
-var OpenVROverlay
-var overlay_id : int
 var overlay_config : Dictionary
 
 # Called when the node enters the scene tree for the first time.
@@ -10,20 +8,10 @@ func _ready() -> void:
 	ARVRServer.connect("tracker_added", self, "_on_trackers_changed")
 	ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
 
-	# Create and display our overlay
-	OpenVROverlay = preload("res://addons/godot-openvr/OpenVROverlay.gdns").new()
-	add_child(OpenVROverlay)
-
-	overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay-" + str(get_index()), "VR Streaming Overlay - Overlay #" + str(get_index()), $VRViewport.get_path()) # Unique key and friendly name
-	OpenVROverlay.set_overlay_width_in_meters(DefaultSettings.get_default_setting("overlay/size"), overlay_id)
-
-	OpenVROverlay.show_overlay(overlay_id)
-	
 	attempt_tracking()
 
 func destroy() -> void:
-	OpenVROverlay.hide_overlay(overlay_id)
-	OpenVROverlay.destroy_overlay(overlay_id)
+	$VRViewport.overlay_visible = false
 
 func set_configuration(config : Dictionary, widgets: Array, render_target_size : Vector2) -> void:
 	# Set texture size for VR texture
@@ -36,7 +24,7 @@ func set_configuration(config : Dictionary, widgets: Array, render_target_size :
 	
 	var size_value = DefaultSettings.get_default_setting("overlay/size")
 	if overlay_config.has("size"): size_value = overlay_config["size"]
-	OpenVROverlay.set_overlay_width_in_meters(size_value, overlay_id)
+	$VRViewport.set_overlay_width_in_meters(size_value)
 
 	$VRViewport/VR2DScene.set_configuration(config, widgets, render_target_size)
 	$"3DVRViewport/VR3DScene".set_configuration(config, widgets, render_target_size)
@@ -46,7 +34,7 @@ func _on_trackers_changed(tracker_name : String, tracker_type : int, tracker_id)
 	attempt_tracking()
 
 func attempt_tracking() -> void:
-	if OpenVROverlay:
+	if $VRViewport.is_overlay_visible():
 		var position_x : float
 		var position_y : float
 		var position_z : float
@@ -86,7 +74,7 @@ func attempt_tracking() -> void:
 			if overlay_config.has("rotation_y"): rotation_y = overlay_config["rotation_y"]
 			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z")
 			if overlay_config.has("rotation_z"): rotation_z = overlay_config["rotation_z"]
-			
+
 			transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
 			transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)
 			transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)
@@ -111,6 +99,6 @@ func attempt_tracking() -> void:
 							trackingIdFound = name_parts[name_parts.size() - 1]
 			
 			if trackingIdFound:
-				OpenVROverlay.track_relative_to_device(trackingIdFound, transform, overlay_id)
+				$VRViewport.track_relative_to_device(trackingIdFound, transform)
 		else:
-			OpenVROverlay.overlay_position_absolute(transform, overlay_id)
+			$VRViewport.overlay_position_absolute(transform)

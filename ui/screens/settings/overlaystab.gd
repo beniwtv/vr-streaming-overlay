@@ -32,6 +32,7 @@ func _on_AddButton_pressed() -> void:
 	var overlay : Dictionary = {
 		"name": "New overlay",
 		"config": {},
+		"widgets": DefaultSettings.get_default_setting("widgets/configuration"),
 		"uuid": UUID.v4()
 	}
 	
@@ -47,10 +48,13 @@ func save_overlays() -> void:
 
 # Redraws the item list according to our overlays
 func redraw_list(select_item : bool) -> void:
+	yield(get_tree(), "idle_frame")
+	
 	get_node(OverlayListNode).clear()
 	
 	var treeroot : TreeItem = get_node(OverlayListNode).create_item()
 	treeroot.set_text(0, "root")
+	treeroot.set_metadata(0, "root")
 	
 	for overlay in overlays:
 		var treeitem : TreeItem = get_node(OverlayListNode).create_item()

@@ -7,6 +7,12 @@ func _ready() -> void:
 
 		$HBoxContainer/RightMarginContainer/RightVBoxContainer/RepeatPasswordOption.visible = false
 
+		$HBoxContainer/RightMarginContainer/RightVBoxContainer/PasswordOption.set_enter_listener(self)
+		$HBoxContainer/RightMarginContainer/RightVBoxContainer/RepeatPasswordOption.set_enter_listener(self)
+
+func text_entered(option : String, text : String) -> void:
+	_on_LoginButton_pressed()
+
 func _on_LoginButton_pressed() -> void:
 	if PasswordStorage.has_password_file():
 		# Open file if possible

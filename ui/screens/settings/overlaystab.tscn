@@ -9,12 +9,13 @@
 atlas = ExtResource( 2 )
 region = Rect2( 182, 2, 26, 26 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 68, 8, 14, 14 )
 
-[sub_resource type="StyleBoxTexture" id=5]
-texture = SubResource( 4 )
+[sub_resource type="StyleBoxTexture" id=3]
+texture = SubResource( 2 )
+region_rect = Rect2( 0, 0, 14, 14 )
 margin_left = 6.0
 margin_right = 6.0
 margin_top = 6.0
@@ -22,12 +23,13 @@ margin_bottom = 6.0
 expand_margin_left = 4.0
 expand_margin_right = 4.0
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
 region = Rect2( 68, 8, 14, 14 )
 
-[sub_resource type="StyleBoxTexture" id=3]
-texture = SubResource( 2 )
+[sub_resource type="StyleBoxTexture" id=5]
+texture = SubResource( 4 )
+region_rect = Rect2( 0, 0, 14, 14 )
 margin_left = 6.0
 margin_right = 6.0
 margin_top = 6.0
@@ -61,7 +63,6 @@ margin_right = 1262.0
 margin_bottom = 684.0
 
 [node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 1252.0
 margin_bottom = 55.0
 size_flags_horizontal = 3
@@ -102,8 +103,8 @@ margin_bottom = 550.0
 rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/selected_focus = SubResource( 5 )
-custom_styles/selected = SubResource( 3 )
+custom_styles/selected_focus = SubResource( 3 )
+custom_styles/selected = SubResource( 5 )
 custom_constants/button_margin = 5
 hide_folding = true
 hide_root = true

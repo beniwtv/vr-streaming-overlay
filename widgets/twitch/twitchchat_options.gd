@@ -16,7 +16,7 @@ func add_config_options(widget_id : String, config : Dictionary) -> void:
 	if config.has("text_color"): text_color_value = config["text_color"]
 
 	var compact_mode_value = false
-	if config.has("compact_mode_"): compact_mode_value = config["compact_mode"]
+	if config.has("compact_mode"): compact_mode_value = config["compact_mode"]
 
 	var show_timestamps_value = false
 	if config.has("show_timestamps"): show_timestamps_value = config["show_timestamps"]

@@ -3,7 +3,6 @@
 [ext_resource path="res://ui/dialogs/selectfontdialog.gd" type="Script" id=1]
 
 [node name="AddConnectionDialog" type="WindowDialog"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -39,13 +38,13 @@ margin_bottom = 590.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 580.0
-margin_bottom = 398.0
+margin_bottom = 418.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="FontBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 460.0
-margin_bottom = 398.0
+margin_bottom = 418.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -58,18 +57,20 @@ text = "Select font:"
 [node name="FontList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer/FontBoxContainer"]
 margin_top = 18.0
 margin_right = 460.0
-margin_bottom = 398.0
+margin_bottom = 418.0
+rect_clip_content = false
 hint_tooltip = "You can add your own *.ttf font files to:
 
 Linux: ~/.local/share/godot/app_userdata/VR Streaming Overlay/fonts"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.75
+custom_constants/hseparation = -1
 
 [node name="SizeBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 464.0
 margin_right = 580.0
-margin_bottom = 398.0
+margin_bottom = 418.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
@@ -82,14 +83,16 @@ text = "Font size:"
 [node name="FontSizeList" type="ItemList" parent="MarginContainer/VBoxContainer/HBoxContainer/SizeBoxContainer"]
 margin_top = 18.0
 margin_right = 116.0
-margin_bottom = 398.0
+margin_bottom = 418.0
+rect_clip_content = false
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/hseparation = -1
 
 [node name="PreviewLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 454.0
+margin_top = 477.0
 margin_right = 580.0
-margin_bottom = 468.0
+margin_bottom = 491.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 size_flags_stretch_ratio = 0.3
@@ -99,7 +102,7 @@ valign = 1
 clip_text = true
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
-margin_top = 525.0
+margin_top = 551.0
 margin_right = 580.0
 margin_bottom = 555.0
 size_flags_horizontal = 3

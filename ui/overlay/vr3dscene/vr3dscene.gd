@@ -1,17 +1,17 @@
 extends Spatial
 
 var overlay_config : Dictionary
-var collision_seconds : int = 0
-var position_x : int
-var position_y : int
-var position_z : int
-var rotation_x : int
-var rotation_y : int
-var rotation_z : int
+var collision_seconds : float = 0
+var position_x : float
+var position_y : float
+var position_z : float
+var rotation_x : float
+var rotation_y : float
+var rotation_z : float
 
 # User settings
 var seconds_required_to_undim : int = 0;
-var size_value : int
+var size_value : float
 
 func _ready() -> void:
 	seconds_required_to_undim = DefaultSettings.get_default_setting("overlay/undimstareseconds")
@@ -50,7 +50,7 @@ func set_configuration(config : Dictionary, widgets : Array, render_target_size 
 	if overlay_config.has("rotation_z"): rotation_z = overlay_config["rotation_z"]
 
 	collision_seconds = 0
-
+	
 	adjust_position()
 	adjust_size()
 
@@ -67,7 +67,7 @@ func _physics_process(delta) -> void:
 
 func adjust_size() -> void:
 	$ARVROrigin/OverlayArea.mesh.size = Vector2(size_value, size_value)
-	$ARVROrigin/OverlayArea/StaticBody/CollisionShape.shape.extents = Vector3(size_value * 0.35, 0.08, size_value * 0.35) 
+	$ARVROrigin/OverlayArea/StaticBody/CollisionShape.shape.extents = Vector3(size_value * 0.35, 0.08, size_value * 0.35)
 
 func adjust_position() -> void:
 	var areatransform : Transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
