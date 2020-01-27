@@ -16,7 +16,7 @@ func verify_connection(receiver : Node) -> void:
 		"Authorization: Bearer " + $VBoxContainer/MarginContainer/Token.text
 	]
 	
-	$HTTPRequest.connect("request_completed", self, "_on_twitch_verify")
+	$HTTPRequest.connect("request_completed", self, "_on_twitch_verify", [], CONNECT_DEFERRED)
 	var err = $HTTPRequest.request("https://api.twitch.tv/helix/users", headers, true, HTTPClient.METHOD_GET)
 	assert(err==OK)
 
@@ -37,7 +37,7 @@ func _on_twitch_verify(result, response_code, headers, body) -> void:
 		
 		if info:
 			response["uuid"] = info["uuid"]
-		
+
 		receiver.connection_verified(response)
 	else:
 		var response : Dictionary

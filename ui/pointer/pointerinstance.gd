@@ -1,40 +1,32 @@
 extends Control
 
-var OpenVROverlay
-var overlay_id : int
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalManager.connect("render_targetsize", self, "_on_render_targetsize_changed")
-	SignalManager.connect("settings_changed", self, "_on_settings_changed")
-	
 	# Listen for trackers becoming available / going away
 	ARVRServer.connect("tracker_added", self, "_on_trackers_changed")
 	ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
 	
-	# Create and display our overlay
-	OpenVROverlay = preload("res://addons/godot-openvr/OpenVROverlay.gdns").new()
-	add_child(OpenVROverlay)
-	
-	overlay_id = OpenVROverlay.create_overlay("beniwtv.vr-streaming.overlay-pointer-" + str(get_index()), "VR Streaming Overlay - Pointer #" + str(get_index()), $VRViewport.get_path()) # Unique key and friendly name
-	OpenVROverlay.set_overlay_width_in_meters(0.005, overlay_id)
-
-	OpenVROverlay.show_overlay(overlay_id)
-	
 	attempt_tracking()
 
-func _on_render_targetsize_changed(size : Vector2) -> void:
-	$VRViewport.size = size
-	$"3DVRViewport".size = size
+func destroy() -> void:
+	$VRViewport.overlay_visible = false
 
-func _on_settings_changed() -> void:
-	attempt_tracking()
+func set_configuration(config : Dictionary, widgets: Array, render_target_size : Vector2) -> void:
+	# Set texture size for VR texture
+	rect_size = render_target_size
+	$VRViewport.size = render_target_size
+	$"3DVRViewport".size = render_target_size
 	
+	$VRViewport/VR2DScene.set_configuration(config, widgets, render_target_size)
+	$"3DVRViewport/VR3DScene".set_configuration(config, widgets, render_target_size)
+
+	attempt_tracking()
+
 func _on_trackers_changed(tracker_name : String, tracker_type : int, tracker_id) -> void:
 	attempt_tracking()
 
 func attempt_tracking() -> void:
-	if OpenVROverlay:
+	if $VRViewport.is_overlay_visible():
 		var position_x : float
 		var position_y : float
 		var position_z : float
@@ -82,8 +74,8 @@ func attempt_tracking() -> void:
 					rightTrackingIdFound = name_parts[name_parts.size() - 1]
 
 		if rightTrackingIdFound != null:
-			OpenVROverlay.track_relative_to_device(rightTrackingIdFound, transform, overlay_id)
+			$VRViewport.track_relative_to_device(rightTrackingIdFound, transform)
 		elif leftTrackingIdFound != null:
-			OpenVROverlay.track_relative_to_device(leftTrackingIdFound, transform, overlay_id)
+			$VRViewport.track_relative_to_device(leftTrackingIdFound, transform)
 		else:
 			print("No trackers (hands) available at the moment - no pointer!")

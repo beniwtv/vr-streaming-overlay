@@ -2,9 +2,9 @@ extends Tabs
 
 var UUID = preload("res://addons/godot-uuid/uuid.gd")
 
-var ConnectionContainerNode = "MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/ConnectionsContainer"
+var ConnectionContainerNode = "MarginContainer/VBoxContainer/PanelContainer/MarginContainer/ScrollContainer/ConnectionsContainer"
 var connections = []
-var currentconnectorui = null
+var currentconnectoruis = {}
 
 func _ready():
 	SignalManager.connect("secrets_loaded", self, "_on_secrets_loaded")
@@ -16,24 +16,24 @@ func _on_secrets_loaded():
 		for i in connections:
 			var connector = load("res://connectors/" + i["type"] + "connector.gd").new()
 			
-			currentconnectorui = load(connector["scene"]).instance()
-			currentconnectorui.visible = false
-			add_child(currentconnectorui)
+			currentconnectoruis[i["uuid"]] = load(connector["scene"]).instance()
+			currentconnectoruis[i["uuid"]].visible = false
+			add_child(currentconnectoruis[i["uuid"]])
 
-			currentconnectorui.set_connection_info(i)
-			currentconnectorui.verify_connection(self)
-			
-		redraw_connections()
+			currentconnectoruis[i["uuid"]].set_connection_info(i)
+			currentconnectoruis[i["uuid"]].verify_connection(self)
 	else:
 		connections = []
 
 func connection_verified(connection):
-	remove_child(currentconnectorui)
-	currentconnectorui.queue_free()
+	remove_child(currentconnectoruis[connection["uuid"]])
+	currentconnectoruis[connection["uuid"]].queue_free()
 
 	for i in connections:
 		if i["uuid"] == connection["uuid"]:
 			i["valid"] = connection["valid"]
+			if connection.has("icon"):
+				i["icon"] = connection["icon"] # Needed to properly display icon
 
 	redraw_connections()
 
@@ -85,9 +85,11 @@ func redraw_connections():
 	for i in connections:
 		if iteration > 0:
 			var splitter = HSeparator.new()
+			splitter.set("custom_constants/separation", 5)
 			get_node(ConnectionContainerNode).add_child(splitter)
 		
 		var connectionitem = preload("res://ui/elements/items/connectionlistitem.tscn").instance()
+
 		connectionitem.set_item_icon(i["icon"])
 		connectionitem.set_item_name(i["name"])
 		connectionitem.set_item_type(i["type"])

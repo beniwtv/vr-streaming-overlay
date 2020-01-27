@@ -21,7 +21,11 @@ var dimdownopacity : float
 var widgets : Array
 var widgethash : int
 
+var widget_thread : Thread
+
 func _ready() -> void:
+	widget_thread = Thread.new()
+		
 	SignalManager.connect("secrets_loaded", self, "redraw_overlay")
 	SignalManager.connect("event_happened", self, "_on_event_happened")
 	SignalManager.connect("event_happened_silent", self, "_on_event_happened_silent")
@@ -135,6 +139,9 @@ func _process(delta):
 
 # Re-draw all widgets in this overlay (for example, due to configuration changes)
 func redraw_overlay() -> void:
+	if widget_thread.is_active():
+		widget_thread.wait_to_finish()
+			
 	# Remove all widgets
 	for i in $WidgetsContainer.get_children():
 		i.queue_free()
@@ -144,6 +151,9 @@ func redraw_overlay() -> void:
 	yield(get_tree(), "idle_frame")
 
 	# Create fresh widgets
+	widget_thread.start(self, "_widget_thread")
+	
+func _widget_thread(params) -> void:
 	for i in range(0, widgets.size()):
 		var metadata = widgets[i]
 
@@ -197,3 +207,6 @@ func undim_overlay() -> void:
 	
 	if dimundim and hand_value == 2:
 		$DimTimer.start()
+
+func _exit_tree():
+	widget_thread.wait_to_finish()

@@ -1,8 +1,6 @@
 extends Control
 
-func _ready() -> void:
-	SignalManager.connect("render_targetsize", self, "_on_render_targetsize_changed")
-
-func _on_render_targetsize_changed(size : Vector2) -> void:
-	rect_size = size
-	$VRBackground.rect_size = size
+func set_configuration(config : Dictionary, widgets : Array, render_target_size : Vector2) -> void:
+	# Set VR texture size
+	rect_size = render_target_size
+	$VRBackground.rect_size = render_target_size

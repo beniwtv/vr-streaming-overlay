@@ -4,22 +4,22 @@ var uuid : String = ""
 var eventNode : Node = null
 
 func set_item_icon(icon : StreamTexture) -> void:
-	$HBoxContainer/ConnectionIcon.texture = icon
+	$HBoxContainer/MarginContainer/ConnectionIcon.texture = icon
 
 func set_item_name(name : String) -> void:
-	$HBoxContainer/VBoxContainer/ConnectionNameLabel.text = name
+	$HBoxContainer/HBoxContainer/ConnectionNameLabel.text = name
 	
 func set_item_type(type : String) -> void:
 	var connector = load("res://connectors/" + type + "connector.gd").new()
-	$HBoxContainer/VBoxContainer/ConnectionTypeLabel.text = connector.get_connector_display_name()
+	$HBoxContainer/HBoxContainer/ConnectionTypeLabel.text = connector.get_connector_display_name()
 
 func set_is_valid(valid : bool) -> void:
 	if valid:
-		$HBoxContainer/IsValid.visible = true
-		$HBoxContainer/NotValid.visible = false
+		$HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer/CenterContainer/IsValid.visible = true
+		$HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer/CenterContainer/NotValid.visible = false
 	else:
-		$HBoxContainer/IsValid.visible = false
-		$HBoxContainer/NotValid.visible = true	
+		$HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer/CenterContainer/IsValid.visible = false
+		$HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer/CenterContainer/NotValid.visible = true	
 
 func set_uuid(uuid : String) -> void:
 	self.uuid = uuid

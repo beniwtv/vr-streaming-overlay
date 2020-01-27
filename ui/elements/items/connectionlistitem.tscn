@@ -1,80 +1,113 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/elements/items/connectionlistitem.gd" type="Script" id=1]
 [ext_resource path="res://ui/theme/verified.png" type="Texture" id=2]
-[ext_resource path="res://ui/icons/invalid.png" type="Texture" id=3]
+[ext_resource path="res://ui/theme/controls-and-icons.png" type="Texture" id=3]
 [ext_resource path="res://ui/theme/edit.png" type="Texture" id=4]
 [ext_resource path="res://ui/theme/remove.png" type="Texture" id=5]
 
-[node name="ConnectionListItem" type="Control"]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 218, 37, 16, 15 )
+
+[node name="ConnectionListItem" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 0, 50 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 1280.0
+margin_bottom = 720.0
 
-[node name="ConnectionIcon" type="TextureRect" parent="HBoxContainer"]
-margin_right = 83.0
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 5.0
+margin_bottom = 720.0
+custom_constants/margin_right = 5
+
+[node name="ConnectionIcon" type="TextureRect" parent="HBoxContainer/MarginContainer"]
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 87.0
-margin_right = 840.0
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 9.0
+margin_right = 971.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 9.0
 
-[node name="ConnectionNameLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_right = 753.0
-margin_bottom = 358.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "CONNECTION NAME"
-valign = 1
-
-[node name="ConnectionTypeLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
-margin_top = 362.0
-margin_right = 753.0
+[node name="ConnectionTypeLabel" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_right = 479.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 text = "TYPE"
 valign = 1
 
-[node name="Label" type="Label" parent="HBoxContainer"]
-margin_left = 844.0
-margin_right = 927.0
+[node name="ConnectionNameLabel" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_left = 483.0
+margin_right = 962.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-text = "Token valid?"
+text = "CONNECTION NAME"
 valign = 1
 
-[node name="IsValid" type="TextureRect" parent="HBoxContainer"]
-margin_left = 931.0
-margin_right = 1014.0
+[node name="ValidVboxMarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 975.0
+margin_right = 1058.0
 margin_bottom = 720.0
+custom_constants/margin_right = 5
+
+[node name="ValidVBoxContainer" type="VBoxContainer" parent="HBoxContainer/ValidVboxMarginContainer"]
+margin_right = 78.0
+margin_bottom = 720.0
+
+[node name="TokenValidLabel" type="Label" parent="HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer"]
+margin_right = 78.0
+margin_bottom = 238.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Token valid?"
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer"]
+margin_top = 242.0
+margin_right = 78.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="NotValid" type="TextureRect" parent="HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer/CenterContainer"]
+visible = false
+margin_left = 31.0
+margin_top = 231.0
+margin_right = 47.0
+margin_bottom = 246.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 1 )
+
+[node name="IsValid" type="TextureRect" parent="HBoxContainer/ValidVboxMarginContainer/ValidVBoxContainer/CenterContainer"]
+margin_left = 31.0
+margin_top = 231.0
+margin_right = 47.0
+margin_bottom = 247.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 2 )
-
-[node name="NotValid" type="TextureRect" parent="HBoxContainer"]
-margin_left = 1018.0
-margin_right = 1101.0
-margin_bottom = 720.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="EditConnectionButton" type="Button" parent="HBoxContainer"]
-margin_left = 1105.0
-margin_right = 1188.0
+margin_left = 1062.0
+margin_right = 1168.0
 margin_bottom = 720.0
 hint_tooltip = "Edit and re-validate"
 size_flags_horizontal = 3
@@ -83,7 +116,7 @@ text = "Edit"
 icon = ExtResource( 4 )
 
 [node name="DeleteConnectionButton" type="Button" parent="HBoxContainer"]
-margin_left = 1192.0
+margin_left = 1172.0
 margin_right = 1280.0
 margin_bottom = 720.0
 hint_tooltip = "Remove connection"

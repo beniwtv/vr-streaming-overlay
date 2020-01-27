@@ -5,9 +5,6 @@ var irc_joined = false
 var authenticated = false
 var capok = false
 
-# IRC commands run in a thread, so we don't block the UI
-var irc_thread = null
-
 # TCP stream we are connected to (with SSL on top)
 var irc_stream = null
 
@@ -56,31 +53,24 @@ func apply_config(widget_id, config):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Twitch widget loading!")
+	print("Twitch chat widget loading!")
 	
 	# Prepare our chat lines array
 	for i in range(0, 200):
 		chat_lines.append("\n")
 
 func _exit_tree():
-	print("Twitch widget unloading!")
-	
-	if irc_thread and irc_thread.is_active():
-		irc_thread.wait_to_finish()
+	print("Twitch chat widget unloading!")
 	
 	if irc_stream:
 		irc_stream.disconnect_from_stream()
 		irc_stream = null
 
-# Connect to Twitch IRC in a separate thread
+# Connect to Twitch IRC
 func connect_to_twitch():
 	if !username: return false
 	if !chat_token: return false
 	
-	irc_thread = Thread.new()
-	irc_thread.start(self, "connect_to_irc")
-
-func connect_to_irc(params):
 	chat_lines.append("CONNECTING... ")
 	redraw_chat()
 	
@@ -104,8 +94,6 @@ func connect_to_irc(params):
 		if count >= 60:
 			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
 			redraw_chat()
-			
-			params.thread.call_deferred("wait_to_finish") # Execute on idle main thread
 			
 			return false
 		else:
@@ -132,8 +120,6 @@ func connect_to_irc(params):
 			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
 			redraw_chat()
 			
-			params.thread.call_deferred("wait_to_finish") # Execute on idle main thread
-			
 			return false
 		else:
 			count = count + 1
@@ -157,8 +143,6 @@ func connect_to_irc(params):
 			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
 			redraw_chat()
 			
-			params.thread.call_deferred("wait_to_finish") # Execute on idle main thread
-			
 			return false
 		else:
 			count = count + 1
@@ -181,8 +165,6 @@ func connect_to_irc(params):
 		if count >= 60:			
 			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
 			redraw_chat()
-			
-			params.thread.call_deferred("wait_to_finish") # Execute on idle main thread
 			
 			return false
 		else:
@@ -261,16 +243,24 @@ func parse_irc_line(lines):
 			last_pong = OS.get_unix_time()
 		elif line.find("PRIVMSG") > -1:
 			# Split in text and other parts
-			var parts = line.split(" :")
+			var parts = Array(line.split(" :"))
+			var caps: PoolStringArray
+			var message: String
 
-			var message = parts[2]
-			var caps = parts[0]
+			# Check for hosting
+			if parts.has(2):
+				message = parts[2]
+				caps = parts[0].split(";")
+			else:
+				#:jtv!jtv@jtv.tmi.twitch.tv PRIVMSG XXX :YYY is now hosting you.
+				message = parts[1]
+				pass
 			
 			# Split caps into a dictionary
-			var cap_parts = caps.split(";")
+			var cap_parts = caps
 			var mod = false
 			var color = 'white'
-			var author = null
+			var author = 'SYSTEM'
 			
 			for i in cap_parts:
 				if i.find("moderator/1") > -1 or i.find("broadcaster/1") > -1:

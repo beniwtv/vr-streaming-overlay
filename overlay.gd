@@ -42,7 +42,7 @@ func _ready() -> void:
 		SignalManager.connect("redraw_overlay", self, "_on_redraw_overlay")
 		
 		# Add all the configured overlays to OpenVR
-		var overlays : Dictionary = SettingsManager.get_value("user", "overlays/configuration", [])
+		var overlays : Array = SettingsManager.get_value("user", "overlays/configuration", [])
 		
 		for overlay in overlays:
 			_on_overlay_add(overlay)

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=63 format=2]
+[gd_resource type="Theme" load_steps=60 format=2]
 
 [ext_resource path="res://ui/theme/button_style.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/theme/controls-and-icons.png" type="Texture" id=2]
@@ -45,158 +45,156 @@ border_width_bottom = 1
 border_color = Color( 0.2, 0.709804, 0.898039, 1 )
 corner_detail = 1
 
-[sub_resource type="AtlasTexture" id=53]
-atlas = ExtResource( 2 )
-region = Rect2( 191, 40, 8, 10 )
-
-[sub_resource type="AtlasTexture" id=54]
-atlas = ExtResource( 2 )
-region = Rect2( 191, 40, 8, 10 )
-
 [sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 191, 40, 8, 10 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 191, 40, 8, 10 )
+
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
 region = Rect2( 134, 33, 2, 14 )
 margin = Rect2( 0, -4, 0, 0 )
 
-[sub_resource type="AtlasTexture" id=55]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 2 )
 region = Rect2( 482, 12, 24, 6 )
 
-[sub_resource type="StyleBoxTexture" id=56]
-texture = SubResource( 55 )
+[sub_resource type="StyleBoxTexture" id=14]
+texture = SubResource( 13 )
+region_rect = Rect2( 0, 0, 24, 6 )
 margin_left = 2.0
 margin_right = 2.0
 margin_top = 4.88346
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
 region = Rect2( 482, 12, 26, 6 )
 
-[sub_resource type="StyleBoxTexture" id=12]
-texture = SubResource( 11 )
+[sub_resource type="StyleBoxTexture" id=16]
+texture = SubResource( 15 )
 region_rect = Rect2( 2, 0, 24, 6 )
 margin_left = 2.0
 margin_right = 2.0
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.156863, 0.156863, 0.156863, 0 )
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
-region = Rect2( 68, 8, 14, 14 )
-
-[sub_resource type="StyleBoxTexture" id=16]
-texture = SubResource( 15 )
-region_rect = Rect2( 0, 0, 14, 14 )
-margin_left = 6.0
-margin_right = 6.0
-margin_top = 6.0
-margin_bottom = 6.0
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 2 )
-region = Rect2( 68, 8, 14, 14 )
-
-[sub_resource type="StyleBoxTexture" id=18]
-texture = SubResource( 17 )
-region_rect = Rect2( 0, 0, 14, 14 )
-margin_left = 6.0
-margin_right = 6.0
-margin_top = 6.0
-margin_bottom = 6.0
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 2, 3, 26, 17 )
+region = Rect2( 68, 8, 14, 14 )
 
 [sub_resource type="StyleBoxTexture" id=20]
+texture = SubResource( 19 )
+region_rect = Rect2( 0, 0, 14, 14 )
+margin_left = 6.0
+margin_right = 6.0
+margin_top = 6.0
+margin_bottom = 6.0
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 68, 8, 14, 14 )
+
+[sub_resource type="StyleBoxTexture" id=22]
+texture = SubResource( 21 )
+region_rect = Rect2( 0, 0, 14, 14 )
+margin_left = 6.0
+margin_right = 6.0
+margin_top = 6.0
+margin_bottom = 6.0
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 2, 3, 26, 17 )
+
+[sub_resource type="StyleBoxTexture" id=24]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
-texture = SubResource( 19 )
+texture = SubResource( 23 )
 region_rect = Rect2( 0, 0, 26, 17 )
 margin_left = 2.0
 margin_right = 2.0
 margin_bottom = 2.0
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=25]
 atlas = ExtResource( 2 )
 region = Rect2( 2, 4, 26, 16 )
 
-[sub_resource type="StyleBoxTexture" id=22]
+[sub_resource type="StyleBoxTexture" id=26]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
-texture = SubResource( 21 )
+texture = SubResource( 25 )
 region_rect = Rect2( 0, 0, 26, 16 )
 margin_left = 2.0
 margin_right = 2.0
 margin_bottom = 2.0
 
-[sub_resource type="AtlasTexture" id=23]
+[sub_resource type="AtlasTexture" id=27]
 atlas = ExtResource( 2 )
 region = Rect2( 225, 17, 12, 6 )
 margin = Rect2( 0, 0, 2, 0 )
 
-[sub_resource type="StyleBoxFlat" id=24]
+[sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="AtlasTexture" id=25]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 2 )
 region = Rect2( 91, 60, 28, 30 )
 
-[sub_resource type="StyleBoxTexture" id=26]
-texture = SubResource( 25 )
+[sub_resource type="StyleBoxTexture" id=30]
+texture = SubResource( 29 )
 region_rect = Rect2( 0, 0, 28, 30 )
 margin_left = 14.0
 margin_right = 14.0
 margin_top = 14.0
 margin_bottom = 14.0
 
-[sub_resource type="AtlasTexture" id=27]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 2 )
 region = Rect2( 91, 60, 28, 30 )
 
-[sub_resource type="StyleBoxTexture" id=28]
-texture = SubResource( 27 )
+[sub_resource type="StyleBoxTexture" id=32]
+texture = SubResource( 31 )
 region_rect = Rect2( 0, 0, 28, 30 )
 margin_left = 14.0
 margin_right = 14.0
 margin_top = 14.0
 margin_bottom = 14.0
 
-[sub_resource type="StyleBoxFlat" id=29]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-
-[sub_resource type="AtlasTexture" id=30]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 2 )
 region = Rect2( 219, 0, 19, 31 )
 
-[sub_resource type="StyleBoxFlat" id=31]
+[sub_resource type="StyleBoxFlat" id=34]
 bg_color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=35]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_top = 5.0
 bg_color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
-[sub_resource type="AtlasTexture" id=33]
+[sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 2 )
 region = Rect2( 149, 13.9797, 32, 2.0562 )
 
-[sub_resource type="StyleBoxTexture" id=34]
+[sub_resource type="StyleBoxTexture" id=37]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_top = 11.0
-texture = SubResource( 33 )
+texture = SubResource( 36 )
 region_rect = Rect2( 0, 0, 32, 2 )
 margin_bottom = 6.0
 
-[sub_resource type="StyleBoxFlat" id=35]
+[sub_resource type="StyleBoxFlat" id=38]
 content_margin_left = 5.0
 content_margin_right = 5.0
 content_margin_top = 5.0
@@ -204,90 +202,86 @@ content_margin_bottom = 5.0
 bg_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 shadow_size = 1
 
-[sub_resource type="AtlasTexture" id=36]
+[sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 2 )
 region = Rect2( 225, 17, 18, 6 )
 
-[sub_resource type="AtlasTexture" id=37]
+[sub_resource type="AtlasTexture" id=40]
 atlas = ExtResource( 2 )
 region = Rect2( 459, 9, 6, 12 )
 margin = Rect2( 4, 0, 0, 0 )
 
-[sub_resource type="StyleBoxFlat" id=38]
+[sub_resource type="StyleBoxFlat" id=41]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="StyleBoxFlat" id=39]
+[sub_resource type="StyleBoxFlat" id=42]
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
-[sub_resource type="StyleBoxFlat" id=58]
-
-[sub_resource type="StyleBoxFlat" id=57]
-
-[sub_resource type="AtlasTexture" id=40]
+[sub_resource type="AtlasTexture" id=43]
 atlas = ExtResource( 2 )
 region = Rect2( 65, 5, 20, 20 )
 
-[sub_resource type="StyleBoxTexture" id=41]
-texture = SubResource( 40 )
+[sub_resource type="StyleBoxTexture" id=44]
+texture = SubResource( 43 )
 region_rect = Rect2( 0, 0, 20, 20 )
 margin_left = 10.0
 margin_right = 10.0
 margin_top = 10.0
 margin_bottom = 10.0
 
-[sub_resource type="AtlasTexture" id=42]
+[sub_resource type="AtlasTexture" id=45]
 atlas = ExtResource( 2 )
 region = Rect2( 65, 4, 20, 21 )
 
-[sub_resource type="StyleBoxTexture" id=43]
-texture = SubResource( 42 )
+[sub_resource type="StyleBoxTexture" id=46]
+texture = SubResource( 45 )
 region_rect = Rect2( 0, 0, 20, 21 )
 margin_left = 10.0
 margin_right = 10.0
 margin_top = 10.0
 margin_bottom = 10.0
 
-[sub_resource type="StyleBoxLine" id=44]
-color = Color( 0.2, 0.709804, 0.898039, 1 )
-thickness = 3
-vertical = true
-
-[sub_resource type="StyleBoxLine" id=45]
-color = Color( 0.2, 0.709804, 0.898039, 1 )
-thickness = 3
-vertical = true
-
-[sub_resource type="StyleBoxLine" id=46]
-color = Color( 0.2, 0.709804, 0.898039, 1 )
-thickness = 3
-vertical = true
-
 [sub_resource type="StyleBoxLine" id=47]
+color = Color( 0.2, 0.709804, 0.898039, 1 )
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=48]
+color = Color( 0.2, 0.709804, 0.898039, 1 )
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=49]
+color = Color( 0.2, 0.709804, 0.898039, 1 )
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxLine" id=50]
 color = Color( 1, 0.733333, 0.2, 1 )
 thickness = 3
 vertical = true
 
-[sub_resource type="StyleBoxFlat" id=48]
+[sub_resource type="StyleBoxFlat" id=51]
 bg_color = Color( 0.2, 0.709804, 0.898039, 1 )
 draw_center = false
 border_width_left = 1
 border_color = Color( 0.2, 0.709804, 0.898039, 1 )
 corner_detail = 1
 
-[sub_resource type="AtlasTexture" id=49]
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 2 )
 region = Rect2( 129, 9, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=50]
+[sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 2 )
 region = Rect2( 129, 9, 12, 12 )
 
-[sub_resource type="AtlasTexture" id=51]
+[sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 2 )
 region = Rect2( 91, 2, 28, 57 )
 
-[sub_resource type="StyleBoxTexture" id=52]
-texture = SubResource( 51 )
+[sub_resource type="StyleBoxTexture" id=55]
+texture = SubResource( 54 )
 region_rect = Rect2( 0, 0, 28, 57 )
 margin_left = 13.0
 margin_right = 13.0
@@ -316,67 +310,65 @@ CheckButton/styles/normal = SubResource( 7 )
 CheckButton/styles/pressed = SubResource( 8 )
 HSeparator/constants/separation = 30
 HSeparator/styles/separator = SubResource( 9 )
-HSlider/icons/grabber = SubResource( 53 )
-HSlider/icons/grabber_highlight = SubResource( 54 )
-HSlider/icons/tick = SubResource( 10 )
-HSlider/styles/grabber_area = SubResource( 56 )
-HSlider/styles/slider = SubResource( 12 )
+HSlider/icons/grabber = SubResource( 10 )
+HSlider/icons/grabber_highlight = SubResource( 11 )
+HSlider/icons/tick = SubResource( 12 )
+HSlider/styles/grabber_area = SubResource( 14 )
+HSlider/styles/slider = SubResource( 16 )
 ItemList/colors/font_color = Color( 0.831373, 0.831373, 0.831373, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
 ItemList/colors/guide_color = Color( 0, 0, 0, 0 )
 ItemList/constants/hseparation = 10
 ItemList/constants/icon_margin = 10
-ItemList/styles/bg = SubResource( 13 )
-ItemList/styles/bg_focus = SubResource( 14 )
-ItemList/styles/selected = SubResource( 16 )
-ItemList/styles/selected_focus = SubResource( 18 )
+ItemList/styles/bg = SubResource( 17 )
+ItemList/styles/bg_focus = SubResource( 18 )
+ItemList/styles/selected = SubResource( 20 )
+ItemList/styles/selected_focus = SubResource( 22 )
 Label/colors/font_color = Color( 0.831373, 0.831373, 0.831373, 1 )
 LineEdit/colors/clear_button_color = Color( 0.2, 0.709804, 0.898039, 1 )
 LineEdit/colors/cursor_color = Color( 1, 0.733333, 0.2, 1 )
 LineEdit/colors/font_color = Color( 0.831373, 0.831373, 0.831373, 1 )
 LineEdit/colors/font_color_selected = Color( 0.156863, 0.156863, 0.156863, 1 )
 LineEdit/colors/selection_color = Color( 1, 0.733333, 0.2, 1 )
-LineEdit/styles/focus = SubResource( 20 )
-LineEdit/styles/normal = SubResource( 22 )
+LineEdit/styles/focus = SubResource( 24 )
+LineEdit/styles/normal = SubResource( 26 )
 OptionButton/colors/font_color = Color( 0.831373, 0.831373, 0.831373, 1 )
 OptionButton/colors/font_color_hover = Color( 1, 1, 1, 1 )
-OptionButton/icons/arrow = SubResource( 23 )
-PanelContainer/styles/panel = SubResource( 24 )
+OptionButton/icons/arrow = SubResource( 27 )
+PanelContainer/styles/panel = SubResource( 28 )
 PopupMenu/colors/font_color = Color( 0.831373, 0.831373, 0.831373, 1 )
 PopupMenu/colors/font_color_hover = Color( 1, 1, 1, 1 )
-PopupMenu/styles/panel = SubResource( 26 )
-PopupPanel/styles/panel = SubResource( 28 )
+PopupMenu/styles/panel = SubResource( 30 )
+PopupPanel/styles/panel = SubResource( 32 )
 RichTextLabel/fonts/bold_font = ExtResource( 3 )
-ScrollContainer/styles/bg = SubResource( 29 )
-SpinBox/icons/updown = SubResource( 30 )
+ScrollContainer/styles/bg = null
+SpinBox/icons/updown = SubResource( 33 )
 TabContainer/colors/font_color_bg = Color( 0.627451, 0.627451, 0.627451, 1 )
 TabContainer/colors/font_color_fg = Color( 0.831373, 0.831373, 0.831373, 1 )
-TabContainer/styles/panel = SubResource( 31 )
-TabContainer/styles/tab_bg = SubResource( 32 )
-TabContainer/styles/tab_fg = SubResource( 34 )
-TooltipPanel/styles/panel = SubResource( 35 )
+TabContainer/styles/panel = SubResource( 34 )
+TabContainer/styles/tab_bg = SubResource( 35 )
+TabContainer/styles/tab_fg = SubResource( 37 )
+TooltipPanel/styles/panel = SubResource( 38 )
 Tree/colors/font_color = Color( 0.831373, 0.831373, 0.831373, 1 )
 Tree/colors/font_color_selected = Color( 1, 1, 1, 1 )
 Tree/colors/guide_color = Color( 0, 0, 0, 0 )
 Tree/constants/draw_relationship_lines = 1
 Tree/constants/hseparation = 10
 Tree/constants/item_margin = 16
-Tree/icons/arrow = SubResource( 36 )
-Tree/icons/arrow_collapsed = SubResource( 37 )
-Tree/styles/bg = SubResource( 38 )
-Tree/styles/bg_focus = SubResource( 39 )
-Tree/styles/cursor = SubResource( 58 )
-Tree/styles/cursor_unfocused = SubResource( 57 )
-Tree/styles/selected = SubResource( 41 )
-Tree/styles/selected_focus = SubResource( 43 )
+Tree/icons/arrow = SubResource( 39 )
+Tree/icons/arrow_collapsed = SubResource( 40 )
+Tree/styles/bg = SubResource( 41 )
+Tree/styles/bg_focus = SubResource( 42 )
+Tree/styles/selected = SubResource( 44 )
+Tree/styles/selected_focus = SubResource( 46 )
 VBoxContainer/constants/separation = 10
-VScrollBar/styles/grabber = SubResource( 44 )
-VScrollBar/styles/grabber_highlight = SubResource( 45 )
-VScrollBar/styles/grabber_pressed = SubResource( 46 )
-VScrollBar/styles/scroll = SubResource( 47 )
+VScrollBar/styles/grabber = SubResource( 47 )
+VScrollBar/styles/grabber_highlight = SubResource( 48 )
+VScrollBar/styles/grabber_pressed = SubResource( 49 )
+VScrollBar/styles/scroll = SubResource( 50 )
 VSeparator/constants/separation = 30
-VSeparator/styles/separator = SubResource( 48 )
+VSeparator/styles/separator = SubResource( 51 )
 WindowDialog/colors/title_color = Color( 1, 0.733333, 0.2, 1 )
-WindowDialog/icons/close = SubResource( 49 )
-WindowDialog/icons/close_highlight = SubResource( 50 )
-WindowDialog/styles/panel = SubResource( 52 )
+WindowDialog/icons/close = SubResource( 52 )
+WindowDialog/icons/close_highlight = SubResource( 53 )
+WindowDialog/styles/panel = SubResource( 55 )
