@@ -248,20 +248,19 @@ func parse_irc_line(lines):
 			var message: String
 
 			# Check for hosting
-			if parts.has(2):
+			if parts.size() == 3:
 				message = parts[2]
 				caps = parts[0].split(";")
 			else:
 				#:jtv!jtv@jtv.tmi.twitch.tv PRIVMSG XXX :YYY is now hosting you.
 				message = parts[1]
-				pass
 			
 			# Split caps into a dictionary
 			var cap_parts = caps
 			var mod = false
 			var color = 'white'
 			var author = 'SYSTEM'
-			
+
 			for i in cap_parts:
 				if i.find("moderator/1") > -1 or i.find("broadcaster/1") > -1:
 					mod = true
