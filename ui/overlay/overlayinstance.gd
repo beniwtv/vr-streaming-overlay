@@ -9,7 +9,7 @@ func _ready() -> void:
 	ARVRServer.connect("tracker_removed", self, "_on_trackers_changed")
 
 	attempt_tracking()
-
+	
 func destroy() -> void:
 	$VRViewport.overlay_visible = false
 
@@ -49,6 +49,10 @@ func attempt_tracking() -> void:
 		if overlay_config.has("hand"): hand_value = overlay_config["hand"]
 
 		if hand_value != 2:
+			position_x = DefaultSettings.get_default_setting("overlay/position_x_hand")
+			if overlay_config.has("position_x_hand"): position_x = overlay_config["position_x_hand"]
+			position_y = DefaultSettings.get_default_setting("overlay/position_y_hand")
+			if overlay_config.has("position_y_hand"): position_y = overlay_config["position_y_hand"]
 			position_z = DefaultSettings.get_default_setting("overlay/position_z_hand")
 			if overlay_config.has("position_z_hand"): position_z = overlay_config["position_z_hand"]
 			
@@ -57,9 +61,21 @@ func attempt_tracking() -> void:
 			else:
 				rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z_hand_right")
 			
-			transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(0, 0, position_z))
+			rotation_x = DefaultSettings.get_default_setting("overlay/rotation_x_hand")
+			if overlay_config.has("rotation_x_hand"): rotation_x = overlay_config["rotation_x_hand"]
+			rotation_y = DefaultSettings.get_default_setting("overlay/rotation_y")
+			if overlay_config.has("rotation_y_hand"): rotation_y = overlay_config["rotation_y_hand"]
+			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z")
+			if overlay_config.has("rotation_z_hand"): rotation_z = overlay_config["rotation_z_hand"]
+						
+			transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
+			transform = transform.rotated(Vector3(1, 0, 0), rotation_x)
+			transform = transform.rotated(Vector3(0, 1, 0), rotation_y)
 			transform = transform.rotated(Vector3(0, 0, 1), rotation_z)
+
 			transform = transform.translated(Vector3(0, 0, 1) * position_z)
+			transform = transform.orthonormalized()
+		
 		else:
 			position_x = DefaultSettings.get_default_setting("overlay/position_x")
 			if overlay_config.has("position_x"): position_x = overlay_config["position_x"]

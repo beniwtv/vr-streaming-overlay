@@ -209,7 +209,6 @@ func parse_irc_line(lines):
 	lines = lines.split('\n')
 	
 	for line in lines:
-		print(line)
 		if line.find("NOTICE *") > -1:
 			append_message(line.split(":")[2] + "\n\n", 'red', 'TWITCH')
 		elif line.find("001") > -1:
@@ -243,17 +242,9 @@ func parse_irc_line(lines):
 			last_pong = OS.get_unix_time()
 		elif line.find("PRIVMSG") > -1:
 			# Split in text and other parts
-			var parts = Array(line.split(" :"))
-			var caps: PoolStringArray
-			var message: String
-
-			# Check for hosting
-			if parts.size() == 3:
-				message = parts[2]
-				caps = parts[0].split(";")
-			else:
-				#:jtv!jtv@jtv.tmi.twitch.tv PRIVMSG XXX :YYY is now hosting you.
-				message = parts[1]
+			var parts = Array(line.split("PRIVMSG"))
+			var caps = parts[0].split(";")
+			var message: String = parts[1].split(' :', true, 1)[1]
 			
 			# Split caps into a dictionary
 			var cap_parts = caps

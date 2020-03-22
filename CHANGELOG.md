@@ -4,13 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.co##m/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [UNRELEASED] - 2019-XX-XX
+## [UNRELEASED] - 2020-XX-XX
 ### Added
 - Added styling for connections tab
+- Re-added position and rotation sliders to hand mode
 
 ### Changed
 - Update code to use the new multi-overlay implementation of godot_openvr
-- Update to Godot 3.2 rc3
+- Update to Godot 3.2
 - Improvements to the README
 
 ### Fixed
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed saving of "Play chime on event" checkbox
 - Fixed Twitch chat widget SSL mode crashing the overlay
 - Fixed overlay crashing when host is reveived on Twitch
+- Fixed parsing of PRIVMSG
 
 ## [0.0.3-alpha - 2019-09-15
 ### Added
