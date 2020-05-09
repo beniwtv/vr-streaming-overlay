@@ -21,7 +21,7 @@ bbcode_text = "To connect to Twitch, we need a so called \"authentication token\
 
     1) Navigate to [url]https://dev.twitch.tv/console/apps[/url] in your favourite browser, to register a new application for the overlay. If you already have an application and client ID, skip to the 3rd step.
 	
-	2) As name, enter a descriptive name like \"VR overlay\". As redirect URL, enter \"http://localhost\". Then select \"Application Integration\" as category and fill out the captcha. Click on \"Create\" to create your new application.
+	2) As name, enter a descriptive name. This needs to be unique to you, and should be something you remember. As redirect URL, enter \"http://localhost\". Then select \"Application Integration\" as category and fill out the captcha. Click on \"Create\" to create your new application.
 	
 	3) Now navigate to [url]https://twitchapps.com/tokengen/[/url] and enter the client ID as received in the previous step. As scopes, enter [b]\"chat:read\"[/b].
 	
@@ -30,7 +30,7 @@ text = "To connect to Twitch, we need a so called \"authentication token\". Ther
 
     1) Navigate to https://dev.twitch.tv/console/apps in your favourite browser, to register a new application for the overlay. If you already have an application and client ID, skip to the 3rd step.
 	
-	2) As name, enter a descriptive name like \"VR overlay\". As redirect URL, enter \"http://localhost\". Then select \"Application Integration\" as category and fill out the captcha. Click on \"Create\" to create your new application.
+	2) As name, enter a descriptive name. This needs to be unique to you, and should be something you remember. As redirect URL, enter \"http://localhost\". Then select \"Application Integration\" as category and fill out the captcha. Click on \"Create\" to create your new application.
 	
 	3) Now navigate to https://twitchapps.com/tokengen/ and enter the client ID as received in the previous step. As scopes, enter \"chat:read\".
 	

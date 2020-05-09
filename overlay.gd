@@ -26,7 +26,8 @@ func _ready() -> void:
 	if arvr_interface and arvr_interface.initialize():
 		# Make sure we run at 90 FPS for this
 		OS.vsync_enabled = false
-		Engine.target_fps = 90
+		Engine.target_fps = 30
+		Engine.iterations_per_second = 15
 		
 		# Load pointer overlay
 		#var pointer1 = load("res://ui/pointer/pointerinstance.tscn").instance()

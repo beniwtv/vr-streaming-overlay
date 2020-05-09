@@ -67,15 +67,33 @@ func attempt_tracking() -> void:
 			if overlay_config.has("rotation_y_hand"): rotation_y = overlay_config["rotation_y_hand"]
 			rotation_z = DefaultSettings.get_default_setting("overlay/rotation_z")
 			if overlay_config.has("rotation_z_hand"): rotation_z = overlay_config["rotation_z_hand"]
-						
+			
 			transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
-			transform = transform.rotated(Vector3(1, 0, 0), rotation_x)
-			transform = transform.rotated(Vector3(0, 1, 0), rotation_y)
-			transform = transform.rotated(Vector3(0, 0, 1), rotation_z)
+			
+			#transform = $"3DVRViewport/VR3DScene/ARVROrigin/OverlayArea/StaticBody".global_transform
 
-			transform = transform.translated(Vector3(0, 0, 1) * position_z)
+			transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)
+			transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)
+			transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)
+			#transform = transform.orthonormalized()
+			#transform.basis = transform.orthonormalized()
+			#print(position_x)
+			#print(position_y)
+			#print(position_z)
+			#transform.origin += transform.basis.x * position_x
+			#transform.origin += transform.basis.y * position_y
+			#transform.origin += transform.basis.z * position_z
+			#transform.origin += transform.basis.z * position_z
+			
+			#transform.basis = transform.basis.rotated(Vector3(1, 0, 0), rotation_x)
+			#transform.basis = transform.basis.rotated(Vector3(0, 1, 0), rotation_y)
+			#transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)
+			
+			#transform = transform.basis.x = position_x
+			#transform = transform.translated(Vector3(1, 0, 1) * position_x)
+			#transform = transform.translated(Vector3(0, 1, 1) * position_y)
+			#transform = transform.translated(Vector3(0, 0, 1) * position_z)
 			transform = transform.orthonormalized()
-		
 		else:
 			position_x = DefaultSettings.get_default_setting("overlay/position_x")
 			if overlay_config.has("position_x"): position_x = overlay_config["position_x"]

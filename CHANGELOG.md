@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update code to use the new multi-overlay implementation of godot_openvr
 - Update to Godot 3.2
 - Improvements to the README
+- Some tweaks to CPU/GPU usage
+- Rotation sliders now allow for more fine-grained control
 
 ### Fixed
 - Fixed skinning issue in font selection dialog
@@ -23,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Twitch chat widget SSL mode crashing the overlay
 - Fixed overlay crashing when host is reveived on Twitch
 - Fixed parsing of PRIVMSG
+- Improved handling of rotation in hand mode
+- Fixed Twitch OAuth help text, fixes #10
 
 ## [0.0.3-alpha - 2019-09-15
 ### Added
