@@ -5,7 +5,8 @@ var info : Dictionary = {}
 
 func set_connection_info(info : Dictionary) -> void:
 	self.info = info
-	$VBoxContainer/MarginContainer/Token.text = info["token"]
+	if info.has("clientid"): $VBoxContainer/MarginContainerClientId/ClientId.text = info["clientid"]
+	$VBoxContainer/MarginContainerToken/Token.text = info["token"]
 
 func verify_connection(receiver : Node) -> void:
 	self.receiver = receiver
@@ -13,7 +14,8 @@ func verify_connection(receiver : Node) -> void:
 	var headers : Array = [
 		"User-Agent: VR Streaming Overlay/1.0 (Godot)",
 		"Accept: application/json",
-		"Authorization: Bearer " + $VBoxContainer/MarginContainer/Token.text
+		"Client-ID: " + $VBoxContainer/MarginContainerClientId/ClientId.text,
+		"Authorization: Bearer " + $VBoxContainer/MarginContainerToken/Token.text
 	]
 	
 	$HTTPRequest.connect("request_completed", self, "_on_twitch_verify", [], CONNECT_DEFERRED)
@@ -22,17 +24,17 @@ func verify_connection(receiver : Node) -> void:
 
 func _on_twitch_verify(result, response_code, headers, body) -> void:
 	$HTTPRequest.disconnect("request_completed", self, "_on_twitch_verify")
-	
 	var userResponse : JSONParseResult = JSON.parse(body.get_string_from_utf8())
 
 	if response_code == 200:
 		var response = {
 			"error": false,
-			"name": userResponse.result["data"][0]["login"],
+			"name": userResponse.result["data"][0]["display_name"],
 			"icon": load("res://connectors/twitchconnector.png"),
 			"valid": true,
 			"type": "twitch",
-			"token": $VBoxContainer/MarginContainer/Token.text
+			"clientid": $VBoxContainer/MarginContainerClientId/ClientId.text,
+			"token": $VBoxContainer/MarginContainerToken/Token.text
 		}
 		
 		if info:
