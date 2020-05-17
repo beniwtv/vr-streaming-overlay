@@ -6,6 +6,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -17,6 +20,7 @@ __meta__ = {
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 1280.0
 margin_bottom = 654.0
+focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -38,6 +42,7 @@ text = "To connect to Twitch, we need a so called \"authentication token\". Ther
 	3) Now navigate to https://twitchapps.com/tokengen/ and enter the client ID as received in the previous step. As scopes, enter \"chat:read\".
 	
 	4) Authorize your new application when asked and your authentication token will be displayed. Enter your client ID and this generated token below:"
+selection_enabled = true
 
 [node name="MarginContainerClientId" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 658.0
@@ -64,3 +69,4 @@ clear_button_enabled = true
 placeholder_text = "Authentication token"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]

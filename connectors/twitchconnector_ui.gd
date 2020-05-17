@@ -61,3 +61,7 @@ func _on_twitch_verify(result, response_code, headers, body) -> void:
 			response["uuid"] = info["uuid"]
 		
 		receiver.connection_verified(response)
+
+
+func _on_RichTextLabel_meta_clicked(meta):
+	OS.shell_open(meta)
