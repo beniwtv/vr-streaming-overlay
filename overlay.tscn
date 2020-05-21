@@ -16,5 +16,7 @@ __meta__ = {
 }
 
 [node name="MainWindow" parent="." instance=ExtResource( 2 )]
-margin_top = -1.67017
-margin_bottom = -1.67017
+margin_left = 9.0
+margin_top = 2.32983
+margin_right = 9.0
+margin_bottom = 2.32983
