@@ -40,6 +40,7 @@ func _ready() -> void:
 		
 		SignalManager.connect("overlay_add", self, "_on_overlay_add")
 		SignalManager.connect("overlay_remove", self, "_on_overlay_remove")
+		SignalManager.connect("overlay_visibility_toggle", self, "_on_overlay_visibility_toggle")
 		SignalManager.connect("redraw_overlay", self, "_on_redraw_overlay")
 		
 		# Add all the configured overlays to OpenVR
@@ -75,3 +76,12 @@ func _on_redraw_overlay(overlay : Dictionary) -> void:
 	for item in $Overlays.get_children():
 		if overlay["uuid"] == item.get_meta("uuid"):
 			item.set_configuration(overlay["config"], overlay["widgets"], render_target_size)
+
+# Called when an overlay needs hiding/showing
+func _on_overlay_visibility_toggle(uuid : String) -> void:
+	for overlay in $Overlays.get_children():
+		if uuid == overlay.get_meta("uuid"):
+			if overlay.is_overlay_visible():
+				overlay.set_overlay_visible(false)
+			else:
+				overlay.set_overlay_visible(true)

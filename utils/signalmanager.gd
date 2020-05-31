@@ -29,3 +29,6 @@ signal overlay_add
 
 # Fired when a overlay is requested to be removed from OpenVR
 signal overlay_remove
+
+# Fired when a overlay needs to be hidden/shown
+signal overlay_visibility_toggle

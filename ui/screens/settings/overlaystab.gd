@@ -57,18 +57,26 @@ func redraw_list(select_item : bool) -> void:
 	treeroot.set_metadata(0, "root")
 	
 	for overlay in overlays:
+		var overlay_visible : bool = true
+		if overlay.has("visible"): overlay_visible = overlay["visible"]
+		
 		var treeitem : TreeItem = get_node(OverlayListNode).create_item()
 		treeitem.set_text(0, overlay["name"])
-		treeitem.set_metadata(0, overlay["uuid"])
+		treeitem.set_metadata(0, {"uuid": overlay["uuid"], "visible": overlay_visible})
 
-		# Add remove button
-		treeitem.add_button(0, load("res://ui/theme/remove.png"), -1, false, "Delete this overlay")
+		# Add remove and show/hide buttons
+		if overlay_visible:
+			treeitem.add_button(0, load("res://ui/theme/visible.png"), 0, false, "Hide this overlay")
+		else:
+			treeitem.add_button(0, load("res://ui/theme/hidden.png"), 0, false, "Show this overlay")
+			
+		treeitem.add_button(0, load("res://ui/theme/remove.png"), 1, false, "Delete this overlay")
 
 	if select_item:
 		var item = treeroot.get_children()
 		
 		while (item):
-			if current_overlay_uuid == item.get_metadata(0):
+			if current_overlay_uuid == item.get_metadata(0)["uuid"]:
 				item.select(0)
 			
 			item = item.get_next()
@@ -76,15 +84,16 @@ func redraw_list(select_item : bool) -> void:
 # When an overlay is selected
 func _on_OverlayList_item_selected() -> void:
 	var selectedTreeItem : TreeItem = get_node(OverlayListNode).get_selected()
-	var uuid : String = selectedTreeItem.get_metadata(0)
+	var uuid : String = selectedTreeItem.get_metadata(0)["uuid"]
 	
 	for i in range(0, overlays.size()):
 		if overlays[i]["uuid"] == uuid:
 			select_overlay(i)
 
-# Delete button pressed
+# Delete or show/hide button pressed
 func _on_OverlayList_button_pressed(item : TreeItem, column : int, id : int) -> void:
-	var uuid : String = item.get_metadata(0)
+	var uuid : String = item.get_metadata(0)["uuid"]
+	var overlay_visible : bool = item.get_metadata(0)["visible"]
 	var overlayIndex : int = -1
 
 	for i in range(0, overlays.size()):
@@ -92,14 +101,22 @@ func _on_OverlayList_button_pressed(item : TreeItem, column : int, id : int) -> 
 			overlayIndex = i
 			
 	if overlayIndex > -1:
-		overlays.remove(overlayIndex)
-		SignalManager.emit_signal("overlay_remove", uuid)
-		
-		if overlays.size() > 0:
-			select_overlay(0)
-		elif overlays.size() == 0:
-			get_node(TabContainerNode).visible = false
-		
+		if id == 1:
+			overlays.remove(overlayIndex)
+			SignalManager.emit_signal("overlay_remove", uuid)
+			
+			if overlays.size() > 0:
+				select_overlay(0)
+			elif overlays.size() == 0:
+				get_node(TabContainerNode).visible = false
+		else:
+			if overlays[overlayIndex].has("visible"):
+				overlays[overlayIndex]["visible"] = !overlays[overlayIndex]["visible"]
+			else:
+				overlays[overlayIndex]["visible"] = false
+				
+			SignalManager.emit_signal("overlay_visibility_toggle", uuid)
+	
 		save_overlays()
 		redraw_list(true)
 

@@ -13,6 +13,12 @@ func _ready() -> void:
 func destroy() -> void:
 	$VRViewport.overlay_visible = false
 
+func is_overlay_visible() -> bool:
+	return $VRViewport.overlay_visible
+
+func set_overlay_visible(visibility : bool) -> void:
+	$VRViewport.overlay_visible = visibility
+
 func set_configuration(config : Dictionary, widgets: Array, render_target_size : Vector2) -> void:
 	# Set texture size for VR texture
 	rect_size = render_target_size
