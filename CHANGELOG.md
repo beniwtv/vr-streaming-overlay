@@ -4,10 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.co##m/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [UNRELEASED] - 2020-XX-XX
+## [UNRELEASED] - 2021-XX-XX
 ### Added
 - Added styling for connections tab
 - Re-added position and rotation sliders to hand mode
+- Implement setting overlay height (so more lines can be shown)
 
 ### Changed
 - Update code to use the new multi-overlay implementation of godot_openvr
@@ -15,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improvements to the README
 - Some tweaks to CPU/GPU usage
 - Rotation sliders now allow for more fine-grained control
+- Make "stare at" area a bit bigger, so it feels more natural
 
 ### Fixed
 - Fixed skinning issue in font selection dialog
@@ -28,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved handling of rotation in hand mode
 - Fixed Twitch OAuth help text, fixes #10
 
-## [0.0.3-alpha - 2019-09-15
+## [0.0.3-alpha] - 2019-09-15
 ### Added
 - Events, when something on the overlay happens (e.g. new chat message)
 - Option(s) to dim/undim overlay based on events

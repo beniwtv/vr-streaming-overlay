@@ -1,14 +1,14 @@
 # VR Streaming Overlay
 
-This is a SteamVR overlay for streamers on Linux.
-(It is made with Godot, so theoretically this could run on Windows and MacOSX too, feedback and patches welcome ;)
+This is a SteamVR overlay for streamers on Linux/Windows.
+(Made using the awesome Godot game engine ;)
 
 **Note:** The master on this repository is kept roughly in sync with Godot / Godot OpenVR master.
 For official releases of Godot please check the releases page and/or the respective branches.
 
-**Note:** The changed version of the plugin is only compiled for Linux at the moment.
+**Note:** While this is also compiled for Windows at the moment, this is currently untested. Feedback is welcome here :)
 
-Also note this is in *VERY* early state, but early testers/feedback are welcome of course!
+Also note this is in an early state, but testers/feedback are welcome of course!
 
 Current features:
 - Should support all SteamVR-supported headsets (only HTC Vive/Valve Index tested though - feedback welcome)
@@ -20,7 +20,10 @@ Current features:
 - Configurable widget system to show different things - like Twitch chat and Twitch stats (followers, current viewers, alerts...)
 - Trigger gesture to show/hide overlay (attached left/right hand)
 
-Planned features:
+Planned features / ideas:
+- Capture arbitrary windows
+- AUR package
+- Stream statistics integration (subs, followers, viewers, alerts...)
 - Integration of other streaming services (patches will be welcome ;)
 
 Linux notes
@@ -51,7 +54,4 @@ How to get help
 ---------------
 My nick is beniwtv on all platforms, mostly.
 
-You can contact me via the #godot-vr channel on IRC/Matrix, or in Discord in the Linux Gamers Group server, GamingOnLinux server or the Godot server.
-
-You can also follow me on Twitter:
-https://twitter.com/beniwtv
+You can contact me on Matrix, or in Discord in the Linux Gamers Group server, GamingOnLinux server or the Godot server.
