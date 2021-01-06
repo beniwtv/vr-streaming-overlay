@@ -20,6 +20,7 @@ var overlay_minangle = 80
 
 # Overlay position / rotation
 var overlay_size = 1.5
+var overlay_height = 1
 
 var overlay_position_x = 0
 var overlay_position_y = 0

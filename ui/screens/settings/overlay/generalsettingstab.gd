@@ -115,6 +115,15 @@ func _ready():
 	overlaysize.set_value(DefaultSettings.get_default_setting("overlay/size"))
 	overlaysize.set_widget_node(self)
 	overlaysize.add_to_group("general_settings")
+
+	var overlayheight = preload("res://ui/elements/options/slideroption.tscn").instance()
+	get_node(SettingsNode + "RightSettings").add_child(overlayheight)
+	overlayheight.set_label("Overlay height multiplier:")
+	overlayheight.set_slider_range(0.1, 5, 0.1)
+	overlayheight.set_option_name("height")
+	overlayheight.set_value(DefaultSettings.get_default_setting("overlay/height"))
+	overlayheight.set_widget_node(self)
+	overlayheight.add_to_group("general_settings")
 		
 	var position_x = preload("res://ui/elements/options/slideroption.tscn").instance()
 	get_node(SettingsNode + "RightSettings").add_child(position_x)
