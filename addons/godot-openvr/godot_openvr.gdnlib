@@ -7,14 +7,12 @@ reloadable=false
 
 [entry]
 
-X11.64="res://addons/godot-openvr/bin/x11/libgodot_openvr.so"
-Windows.32="res://addons/godot-openvr/bin/win32/libgodot_openvr.dll"
 Windows.64="res://addons/godot-openvr/bin/win64/libgodot_openvr.dll"
-OSX.64="res://addons/godot-openvr/bin/osx/libgodot_openvr.dylib"
+Windows.32="res://addons/godot-openvr/bin/win32/libgodot_openvr.dll"
+X11.64="res://addons/godot-openvr/bin/x11/libgodot_openvr.so"
 
 [dependencies]
 
-X11.64=[ "res://addons/godot-openvr/bin/x11/libopenvr_api.so" ]
-Windows.32=[ "res://addons/godot-openvr/bin/win32/openvr_api.dll" ]
 Windows.64=[ "res://addons/godot-openvr/bin/win64/openvr_api.dll" ]
-OSX.64=[ "res://addons/godot-openvr/bin/osx/libopenvr_api.dylib" ]
+Windows.32=[ "res://addons/godot-openvr/bin/win32/openvr_api.dll" ]
+X11.64=[ "res://addons/godot-openvr/bin/x11/libopenvr_api.so" ]
