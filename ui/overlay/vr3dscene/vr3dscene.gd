@@ -67,7 +67,7 @@ func _physics_process(delta) -> void:
 
 func adjust_size() -> void:
 	$ARVROrigin/OverlayArea.mesh.size = Vector2(size_value, size_value)
-	$ARVROrigin/OverlayArea/StaticBody/CollisionShape.shape.extents = Vector3(size_value * 0.35, 0.08, size_value * 0.35)
+	$ARVROrigin/OverlayArea/StaticBody/CollisionShape.shape.extents = Vector3(size_value * 0.8, 0.08, size_value * 0.8)
 
 func adjust_position() -> void:
 	var areatransform : Transform = Transform(Basis(Vector3(0, 0, 0)), Vector3(position_x, position_y, position_z))
