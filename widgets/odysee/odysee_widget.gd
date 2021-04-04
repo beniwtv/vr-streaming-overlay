@@ -13,7 +13,7 @@ var username = null
 var chat_token = null
 var compact_mode = false
 
-var claim_id = "e78621e7ea5ddb580147f8be5cd8abf8fee35d2d"
+var claim_id = "8d942740a95b8f212d5e6627a73a6e2943207eb9"
 var text_color = Color(255, 255, 255)
 var timestamp_color = Color(255, 255, 255)
 var username_color = Color(255, 255, 255)
@@ -59,11 +59,11 @@ func redraw_chat():
 func append_message(message, color, sender):
 	if typeof(color) == TYPE_COLOR:
 		color = '#' + color.to_html(true)
-	var timestamp = "[color=#" + text_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
+	var timestamp = "[color=#" + timestamp_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
 
 	if sender: 
 		message = "[color=#" + username_color.to_html(true) + "]" + sender + "[/color]" + ' | ' + "[color=" + color + "]" + message + "[/color]"
-	message = "[color=#" + timestamp_color.to_html(true) + "]" + timestamp + "[/color]" + message
+	message = timestamp + message
 
 	chat_lines.append(message)
 	redraw_chat()
@@ -104,7 +104,7 @@ func _connected(proto = ""):
 	print("Connected with protocol: ", proto)
 	# You MUST always use get_peer(1).put_packet to send data to server,
 	# and not put_packet directly when not using the MultiplayerAPI.
-	_client.get_peer(1).put_packet("Test packet".to_utf8())
+	_client.get_peer(1).put_packet("Hello LBRY!".to_utf8())
 
 func _on_data():
 	# Print the received packet, you MUST always use get_peer(1).get_packet
