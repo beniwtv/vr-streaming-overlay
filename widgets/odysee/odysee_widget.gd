@@ -15,6 +15,7 @@ var compact_mode = false
 
 var claim_id = "8d942740a95b8f212d5e6627a73a6e2943207eb9"
 var text_color = Color(255, 255, 255)
+var tip_color = Color(255, 255, 255)
 var timestamp_color = Color(255, 255, 255)
 var username_color = Color(255, 255, 255)
 var show_timestamps = false
@@ -25,6 +26,7 @@ func apply_config(widget_id, config):
 	if config.has("ratio"): size_flags_stretch_ratio = config["ratio"]
 	if config.has("claim_id"): claim_id = config["claim_id"]
 	if config.has("text_color"): text_color = config["text_color"]
+	if config.has("tip_color"): tip_color = config["tip_color"]
 	if config.has("username_color"): username_color = config["username_color"]
 	if config.has("timestamp_color"): timestamp_color = config["timestamp_color"]
 	if config.has("compact_mode"): compact_mode = config["compact_mode"]
@@ -56,12 +58,14 @@ func redraw_chat():
 	append_bbcode(chat_lines.join(""))
 
 # Appends a message to the rich text label for display
-func append_message(message, color, sender):
+func append_message(message, color, sender, tip_amount):
 	if typeof(color) == TYPE_COLOR:
 		color = '#' + color.to_html(true)
 	var timestamp = "[color=#" + timestamp_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
 
-	if sender: 
+	if tip_amount > 0:
+		message = "[color=#" + tip_color.to_html(true) + "] Tipped " + str(tip_amount) + " [/color]" + "[color=#" + username_color.to_html(true) + "]" + sender + "[/color]" + ' | ' + "[color=" + color + "]" + message + "[/color]"
+	elif sender: 
 		message = "[color=#" + username_color.to_html(true) + "]" + sender + "[/color]" + ' | ' + "[color=" + color + "]" + message + "[/color]"
 	message = timestamp + message
 
@@ -111,8 +115,8 @@ func _on_data():
 	# to receive data from server, and not get_packet directly when not
 	# using the MultiplayerAPI.
 	var comment = JSON.parse(_client.get_peer(1).get_packet().get_string_from_utf8())
-	print(comment.result["data"]["comment"]["channel_name"] + ": " + comment.result["data"]["comment"]["comment"])
-	append_message(comment.result["data"]["comment"]["comment"] + "\n", text_color, comment.result["data"]["comment"]["channel_name"])
+	print(comment.result["data"]["comment"]["channel_name"] + ": " + comment.result["data"]["comment"]["comment"] + " Tipped: " + str(comment.result["data"]["comment"]["support_amount"]))
+	append_message(comment.result["data"]["comment"]["comment"] + "\n", text_color, comment.result["data"]["comment"]["channel_name"], comment.result["data"]["comment"]["support_amount"])
 
 func _process(delta):
 	# Call this in _process or _physics_process. Data transfer, and signals

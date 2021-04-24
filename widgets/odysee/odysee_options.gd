@@ -27,6 +27,9 @@ func add_config_options(widget_id : String, config : Dictionary) -> void:
 	var font_select_value = DefaultSettings.get_default_setting("widgets/font")
 	if config.has("font"): font_select_value = config["font"]
 	
+	var tip_color_value = "#FFFFFF"
+	if config.has("tip_color"): tip_color_value = config["tip_color"]
+	
 	var items = []
 	
 	var claim_id = preload("res://ui/elements/options/lineeditoption.tscn").instance()
@@ -42,6 +45,13 @@ func add_config_options(widget_id : String, config : Dictionary) -> void:
 	text_color.set_option_name("text_color")
 	text_color.set_value(text_color_value)
 	text_color.set_widget_node(self)
+	
+	var tip_color = preload("res://ui/elements/options/coloroption.tscn").instance()
+	$VBoxContainer.add_child(tip_color)
+	tip_color.set_label("Tip color:")
+	tip_color.set_option_name("tip_color")
+	tip_color.set_value(tip_color_value)
+	tip_color.set_widget_node(self)
 	
 	var username_color = preload("res://ui/elements/options/coloroption.tscn").instance()
 	$VBoxContainer.add_child(username_color)
