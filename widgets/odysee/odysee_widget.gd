@@ -13,18 +13,20 @@ var username = null
 var chat_token = null
 var compact_mode = false
 
-var claim_id = "8d942740a95b8f212d5e6627a73a6e2943207eb9"
+var claim_id = "edf63b41a82a93bad1d53b159af2e7e1fe119a5e"
 var text_color = Color(255, 255, 255)
 var tip_color = Color(255, 255, 255)
 var timestamp_color = Color(255, 255, 255)
 var username_color = Color(255, 255, 255)
 var show_timestamps = false
+var stream_claim = ""
 
 # Apply config given by widget manager
 func apply_config(widget_id, config):
+	var connections = PasswordStorage.get_secret("connections")
+	if !connections: connections = []
 	
 	if config.has("ratio"): size_flags_stretch_ratio = config["ratio"]
-	if config.has("claim_id"): claim_id = config["claim_id"]
 	if config.has("text_color"): text_color = config["text_color"]
 	if config.has("tip_color"): tip_color = config["tip_color"]
 	if config.has("username_color"): username_color = config["username_color"]
@@ -39,11 +41,51 @@ func apply_config(widget_id, config):
 		dynamic_font.add_fallback(load("res://ui/font/TwitterColorEmoji-SVGinOT.ttf"))
 		set("custom_fonts/normal_font", dynamic_font)
  
-	connect_to_odysee()
+		if config.has("connection"):
+			for i in connections:
+				if config["connection"] == i["uuid"]:
+					claim_id = i["claimid"]
+					
 
 # Called when the node enters the scene tree for the first time.
 
+# Get stream claim id from channel claim id		
+	
+func _on_sql_request_completed(result, response_code, headers, body):
+	print("requesting claim id")
+	streamClaim.disconnect("request_completed", self, "_on_sql_request_completed")
+	_client.disconnect("connection_closed", self, "_closed")
+	var query = JSON.parse(body.get_string_from_utf8())
 
+	if query.result["data"].size() == 0:
+		print("Cannot find stream on channel, assuming claim id is for stream ")
+		stream_claim = claim_id
+	else:
+		print("Found stream claim_id " + query.result["data"][0]["claim_id"])
+		stream_claim = query.result["data"][0]["claim_id"]
+	
+	# Prepare our chat lines array
+	for i in range(0, 200):
+		chat_lines.append("\n")
+	# Connect base signals to get notified of connection open, close, and errors.
+	_client.connect("connection_closed", self, "_closed")
+	_client.connect("connection_error", self, "_closed")
+	_client.connect("connection_established", self, "_connected")
+	# This signal is emitted when not using the Multiplayer API every time
+	# a full packet is received.
+	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
+	_client.connect("data_received", self, "_on_data")
+	
+	# Initiate connection to the given URL.
+	var err = _client.connect_to_url("wss://comments.lbry.com/api/v2/live-chat/subscribe?subscription_id=" + stream_claim)
+	if err != OK:
+		append_message("Unable to connect to odysee", "#B22222", "info", 0)
+		print("Unable to connect")
+		set_process(false)
+	else:
+		print("Connected to Odysee using " + stream_claim)
+
+	
 # Connect to Odysee via websockets
 func connect_to_odysee():
 	return
@@ -71,40 +113,31 @@ func append_message(message, color, sender, tip_amount):
 
 	chat_lines.append(message)
 	redraw_chat()
-	
+
+
 # Our WebSocketClient instance
 var _client = WebSocketClient.new()
+onready var streamClaim = HTTPRequest.new()
 
 func _ready():
 	print("Odysee chat widget loading!")
-	
-	# Prepare our chat lines array
-	for i in range(0, 200):
-		chat_lines.append("\n")
-	# Connect base signals to get notified of connection open, close, and errors.
-	_client.connect("connection_closed", self, "_closed")
-	_client.connect("connection_error", self, "_closed")
-	_client.connect("connection_established", self, "_connected")
-	# This signal is emitted when not using the Multiplayer API every time
-	# a full packet is received.
-	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
-	_client.connect("data_received", self, "_on_data")
-
-	# Initiate connection to the given URL.
-	var err = _client.connect_to_url("wss://comments.lbry.com/api/v2/live-chat/subscribe?subscription_id=" + claim_id)
-	if err != OK:
-		print("Unable to connect")
-		set_process(false)
+	add_child(streamClaim)
+	streamClaim.connect("request_completed", self, "_on_sql_request_completed", [], CONNECT_DEFERRED)
+	print("Using connector: " + claim_id)
+	var error = streamClaim.request("https://chainquery.lbry.com/api/sql?query=SELECT%20*%20FROM%20claim%20WHERE%20publisher_id=%22" + claim_id + "%22%20AND%20bid_state%3C%3E%22Spent%22%20AND%20claim_type=1%20AND%20source_hash%20IS%20NULL%20ORDER%20BY%20id%20DESC%20LIMIT%201")
 
 func _closed(was_clean = false):
 	# was_clean will tell you if the disconnection was correctly notified
 	# by the remote peer before closing the socket.
+	append_message("Disconnected from odysee,", "#B22222", "info", 0)
 	print("Closed, clean: ", was_clean)
 	set_process(false)
+	_client.poll()
 
 func _connected(proto = ""):
 	# This is called on connection, "proto" will be the selected WebSocket
 	# sub-protocol (which is optional)
+	append_message("Connected to Odysee", "#B22222", "info", 0)
 	print("Connected with protocol: ", proto)
 	# You MUST always use get_peer(1).put_packet to send data to server,
 	# and not put_packet directly when not using the MultiplayerAPI.

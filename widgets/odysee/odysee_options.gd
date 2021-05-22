@@ -6,8 +6,8 @@ var receiver : Node = null
 func add_config_options(widget_id : String, config : Dictionary) -> void:
 	self.config = config
 	
-	var claim_id_value = "Place Stream Claim Id Here"
-	if config.has("claim_id"): claim_id_value = config["claim_id"]
+	var connection_value = null
+	if config.has("connection"): connection_value = config["connection"]
 
 	var text_color_value = "#FFFFFF"
 	if config.has("text_color"): text_color_value = config["text_color"]
@@ -30,14 +30,21 @@ func add_config_options(widget_id : String, config : Dictionary) -> void:
 	var tip_color_value = "#FFFFFF"
 	if config.has("tip_color"): tip_color_value = config["tip_color"]
 	
+	var connections = PasswordStorage.get_secret("connections")
+	if !connections: connections = []
 	var items = []
 	
-	var claim_id = preload("res://ui/elements/options/lineeditoption.tscn").instance()
-	$VBoxContainer.add_child(claim_id)
-	claim_id.set_label("stream claim id:")
-	claim_id.set_option_name("claim_id")
-	claim_id.set_value(claim_id_value)
-	claim_id.set_widget_node(self)
+	for i in connections:
+		if i["type"] == "odysee":
+			items.append({"name": "Odysee: " + i["name"], "value": i["uuid"]})
+		
+	var connection = preload("res://ui/elements/options/dropdownoption.tscn").instance()
+	$VBoxContainer.add_child(connection)
+	connection.set_label("Connection:")
+	connection.set_values(items)
+	connection.set_option_name("connection")
+	if connection_value: connection.set_value(connection_value)
+	connection.set_widget_node(self)
 	
 	var text_color = preload("res://ui/elements/options/coloroption.tscn").instance()
 	$VBoxContainer.add_child(text_color)
