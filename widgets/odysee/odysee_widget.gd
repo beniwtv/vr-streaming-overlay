@@ -79,7 +79,7 @@ func _on_sql_request_completed(result, response_code, headers, body):
 	# Initiate connection to the given URL.
 	var err = _client.connect_to_url("wss://comments.lbry.com/api/v2/live-chat/subscribe?subscription_id=" + stream_claim)
 	if err != OK:
-		append_message("Unable to connect to odysee", "#B22222", "info", 0)
+		append_message("Unable to connect to odysee", "#B22222", "info", 0, false)
 		print("Unable to connect")
 		set_process(false)
 	else:
@@ -100,13 +100,15 @@ func redraw_chat():
 	append_bbcode(chat_lines.join(""))
 
 # Appends a message to the rich text label for display
-func append_message(message, color, sender, tip_amount):
+func append_message(message, color, sender, tip_amount, is_fiat):
 	if typeof(color) == TYPE_COLOR:
 		color = '#' + color.to_html(true)
 	var timestamp = "[color=#" + timestamp_color.to_html(true) + "]" + str(OS.get_time()["hour"]).pad_zeros(2) + ":" + str(OS.get_time()["minute"]).pad_zeros(2) + "[/color] " if show_timestamps else ""
-
+	var currency = " LBC"
 	if tip_amount > 0:
-		message = "[color=#" + tip_color.to_html(true) + "] Tipped " + str(tip_amount) + " [/color]" + "[color=#" + username_color.to_html(true) + "]" + sender + "[/color]" + ' | ' + "[color=" + color + "]" + message + "[/color]"
+		if is_fiat:
+			currency = " " + "USD"
+		message = "[color=#" + tip_color.to_html(true) + "] Tipped " + str(tip_amount) + currency + " [/color]" + "[color=#" + username_color.to_html(true) + "]" + sender + "[/color]" + ' | ' + "[color=" + color + "]" + message + "[/color]"
 	elif sender: 
 		message = "[color=#" + username_color.to_html(true) + "]" + sender + "[/color]" + ' | ' + "[color=" + color + "]" + message + "[/color]"
 	message = timestamp + message
@@ -129,7 +131,7 @@ func _ready():
 func _closed(was_clean = false):
 	# was_clean will tell you if the disconnection was correctly notified
 	# by the remote peer before closing the socket.
-	append_message("Disconnected from odysee,", "#B22222", "info", 0)
+	append_message("Disconnected from odysee,", "#B22222", "info", 0, false)
 	print("Closed, clean: ", was_clean)
 	set_process(false)
 	_client.poll()
@@ -137,7 +139,7 @@ func _closed(was_clean = false):
 func _connected(proto = ""):
 	# This is called on connection, "proto" will be the selected WebSocket
 	# sub-protocol (which is optional)
-	append_message("Connected to Odysee", "#B22222", "info", 0)
+	append_message("Connected to Odysee", "#B22222", "info", 0, false)
 	print("Connected with protocol: ", proto)
 	# You MUST always use get_peer(1).put_packet to send data to server,
 	# and not put_packet directly when not using the MultiplayerAPI.
@@ -149,7 +151,7 @@ func _on_data():
 	# using the MultiplayerAPI.
 	var comment = JSON.parse(_client.get_peer(1).get_packet().get_string_from_utf8())
 	print(comment.result["data"]["comment"]["channel_name"] + ": " + comment.result["data"]["comment"]["comment"] + " Tipped: " + str(comment.result["data"]["comment"]["support_amount"]))
-	append_message(comment.result["data"]["comment"]["comment"] + "\n", text_color, comment.result["data"]["comment"]["channel_name"], comment.result["data"]["comment"]["support_amount"])
+	append_message(comment.result["data"]["comment"]["comment"] + "\n", text_color, comment.result["data"]["comment"]["channel_name"], comment.result["data"]["comment"]["support_amount"], comment.result["data"]["comment"]["is_fiat"])
 
 func _process(delta):
 	# Call this in _process or _physics_process. Data transfer, and signals
