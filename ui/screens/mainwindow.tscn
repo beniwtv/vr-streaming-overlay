@@ -19,5 +19,5 @@ margin_right = 1280.0
 
 [node name="SettingsScreen" parent="." instance=ExtResource( 4 )]
 visible = false
-margin_top = 362.0
+margin_top = 365.0
 margin_right = 1280.0

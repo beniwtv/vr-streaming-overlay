@@ -6,15 +6,7 @@ var OpenVROverlay
 var SettingsNode : String = "MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/HBoxContainer/"
 var render_target_size : Vector2
 
-#onready var vr3dscene = get_node("3DVRViewport")
-#onready var debugrect = get_node("MainWindow/SettingsScreen/General settings/MarginContainer/VBoxContainer/3DDebugRect")
-
 func _ready() -> void:
-	#vr3dscene.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
-	#yield(get_tree(), "idle_frame")
-	#yield(get_tree(), "idle_frame")
-	#debugrect.texture = vr3dscene.get_texture()
-	
 	# Get configuration object
 	OpenVRConfig = preload("res://addons/godot-openvr/OpenVRConfig.gdns").new()
 	OpenVRConfig.set_application_type(2) # Set to OVERLAY MODE = 2, NORMAL MODE = 1
@@ -51,7 +43,7 @@ func _ready() -> void:
 	else:
 		SignalManager.emit_signal("vr_init", "error")
 
-func _process(delta : float) -> void:
+func _process(_delta : float) -> void:
 	if Input.is_action_just_pressed("center_on_hmd"):
 		# Calling center_on_hmd will cause the ARVRServer to adjust all tracking data so the player is centered on the origin point looking forward
 		ARVRServer.center_on_hmd(true, false)
@@ -63,6 +55,14 @@ func _on_overlay_add(overlay : Dictionary) -> void:
 	$Overlays.add_child(overlayInstance)
 	
 	overlayInstance.set_configuration(overlay["config"], overlay["widgets"], render_target_size)
+	
+	# 3D DEBUG STUFF
+	#vr3dscene.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
+	#var debugrect = get_node("MainWindow/SettingsScreen/Overlays/MarginContainer/VBoxContainer/OverlaysContainer/OverlaySettings/TabContainer/General settings/MarginContainer/VBoxContainer/3DDebugRect")
+	#var vr3dscene = overlayInstance.get_node("3DVRViewport")
+	#yield(get_tree(), "idle_frame")
+	#yield(get_tree(), "idle_frame")
+	#debugrect.texture = vr3dscene.get_texture()
 
 # Called when an overlay needs to be removed from OpenVR
 func _on_overlay_remove(uuid : String) -> void:

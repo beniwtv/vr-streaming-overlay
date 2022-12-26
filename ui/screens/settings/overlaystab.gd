@@ -91,7 +91,7 @@ func _on_OverlayList_item_selected() -> void:
 			select_overlay(i)
 
 # Delete or show/hide button pressed
-func _on_OverlayList_button_pressed(item : TreeItem, column : int, id : int) -> void:
+func _on_OverlayList_button_pressed(item : TreeItem, _column : int, id : int) -> void:
 	var uuid : String = item.get_metadata(0)["uuid"]
 	var overlay_visible : bool = item.get_metadata(0)["visible"]
 	var overlayIndex : int = -1

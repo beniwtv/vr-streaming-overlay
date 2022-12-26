@@ -10,7 +10,7 @@ func _ready() -> void:
 		$HBoxContainer/RightMarginContainer/RightVBoxContainer/PasswordOption.set_enter_listener(self)
 		$HBoxContainer/RightMarginContainer/RightVBoxContainer/RepeatPasswordOption.set_enter_listener(self)
 
-func text_entered(option : String, text : String) -> void:
+func text_entered(_option : String, _text : String) -> void:
 	_on_LoginButton_pressed()
 
 func _on_LoginButton_pressed() -> void:
