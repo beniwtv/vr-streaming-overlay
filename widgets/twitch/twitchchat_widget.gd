@@ -62,6 +62,9 @@ func _ready():
 func _exit_tree():
 	print("Twitch chat widget unloading!")
 	
+	authenticated = false
+	capok = false	
+	
 	if irc_stream:
 		irc_stream.disconnect_from_stream()
 		irc_stream = null
@@ -81,6 +84,8 @@ func connect_to_twitch():
 		# Make sure we could connect to Twitch
 		chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
 		redraw_chat()
+		
+		return false
 	
 	irc_stream = StreamPeerSSL.new()
 	irc_stream.set_blocking_handshake_enabled(true)
@@ -92,7 +97,7 @@ func connect_to_twitch():
 		OS.delay_msec(500)
 		
 		if count >= 60:
-			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
+			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET!")
 			redraw_chat()
 			
 			return false
@@ -117,7 +122,7 @@ func connect_to_twitch():
 		OS.delay_msec(500)
 	
 		if count >= 60:		
-			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
+			chat_lines.append("ERROR! COULD NOT AUTHENTICATE: BAD TOKEN?")
 			redraw_chat()
 			
 			return false
@@ -140,7 +145,7 @@ func connect_to_twitch():
 		OS.delay_msec(500)
 	
 		if count >= 60:
-			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
+			chat_lines.append("ERROR! COULD NOT SET CAPABILITIES! Bug @beniwtv!")
 			redraw_chat()
 			
 			return false
@@ -152,6 +157,12 @@ func connect_to_twitch():
 
 	count = 0
 
+	if channels.size() < 1:
+		chat_lines.append("ERROR! NO CHANNELS TO JOIN CONFIGURED!")
+		redraw_chat()
+			
+		return false
+
 	while !irc_joined:
 		irc_stream.poll()
 
@@ -162,8 +173,8 @@ func connect_to_twitch():
 	
 		OS.delay_msec(500)
 		
-		if count >= 60:			
-			chat_lines.append("ERROR! VERIFY CONNECTION TO INTERNET")
+		if count >= 60:
+			chat_lines.append("ERROR! UNABLE TO JOIN CHANNELS: " + channels.join(",") + "!")
 			redraw_chat()
 			
 			return false
@@ -192,7 +203,7 @@ func _process(delta):
 		authenticated = false
 		capok = false
 		irc_joined = false
-				
+		
 		connect_to_twitch()
 		return false
 	

@@ -2,6 +2,7 @@ extends MarginContainer
 
 var config = null
 var receiver : Node = null
+var channels = null
 
 func add_config_options(widget_id : String, config : Dictionary) -> void:
 	self.config = config
@@ -40,7 +41,7 @@ func add_config_options(widget_id : String, config : Dictionary) -> void:
 	if connection_value: connection.set_value(connection_value)
 	connection.set_widget_node(self)
 	
-	var channels = preload("res://ui/elements/options/arrayoption.tscn").instance()
+	channels = preload("res://ui/elements/options/arrayoption.tscn").instance()
 	$VBoxContainer.add_child(channels)
 	channels.set_label("Join channels:")
 	channels.set_item_options(load("res://widgets/twitchchat.png"), "#")
@@ -81,6 +82,18 @@ func set_receiver_node(receiver : Node) -> void:
 
 func set_config_value(key : String, value) -> void:
 	config[key] = value
+	
+	# Make sure we select at least one channel if it's empty
+	if key == "connection":
+		if config["channels"].size() < 1:
+			var connections = PasswordStorage.get_secret("connections")
+			if !connections: connections = []
+			var items = []
+	
+			for i in connections:
+				if i["type"] == "twitch" and i["uuid"] == value:
+					config["channels"] = ["#" + i["name"]]
+					channels.set_value(config["channels"])
 	
 	if receiver:
 		receiver.save_options_for_widget()
