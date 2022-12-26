@@ -82,6 +82,10 @@ func attempt_tracking() -> void:
 			transform.basis = transform.basis.rotated(Vector3(0, 0, 1), rotation_z)
 			
 			transform = transform.orthonormalized()
+			
+			var overlay_height : float = 1
+			if overlay_config.has("height"): overlay_height = overlay_config["height"]
+			transform = transform.scaled(Vector3(1, overlay_height, 1))
 		else:
 			position_x = DefaultSettings.get_default_setting("overlay/position_x")
 			if overlay_config.has("position_x"): position_x = overlay_config["position_x"]
