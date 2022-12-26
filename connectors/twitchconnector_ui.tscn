@@ -19,7 +19,7 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 654.0
+margin_bottom = 650.0
 focus_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -45,18 +45,18 @@ text = "To connect to Twitch, we need a so called \"authentication token\". Ther
 selection_enabled = true
 
 [node name="MarginContainerClientId" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 658.0
+margin_top = 654.0
 margin_right = 1280.0
-margin_bottom = 682.0
+margin_bottom = 680.0
 
 [node name="ClientId" type="LineEdit" parent="VBoxContainer/MarginContainerClientId"]
 margin_right = 1280.0
-margin_bottom = 24.0
+margin_bottom = 26.0
 clear_button_enabled = true
 placeholder_text = "Client ID"
 
 [node name="MarginContainerToken" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 686.0
+margin_top = 684.0
 margin_right = 1280.0
 margin_bottom = 720.0
 custom_constants/margin_top = 10
@@ -64,9 +64,10 @@ custom_constants/margin_top = 10
 [node name="Token" type="LineEdit" parent="VBoxContainer/MarginContainerToken"]
 margin_top = 10.0
 margin_right = 1280.0
-margin_bottom = 34.0
+margin_bottom = 36.0
 clear_button_enabled = true
 placeholder_text = "Authentication token"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [connection signal="meta_clicked" from="VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
