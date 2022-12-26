@@ -16,7 +16,7 @@ var overlay_chimedevice = "Default"
 var overlay_undimstare = true
 var overlay_undimstareseconds = 3
 var overlay_showseconds = 0.8
-var overlay_minangle = 80
+var overlay_showangle = 45
 
 # Overlay position / rotation
 var overlay_size = 1.5

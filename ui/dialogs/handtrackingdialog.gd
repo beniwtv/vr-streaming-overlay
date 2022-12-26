@@ -15,14 +15,14 @@ func set_settings_dialog(dialog : Node):
 	showseconds.set_widget_node(settings_dialog)
 	showseconds.add_to_group("hand_tracking_settings")
 
-	var minangle = preload("res://ui/elements/options/numberoption.tscn").instance()
-	$MarginContainer/VBoxContainer.add_child(minangle)
-	minangle.set_label("Minimum angle required (degrees):")
-	minangle.set_spinbox_range(0, 360, 1)
-	minangle.set_option_name("minangle")
-	minangle.set_value(DefaultSettings.get_default_setting("overlay/minangle"))
-	minangle.set_widget_node(settings_dialog)
-	minangle.add_to_group("hand_tracking_settings")
+	var showangle = preload("res://ui/elements/options/numberoption.tscn").instance()
+	$MarginContainer/VBoxContainer.add_child(showangle)
+	showangle.set_label("Angle to HMD for showing (degrees):")
+	showangle.set_spinbox_range(0, 360, 1)
+	showangle.set_option_name("showangle")
+	showangle.set_value(DefaultSettings.get_default_setting("overlay/showangle"))
+	showangle.set_widget_node(settings_dialog)
+	showangle.add_to_group("hand_tracking_settings")
 
 func set_active_overlay(overlay : Dictionary) -> void:
 	current_overlay = overlay

@@ -7,8 +7,6 @@ var angle_seconds : float = 0
 
 # User settings
 var hand_value : int
-var seconds_required_to_show : float
-var angle_required : int
 var color_value : Color
 var opacity_value : float
 var dimdownafter : int
@@ -41,8 +39,6 @@ func _ready() -> void:
 	$Viewport/VRBackground.modulate.a = DefaultSettings.get_default_setting("overlay/opacity")
 	
 	hand_value = DefaultSettings.get_default_setting("overlay/hand")
-	seconds_required_to_show = DefaultSettings.get_default_setting("overlay/showseconds")
-	angle_required = DefaultSettings.get_default_setting("overlay/minangle")
 	color_value = DefaultSettings.get_default_setting("overlay/color")
 	opacity_value = DefaultSettings.get_default_setting("overlay/opacity")
 	dimdownafter = DefaultSettings.get_default_setting("overlay/dimdownafter")
@@ -79,12 +75,6 @@ func set_configuration(config : Dictionary, widgets : Array, render_target_size 
 	hand_value = DefaultSettings.get_default_setting("overlay/hand")
 	if overlay_config.has("hand"): hand_value = overlay_config["hand"]
 
-	seconds_required_to_show = DefaultSettings.get_default_setting("overlay/showseconds")
-	if overlay_config.has("showseconds"): seconds_required_to_show = overlay_config["showseconds"]
-
-	angle_required = DefaultSettings.get_default_setting("overlay/minangle")
-	if overlay_config.has("minangle"): angle_required = overlay_config["minangle"]
-
 	$Viewport/WidgetsContainer.modulate.a = 255
 
 	color_value = DefaultSettings.get_default_setting("overlay/color")
@@ -117,38 +107,6 @@ func set_configuration(config : Dictionary, widgets : Array, render_target_size 
 
 	dimdownopacity = DefaultSettings.get_default_setting("overlay/dimdownopacity")
 	if overlay_config.has("dimdownopacity"): dimdownopacity = overlay_config["dimdownopacity"]
-
-	angle_seconds = 0
-
-# In hand mode, calculates the controler's angle and shows/hides the overlay
-func _process(delta):
-	# Detect controller gestures
-	if hand_value == 0:
-		controller_transform = get_node("../../3DVRViewport/VR3DScene/ARVROrigin/LeftHand").transform
-
-		var angle : float = rad2deg(controller_transform.basis.get_euler().z)
-
-		if angle >= angle_required:
-			angle_seconds = angle_seconds + delta
-		else:
-			angle_seconds = 0
-	elif hand_value == 1:
-		controller_transform = get_node("../../3DVRViewport/VR3DScene/ARVROrigin/RightHand").transform
-	
-		var angle : float = rad2deg(controller_transform.basis.get_euler().z)
-		
-		if angle <= angle_required * -1:
-			angle_seconds = angle_seconds + delta
-		else:
-			angle_seconds = 0
-	else:
-		visible = true
-		return
-
-	if angle_seconds >= seconds_required_to_show:
-		visible = true
-	else:
-		visible = false
 
 # Re-draw all widgets in this overlay (for example, due to configuration changes)
 func redraw_overlay() -> void:
