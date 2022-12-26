@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=VR Streaming Overlay
+Exec=vr-streaming-overlay
+Icon=vr-streaming-overlay
+Type=Application
+Categories=Utility;
+#tag=${pkgver//_/-}

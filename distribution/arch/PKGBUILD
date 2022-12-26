@@ -1,0 +1,36 @@
+# Maintainer Benedikt <beniwtv@protonmail.com>
+pkgname=vr-streaming-overlay
+pkgver=0.0.4_alpha
+pkgrel=1
+pkgdesc="This is a SteamVR overlay for streamers on Linux."
+url="https://github.com/beniwtv/vr-streaming-overlay"
+license=('MIT')
+source=(
+    "vr-streaming-overlay::git+https://github.com/beniwtv/vr-streaming-overlay.git"
+    "godot::https://downloads.tuxfamily.org/godotengine/3.5.1/Godot_v3.5.1-stable_linux_headless.64.zip"
+    "templates::https://downloads.tuxfamily.org/godotengine/3.5.1/Godot_v3.5.1-stable_export_templates.tpz"
+)
+arch=('x86_64')
+sha1sums=('SKIP' 'eff7240e6b940af8605bcbcabf46f2f097bba8e4', '80816a381879f48aa25cf846336009c7546eebfe')
+makedepends=('git')
+
+build() {
+    cd "$srcdir/"
+    ls -la
+    ./Godot_v3.5.1-stable_linux_headless.64 --export "Linux/X11" --path "$srcdir/$pkgname" $pkgname
+}
+
+package() {
+  mkdir -p "$pkgdir/opt/$pkgname"
+  mkdir -p "$pkgdir/usr/bin"
+  mkdir -p "$pkgdir/usr/share/icons/hicolor"
+  mkdir -p "$pkgdir/usr/share/applications"
+  
+  #rm -f $pkgname-$pkgver.tar.xz
+  #rsync -AHa --force "$srcdir/" "$pkgdir/opt/$pkgname/"
+
+  #chmod +x "$pkgdir/opt/$pkgname/${pkgname}.$arch"
+
+  #ln -s "/opt/$pkgname/${pkgname}_linux_64.$arch" "$pkgdir/usr/bin/$pkgname"
+  ls "$srcdir/$pkgname"
+}
